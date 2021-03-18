@@ -22,10 +22,10 @@ urls = {
     'repvgg_b1': 'https://bj.bcebos.com/v1/ai-studio-online/b2f8171754bd4d3cb44739b675dc1f0b8cb77ebefdad47ec82ce98292726bf2c?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B1.pdparams',
     'repvgg_b2': 'https://bj.bcebos.com/v1/ai-studio-online/9fc65aab46b441dca194f974bdf420710b2144e941704330869d62a2ab9cb0b6?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B2.pdparams',
     'repvgg_b3': 'https://bj.bcebos.com/v1/ai-studio-online/8d902ba9ebf3441e896e8d7078544005a0715ca6867f4067989dcc533ace2435?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B3_200epochs.pdparams',
-    'repvgg_b1_g2': 'https://bj.bcebos.com/v1/ai-studio-online/da4931eff12142a290ce8d01a0cd3b777a81b53c971b4dd2a1a627c615466570?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B1g2.pdparams',
-    'repvgg_b1_g4': 'https://bj.bcebos.com/v1/ai-studio-online/440040d200b14bcb9951e47877b7b416454affd75f8e4eaba6fedfa87c4ab66a?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B1g4.pdparams',
-    'repvgg_b2_g4': 'https://bj.bcebos.com/v1/ai-studio-online/42b0654c15f942c9828a7ca7d117638417c48ccdeac84123bcd72558db7a01c2?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B2g4_200epochs.pdparams',
-    'repvgg_b3_g4': 'https://bj.bcebos.com/v1/ai-studio-online/5e4f6084ee954a319c2e0c11aadae680c643ae88bdbb44d2a1875a38f5278060?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B3g4_200epochs.pdparams'
+    'repvgg_b1g2': 'https://bj.bcebos.com/v1/ai-studio-online/da4931eff12142a290ce8d01a0cd3b777a81b53c971b4dd2a1a627c615466570?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B1g2.pdparams',
+    'repvgg_b1g4': 'https://bj.bcebos.com/v1/ai-studio-online/440040d200b14bcb9951e47877b7b416454affd75f8e4eaba6fedfa87c4ab66a?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B1g4.pdparams',
+    'repvgg_b2g4': 'https://bj.bcebos.com/v1/ai-studio-online/42b0654c15f942c9828a7ca7d117638417c48ccdeac84123bcd72558db7a01c2?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B2g4_200epochs.pdparams',
+    'repvgg_b3g4': 'https://bj.bcebos.com/v1/ai-studio-online/5e4f6084ee954a319c2e0c11aadae680c643ae88bdbb44d2a1875a38f5278060?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B3g4_200epochs.pdparams'
 }
 
 
