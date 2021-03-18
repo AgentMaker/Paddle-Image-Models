@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # Work
-.test.py
-.pretrained_models/
+test.py
+pretrained_models/
