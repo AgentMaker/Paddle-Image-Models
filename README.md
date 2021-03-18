@@ -4,7 +4,7 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/AgentMaker/Paddle-Image-Models?include_prereleases)
 ![GitHub](https://img.shields.io/github/license/AgentMaker/Paddle-Image-Models)  
 
-A PaddlePaddle version image models zoo.
+A PaddlePaddle version image model zoo.
 
 ## Install Package
 * Install by pip：
@@ -20,3 +20,8 @@ from ppim import rexnet_100
 # Load the ReXNetV1 x1.0 model
 model, val_transforms = rexnet_100(pretrained=True)
 ```
+
+## Model Zoo
+* ReXNet
+* RepVGG
+* DeiT
