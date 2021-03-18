@@ -131,3 +131,6 @@ dmypy.json
 # Work
 test.py
 pretrained_models/
+build/
+dist/
+ppim.egg-info/
