@@ -64,9 +64,8 @@ class SE(nn.Layer):
 
 
 class LinearBottleneck(nn.Layer):
-    def __init__(self, in_channels, channels, t, stride, use_se=True, se_ratio=12,
-                 **kwargs):
-        super(LinearBottleneck, self).__init__(**kwargs)
+    def __init__(self, in_channels, channels, t, stride, use_se=True, se_ratio=12):
+        super(LinearBottleneck, self).__init__()
         self.use_shortcut = stride == 1 and in_channels <= channels
         self.in_channels = in_channels
         self.out_channels = channels
@@ -98,11 +97,8 @@ class LinearBottleneck(nn.Layer):
 
 
 class ReXNetV1(nn.Layer):
-    def __init__(self, input_ch=16, final_ch=180, width_mult=1.0, depth_mult=1.0, classes=1000,
-                 use_se=True,
-                 se_ratio=12,
-                 dropout_ratio=0.2,
-                 bn_momentum=0.9):
+    def __init__(self, input_ch=16, final_ch=180, width_mult=1.0, depth_mult=1.0,
+                 use_se=True, se_ratio=12, dropout_ratio=0.2, class_dim=1000):
         super(ReXNetV1, self).__init__()
 
         layers = [1, 2, 2, 3, 3, 5]
@@ -154,7 +150,7 @@ class ReXNetV1(nn.Layer):
         self.features = nn.Sequential(*features)
         self.output = nn.Sequential(
             nn.Dropout(dropout_ratio),
-            nn.Conv2D(pen_channels, classes, 1))
+            nn.Conv2D(pen_channels, class_dim, 1))
 
     def forward(self, x):
         x = self.features(x)

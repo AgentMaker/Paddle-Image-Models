@@ -178,7 +178,6 @@ class VisionTransformer(nn.Layer):
                  img_size=224,
                  patch_size=16,
                  in_chans=3,
-                 class_dim=1000,
                  embed_dim=768,
                  depth=12,
                  num_heads=12,
@@ -190,7 +189,7 @@ class VisionTransformer(nn.Layer):
                  drop_path_rate=0.,
                  norm_layer='nn.LayerNorm',
                  epsilon=1e-5,
-                 **args):
+                 class_dim=1000):
         super().__init__()
         self.class_dim = class_dim
 
@@ -233,7 +232,6 @@ class VisionTransformer(nn.Layer):
         self.head = nn.Linear(embed_dim,
                               class_dim) if class_dim > 0 else Identity()
 
-        # TODO(littletomatodonkey): same init in static mode
         if paddle.in_dynamic_mode():
             trunc_normal_(self.pos_embed)
             trunc_normal_(self.cls_token)
@@ -249,7 +247,6 @@ class VisionTransformer(nn.Layer):
             ones_(m.weight)
 
     def forward_features(self, x):
-        # B = x.shape[0]
         B = paddle.shape(x)[0]
         x = self.patch_embed(x)
         cls_tokens = self.cls_token.expand((B, -1, -1))

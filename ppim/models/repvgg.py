@@ -43,7 +43,6 @@ class ConvBN(nn.Layer):
 
 
 class RepVGGBlock(nn.Layer):
-
     def __init__(self, in_channels, out_channels, kernel_size,
                  stride=1, padding=0, dilation=1, groups=1, padding_mode='zeros'):
         super(RepVGGBlock, self).__init__()
@@ -134,7 +133,6 @@ class RepVGGBlock(nn.Layer):
 
 
 class RepVGG(nn.Layer):
-
     def __init__(self, num_blocks, width_multiplier=None, override_groups_map=None, class_dim=1000):
         super(RepVGG, self).__init__()
 
@@ -188,87 +186,132 @@ g4_map = {l: 4 for l in optional_groupwise_layers}
 
 
 def repvgg_a0(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[2, 4, 14, 1],
-                   width_multiplier=[0.75, 0.75, 0.75, 2.5], override_groups_map=None, **kwargs)
+    model = RepVGG(
+        num_blocks=[2, 4, 14, 1],
+        width_multiplier=[0.75, 0.75, 0.75, 2.5],
+        override_groups_map=None,
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_a0'])
     return model, transforms
 
+
 def repvgg_a1(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[2, 4, 14, 1],
-                   width_multiplier=[1, 1, 1, 2.5], override_groups_map=None, **kwargs)
+    model = RepVGG(
+        num_blocks=[2, 4, 14, 1],
+        width_multiplier=[1, 1, 1, 2.5],
+        override_groups_map=None,
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_a1'])
     return model, transforms
 
 
 def repvgg_a2(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[2, 4, 14, 1],
-                   width_multiplier=[1.5, 1.5, 1.5, 2.75], override_groups_map=None, **kwargs)
+    model = RepVGG(
+        num_blocks=[2, 4, 14, 1],
+        width_multiplier=[1.5, 1.5, 1.5, 2.75],
+        override_groups_map=None,
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_a2'])
     return model, transforms
 
 
 def repvgg_b0(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[1, 1, 1, 2.5], override_groups_map=None, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[1, 1, 1, 2.5],
+        override_groups_map=None,
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b0'])
     return model, transforms
 
 
 def repvgg_b1(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[2, 2, 2, 4], override_groups_map=None, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[2, 2, 2, 4],
+        override_groups_map=None,
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b1'])
     return model, transforms
 
 
 def repvgg_b2(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[2.5, 2.5, 2.5, 5], override_groups_map=None, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[2.5, 2.5, 2.5, 5], 
+        override_groups_map=None, 
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b2'])
     return model, transforms
 
 
 def repvgg_b3(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[3, 3, 3, 5], override_groups_map=None, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[3, 3, 3, 5], 
+        override_groups_map=None, 
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b3'])
     return model, transforms
 
 
 def repvgg_b1g2(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[2, 2, 2, 4], override_groups_map=g2_map, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[2, 2, 2, 4], 
+        override_groups_map=g2_map, 
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b1g2'])
     return model, transforms
 
 
 def repvgg_b1g4(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[2, 2, 2, 4], override_groups_map=g4_map, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[2, 2, 2, 4], 
+        override_groups_map=g4_map, 
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b1g4'])
     return model, transforms
 
 
 def repvgg_b2g4(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[2.5, 2.5, 2.5, 5], override_groups_map=g4_map, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[2.5, 2.5, 2.5, 5], 
+        override_groups_map=g4_map, 
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b2g4'])
     return model, transforms
 
 
 def repvgg_b3g4(pretrained=False, **kwargs):
-    model = RepVGG(num_blocks=[4, 6, 16, 1],
-                   width_multiplier=[3, 3, 3, 5], override_groups_map=g4_map, **kwargs)
+    model = RepVGG(
+        num_blocks=[4, 6, 16, 1],
+        width_multiplier=[3, 3, 3, 5], 
+        override_groups_map=g4_map, 
+        **kwargs
+    )
     if pretrained:
         model = load_model(model, urls['repvgg_b3g4'])
     return model, transforms
