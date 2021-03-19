@@ -41,7 +41,7 @@ metric = paddle.metric.Accuracy(topk=(1, 5))
 model.prepare(optimizer=opt, loss=loss, metrics=metric)
 
 # Set the data preprocess
-transforms = T.Compose([
+train_transforms = T.Compose([
     T.Resize(256, interpolation='bicubic'),
     T.RandomCrop(224),
     T.ToTensor(),
@@ -49,8 +49,8 @@ transforms = T.Compose([
 ])
 
 # Load the Cifar100 dataset
-train_dataset = Cifar100(mode='train', transform=transforms, backend='pil')
-val_dataset = Cifar100(mode='test',  transform=transforms, backend='pil')
+train_dataset = Cifar100(mode='train', transform=train_transforms, backend='pil')
+val_dataset = Cifar100(mode='test',  transform=val_transforms, backend='pil')
 
 # Finetune the model 
 model.fit(
