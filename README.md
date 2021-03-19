@@ -22,7 +22,7 @@ from paddle.vision import Cifar100
 
 from ppim import rexnet_100
 
-# Load Model
+# Load the model
 model, val_transforms = rexnet_100(pretrained=True)
 
 # Use the PaddleHapi Model
