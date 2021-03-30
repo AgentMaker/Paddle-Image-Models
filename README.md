@@ -71,6 +71,6 @@ model.fit(
 
 ## Model Zoo
 * ReXNet
+* RedNet
 * RepVGG
 * DeiT
-* RedNet
