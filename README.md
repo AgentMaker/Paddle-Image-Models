@@ -73,3 +73,4 @@ model.fit(
 * ReXNet
 * RepVGG
 * DeiT
+* RedNet
