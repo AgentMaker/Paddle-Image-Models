@@ -12,7 +12,7 @@
 * 通过 pip 进行安装：
 
     ```shell
-    $ pip install ppim==1.0.3 -i https://pypi.python.org/pypi 
+    $ pip install ppim==1.0.4 -i https://pypi.python.org/pypi 
     ```
 * 通过 whl 包进行安装：[【Releases Packages】](https://github.com/AgentMaker/Paddle-Image-Models/releases)
 
