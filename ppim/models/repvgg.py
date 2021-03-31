@@ -133,10 +133,12 @@ class RepVGGBlock(nn.Layer):
 
 
 class RepVGG(nn.Layer):
-    def __init__(self, num_blocks, width_multiplier=None, override_groups_map=None, class_dim=1000):
+    def __init__(self, num_blocks, width_multiplier=None, override_groups_map=None, class_dim=1000, with_pool=True):
         super(RepVGG, self).__init__()
-
         assert len(width_multiplier) == 4
+
+        self.class_dim = class_dim
+        self.with_pool = with_pool
         self.override_groups_map = override_groups_map or dict()
 
         assert 0 not in self.override_groups_map
@@ -154,8 +156,12 @@ class RepVGG(nn.Layer):
             int(256 * width_multiplier[2]), num_blocks[2], stride=2)
         self.stage4 = self._make_stage(
             int(512 * width_multiplier[3]), num_blocks[3], stride=2)
-        self.gap = nn.AdaptiveAvgPool2D(output_size=1)
-        self.linear = nn.Linear(int(512 * width_multiplier[3]), class_dim)
+
+        if with_pool:
+            self.gap = nn.AdaptiveAvgPool2D(output_size=1)
+
+        if class_dim > 0:
+            self.linear = nn.Linear(int(512 * width_multiplier[3]), class_dim)
 
     def _make_stage(self, planes, num_blocks, stride):
         strides = [stride] + [1]*(num_blocks-1)
@@ -174,9 +180,14 @@ class RepVGG(nn.Layer):
         out = self.stage2(out)
         out = self.stage3(out)
         out = self.stage4(out)
-        out = self.gap(out)
-        out = paddle.flatten(out, start_axis=1)
-        out = self.linear(out)
+
+        if self.with_pool:
+            out = self.gap(out)
+
+        if self.class_dim > 0:
+            out = paddle.flatten(out, start_axis=1)
+            out = self.linear(out)
+
         return out
 
 
@@ -248,8 +259,8 @@ def repvgg_b1(pretrained=False, **kwargs):
 def repvgg_b2(pretrained=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
-        width_multiplier=[2.5, 2.5, 2.5, 5], 
-        override_groups_map=None, 
+        width_multiplier=[2.5, 2.5, 2.5, 5],
+        override_groups_map=None,
         **kwargs
     )
     if pretrained:
@@ -260,8 +271,8 @@ def repvgg_b2(pretrained=False, **kwargs):
 def repvgg_b3(pretrained=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
-        width_multiplier=[3, 3, 3, 5], 
-        override_groups_map=None, 
+        width_multiplier=[3, 3, 3, 5],
+        override_groups_map=None,
         **kwargs
     )
     if pretrained:
@@ -272,8 +283,8 @@ def repvgg_b3(pretrained=False, **kwargs):
 def repvgg_b1g2(pretrained=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
-        width_multiplier=[2, 2, 2, 4], 
-        override_groups_map=g2_map, 
+        width_multiplier=[2, 2, 2, 4],
+        override_groups_map=g2_map,
         **kwargs
     )
     if pretrained:
@@ -284,8 +295,8 @@ def repvgg_b1g2(pretrained=False, **kwargs):
 def repvgg_b1g4(pretrained=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
-        width_multiplier=[2, 2, 2, 4], 
-        override_groups_map=g4_map, 
+        width_multiplier=[2, 2, 2, 4],
+        override_groups_map=g4_map,
         **kwargs
     )
     if pretrained:
@@ -296,8 +307,8 @@ def repvgg_b1g4(pretrained=False, **kwargs):
 def repvgg_b2g4(pretrained=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
-        width_multiplier=[2.5, 2.5, 2.5, 5], 
-        override_groups_map=g4_map, 
+        width_multiplier=[2.5, 2.5, 2.5, 5],
+        override_groups_map=g4_map,
         **kwargs
     )
     if pretrained:
@@ -308,8 +319,8 @@ def repvgg_b2g4(pretrained=False, **kwargs):
 def repvgg_b3g4(pretrained=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
-        width_multiplier=[3, 3, 3, 5], 
-        override_groups_map=g4_map, 
+        width_multiplier=[3, 3, 3, 5],
+        override_groups_map=g4_map,
         **kwargs
     )
     if pretrained:

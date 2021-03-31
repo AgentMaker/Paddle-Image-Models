@@ -36,7 +36,6 @@ class DistilledVisionTransformer(VisionTransformer):
     def __init__(self,
                  img_size=224,
                  patch_size=16,
-                 class_dim=1000,
                  embed_dim=768,
                  depth=12,
                  num_heads=12,
@@ -44,6 +43,7 @@ class DistilledVisionTransformer(VisionTransformer):
                  qkv_bias=False,
                  norm_layer='nn.LayerNorm',
                  epsilon=1e-5,
+                 class_dim=1000,
                  **kwargs):
         super().__init__(
             img_size=img_size,
@@ -66,9 +66,8 @@ class DistilledVisionTransformer(VisionTransformer):
             shape=(1, 1, self.embed_dim), default_initializer=zeros_)
         self.add_parameter("cls_token", self.cls_token)
 
-        self.head_dist = nn.Linear(
-            self.embed_dim,
-            self.class_dim) if self.class_dim > 0 else Identity()
+        if class_dim > 0:
+            self.head_dist = nn.Linear(self.embed_dim, self.class_dim)
 
         trunc_normal_(self.dist_token)
         trunc_normal_(self.pos_embed)
@@ -93,8 +92,11 @@ class DistilledVisionTransformer(VisionTransformer):
 
     def forward(self, x):
         x, x_dist = self.forward_features(x)
-        x = self.head(x)
-        x_dist = self.head_dist(x_dist)
+
+        if self.class_dim > 0:
+            x = self.head(x)
+            x_dist = self.head_dist(x_dist)
+            
         return (x + x_dist) / 2
 
 

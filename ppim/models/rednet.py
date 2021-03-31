@@ -92,9 +92,9 @@ class BottleneckBlock(resnet.BottleneckBlock):
 
 
 class RedNet(resnet.ResNet):
-    def __init__(self, block, depth, num_classes=1000, with_pool=True):
+    def __init__(self, block, depth, class_dim=1000, with_pool=True):
         super(RedNet, self).__init__(block=block, depth=50,
-                                     num_classes=num_classes, with_pool=with_pool)
+                                     num_classes=class_dim, with_pool=with_pool)
         layer_cfg = {
             26: [1, 2, 4, 1],
             38: [2, 3, 5, 2],
@@ -108,6 +108,7 @@ class RedNet(resnet.ResNet):
         self.bn1 = None
         self.relu = None
         self.inplanes = 64
+        self.class_dim = class_dim
 
         self.stem = nn.Sequential(
             nn.Sequential(
@@ -155,7 +156,7 @@ class RedNet(resnet.ResNet):
         if self.with_pool:
             x = self.avgpool(x)
 
-        if self.num_classes > 0:
+        if self.class_dim > 0:
             x = paddle.flatten(x, 1)
             x = self.fc(x)
 

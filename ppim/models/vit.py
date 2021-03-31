@@ -192,7 +192,6 @@ class VisionTransformer(nn.Layer):
                  class_dim=1000):
         super().__init__()
         self.class_dim = class_dim
-
         self.num_features = self.embed_dim = embed_dim
 
         self.patch_embed = PatchEmbed(
@@ -229,8 +228,8 @@ class VisionTransformer(nn.Layer):
         self.norm = eval(norm_layer)(embed_dim, epsilon=epsilon)
 
         # Classifier head
-        self.head = nn.Linear(embed_dim,
-                              class_dim) if class_dim > 0 else Identity()
+        if class_dim > 0:
+            self.head = nn.Linear(embed_dim, class_dim)
 
         if paddle.in_dynamic_mode():
             trunc_normal_(self.pos_embed)
@@ -260,5 +259,8 @@ class VisionTransformer(nn.Layer):
 
     def forward(self, x):
         x = self.forward_features(x)
-        x = self.head(x)
+
+        if self.class_dim > 0:
+            x = self.head(x)
+
         return x

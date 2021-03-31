@@ -97,9 +97,12 @@ class LinearBottleneck(nn.Layer):
 
 
 class ReXNetV1(nn.Layer):
-    def __init__(self, input_ch=16, final_ch=180, width_mult=1.0, depth_mult=1.0,
-                 use_se=True, se_ratio=12, dropout_ratio=0.2, class_dim=1000):
+    def __init__(self, input_ch=16, final_ch=180, width_mult=1.0, depth_mult=1.0, use_se=True,
+                 se_ratio=12, dropout_ratio=0.2, class_dim=1000, with_pool=True):
         super(ReXNetV1, self).__init__()
+
+        self.class_dim = class_dim
+        self.with_pool = with_pool
 
         layers = [1, 2, 2, 3, 3, 5]
         strides = [1, 2, 2, 2, 1, 2]
@@ -146,15 +149,23 @@ class ReXNetV1(nn.Layer):
         pen_channels = int(1280 * width_mult)
         ConvBN(features, c, pen_channels, act='swish')
 
-        features.append(nn.AdaptiveAvgPool2D(1))
+        if with_pool:
+            features.append(nn.AdaptiveAvgPool2D(1))
+
         self.features = nn.Sequential(*features)
-        self.output = nn.Sequential(
-            nn.Dropout(dropout_ratio),
-            nn.Conv2D(pen_channels, class_dim, 1))
+
+        if class_dim > 0:
+            self.output = nn.Sequential(
+                nn.Dropout(dropout_ratio),
+                nn.Conv2D(pen_channels, class_dim, 1)
+            )
 
     def forward(self, x):
         x = self.features(x)
-        x = self.output(x).squeeze()
+
+        if self.class_dim > 0:
+            x = self.output(x).squeeze()
+
         return x
 
 
