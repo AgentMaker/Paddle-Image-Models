@@ -213,14 +213,14 @@ model.fit(
 @article{han2020rexnet,
     title = {{ReXNet}: Diminishing Representational Bottleneck on Convolutional Neural Network},
     author = {Han, Dongyoon and Yun, Sangdoo and Heo, Byeongho and Yoo, YoungJoon},
-    year = {2020},
     journal = {arXiv preprint arXiv:2007.00992},
+    year = {2020},
 }
 ```
 ```
 @InProceedings{Li_2021_CVPR,
-    author = {Li, Duo and Hu, Jie and Wang, Changhu and Li, Xiangtai and She, Qi and Zhu, Lei and Zhang, Tong and Chen, Qifeng},
     title = {Involution: Inverting the Inherence of Convolution for Visual Recognition},
+    author = {Li, Duo and Hu, Jie and Wang, Changhu and Li, Xiangtai and She, Qi and Zhu, Lei and Zhang, Tong and Chen, Qifeng},
     booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
     month = {June},
     year = {2021}
