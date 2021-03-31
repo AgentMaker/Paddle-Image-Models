@@ -216,7 +216,7 @@
 ## 引用
 ```
 @article{han2020rexnet,
-    title = {{ReXNet}: Diminishing Representational Bottleneck on Convolutional Neural Network},
+    title = {ReXNet: Diminishing Representational Bottleneck on Convolutional Neural Network},
     author = {Han, Dongyoon and Yun, Sangdoo and Heo, Byeongho and Yoo, YoungJoon},
     journal = {arXiv preprint arXiv:2007.00992},
     year = {2020},
