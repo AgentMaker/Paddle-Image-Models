@@ -28,12 +28,12 @@ urls = {
 }
 
 
-class involution(nn.Layer):
+class Involution(nn.Layer):
     def __init__(self,
                  channels,
                  kernel_size,
                  stride):
-        super(involution, self).__init__()
+        super(Involution, self).__init__()
         self.kernel_size = kernel_size
         self.stride = stride
         self.channels = channels
@@ -88,7 +88,7 @@ class BottleneckBlock(resnet.BottleneckBlock):
         super(BottleneckBlock, self).__init__(inplanes, planes, stride,
                                               downsample, groups, base_width, dilation, norm_layer)
         width = int(planes * (base_width / 64.)) * groups
-        self.conv2 = involution(width, 7, stride)
+        self.conv2 = Involution(width, 7, stride)
 
 
 class RedNet(resnet.ResNet):
@@ -122,7 +122,7 @@ class RedNet(resnet.ResNet):
                 ('bn', nn.BatchNorm2D(self.inplanes // 2)),
                 ('activate', nn.ReLU())
             ),
-            involution(self.inplanes // 2, 3, 1),
+            Involution(self.inplanes // 2, 3, 1),
             nn.BatchNorm2D(self.inplanes // 2),
             nn.ReLU(),
             nn.Sequential(
