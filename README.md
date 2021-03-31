@@ -211,36 +211,35 @@ model.fit(
 ## Citation
 ```
 @article{han2020rexnet,
-    title={{ReXNet}: Diminishing Representational Bottleneck on Convolutional Neural Network
-},
-    author={Han, Dongyoon and Yun, Sangdoo and Heo, Byeongho and Yoo, YoungJoon},
-    year={2020},
-    journal={arXiv preprint arXiv:2007.00992},
+    title = {{ReXNet}: Diminishing Representational Bottleneck on Convolutional Neural Network},
+    author = {Han, Dongyoon and Yun, Sangdoo and Heo, Byeongho and Yoo, YoungJoon},
+    year = {2020},
+    journal = {arXiv preprint arXiv:2007.00992},
 }
 ```
 ```
 @InProceedings{Li_2021_CVPR,
-author = {Li, Duo and Hu, Jie and Wang, Changhu and Li, Xiangtai and She, Qi and Zhu, Lei and Zhang, Tong and Chen, Qifeng},
-title = {Involution: Inverting the Inherence of Convolution for Visual Recognition},
-booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-month = {June},
-year = {2021}
+    author = {Li, Duo and Hu, Jie and Wang, Changhu and Li, Xiangtai and She, Qi and Zhu, Lei and Zhang, Tong and Chen, Qifeng},
+    title = {Involution: Inverting the Inherence of Convolution for Visual Recognition},
+    booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month = {June},
+    year = {2021}
 }
 ```
 ```
 @article{ding2021repvgg,
-title={RepVGG: Making VGG-style ConvNets Great Again},
-author={Ding, Xiaohan and Zhang, Xiangyu and Ma, Ningning and Han, Jungong and Ding, Guiguang and Sun, Jian},
-journal={arXiv preprint arXiv:2101.03697},
-year={2021}
+    title={RepVGG: Making VGG-style ConvNets Great Again},
+    author={Ding, Xiaohan and Zhang, Xiangyu and Ma, Ningning and Han, Jungong and Ding, Guiguang and Sun, Jian},
+    journal={arXiv preprint arXiv:2101.03697},
+    year={2021}
 }
 ```
 ```
 @article{touvron2020deit,
-  title={Training data-efficient image transformers & distillation through attention},
-  author={Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv\'e J\'egou},
-  journal={arXiv preprint arXiv:2012.12877},
-  year={2020}
+    title = {Training data-efficient image transformers & distillation through attention},
+    author = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv'e J'egou},
+    journal = {arXiv preprint arXiv:2012.12877},
+    year = {2020}
 }
 
 ```
