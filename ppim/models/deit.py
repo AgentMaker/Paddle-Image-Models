@@ -68,10 +68,10 @@ class DistilledVisionTransformer(VisionTransformer):
 
         if class_dim > 0:
             self.head_dist = nn.Linear(self.embed_dim, self.class_dim)
+            self.head_dist.apply(self._init_weights)
 
         trunc_normal_(self.dist_token)
         trunc_normal_(self.pos_embed)
-        self.head_dist.apply(self._init_weights)
 
     def forward_features(self, x):
         B = paddle.shape(x)[0]
