@@ -8,6 +8,7 @@ A PaddlePaddle version image model zoo.
 
 ## Install Package
 * Install by pip：
+
     ```shell
     $ pip install ppim==1.0.1 -i https://pypi.python.org/pypi 
     ```
@@ -15,6 +16,7 @@ A PaddlePaddle version image model zoo.
 
 ## Usage
 * Quick Start
+
     ```python
     import paddle
     from ppim import rednet26
@@ -32,6 +34,7 @@ A PaddlePaddle version image model zoo.
     out = model(x)
     ```
 * Finetune
+    
     ```python
     import paddle
     import paddle.nn as nn
