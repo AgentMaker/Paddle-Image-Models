@@ -4,38 +4,38 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/AgentMaker/Paddle-Image-Models?include_prereleases)
 ![GitHub](https://img.shields.io/github/license/AgentMaker/Paddle-Image-Models)  
 
-English | [简体中文](README_CN.md)
+[English](README.md) | 简体中文
 
-A PaddlePaddle version image model zoo.
+一个基于飞桨框架实现的图像预训练模型库。
 
-## Install Package
-* Install by pip：
+## 安装
+* 通过 pip 进行安装：
 
     ```shell
     $ pip install ppim==1.0.3 -i https://pypi.python.org/pypi 
     ```
-* Install by wheel package：[【Releases Packages】](https://github.com/AgentMaker/Paddle-Image-Models/releases)
+* 通过 whl 包进行安装：[【Releases Packages】](https://github.com/AgentMaker/Paddle-Image-Models/releases)
 
-## Usage
-* Quick Start
+## 使用方法
+* 快速使用
 
     ```python
     import paddle
     from ppim import rednet26
 
-    # Load the model
+    # 加载模型
     model, val_transforms = rednet26(pretrained=True)
 
-    # Model summary 
+    # 模型结构总览 
     paddle.summary(model, input_size=(1, 3, 224, 224))
 
-    # Random a input
+    # 准备一个随机的输入
     x = paddle.randn(shape=(1, 3, 224, 224))
 
-    # Model forword
+    # 模型前向计算
     out = model(x)
     ```
-* Finetune
+* 模型微调
     
     ```python
     import paddle
@@ -45,25 +45,25 @@ A PaddlePaddle version image model zoo.
 
     from ppim import rexnet_100
 
-    # Load the model
+    # 加载模型
     model, val_transforms = rexnet_100(pretrained=True)
 
-    # Use the PaddleHapi Model
+    # 使用飞桨高层 API Model
     model = paddle.Model(model)
 
-    # Set the optimizer
+    # 配置优化器
     opt = paddle.optimizer.Adam(learning_rate=0.001, parameters=model.parameters())
 
-    # Set the loss function
+    # 配置损失函数
     loss = nn.CrossEntropyLoss()
 
-    # Set the evaluate metric
+    # 配置评估指标
     metric = paddle.metric.Accuracy(topk=(1, 5))
 
-    # Prepare the model 
+    # 模型准备
     model.prepare(optimizer=opt, loss=loss, metrics=metric)
 
-    # Set the data preprocess
+    # 配置训练集数据处理
     train_transforms = T.Compose([
         T.Resize(256, interpolation='bicubic'),
         T.RandomCrop(224),
@@ -71,11 +71,11 @@ A PaddlePaddle version image model zoo.
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
-    # Load the Cifar100 dataset
+    # 加载 Cifar100 数据集
     train_dataset = Cifar100(mode='train', transform=train_transforms, backend='pil')
     val_dataset = Cifar100(mode='test',  transform=val_transforms, backend='pil')
 
-    # Finetune the model 
+    # 模型微调
     model.fit(
         train_data=train_dataset, 
         eval_data=val_dataset, 
@@ -92,14 +92,14 @@ A PaddlePaddle version image model zoo.
     )
     ```
 
-## Model Zoo
+## 模型库
 * ReXNet
-    * Paper：[ReXNet: Diminishing Representational Bottleneck on Convolutional Neural Network](https://arxiv.org/abs/2007.00992)
-    * Origin Repo：[clovaai/rexnet](https://github.com/clovaai/rexnet)
-    * Evaluate Transforms：
+    * 论文：[ReXNet: Diminishing Representational Bottleneck on Convolutional Neural Network](https://arxiv.org/abs/2007.00992)
+    * 官方项目：[clovaai/rexnet](https://github.com/clovaai/rexnet)
+    * 验证集数据处理：
         ```python
-        # backend: pil
-        # input_size: 224x224
+        # 图像后端：pil
+        # 输入图像大小：224x224
         transforms = T.Compose([
             T.Resize(256, interpolation='bicubic'),
             T.CenterCrop(224),
@@ -107,7 +107,7 @@ A PaddlePaddle version image model zoo.
             T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
         ```
-    * Model Details：
+    * 模型细节：
 
         |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
         |:---------------------:|:---------:|:--------:|:---------:|:---------:|
@@ -118,12 +118,12 @@ A PaddlePaddle version image model zoo.
         | ReXNet-3.0             |  34  | 3.4  | 82.8 | 96.2 |
 
 * RedNet
-    * Paper：[Involution: Inverting the Inherence of Convolution for Visual Recognition](https://arxiv.org/abs/2103.06255)
-    * Origin Repo：[d-li14/involution](https://github.com/d-li14/involution)
-    * Evaluate Transforms：
+    * 论文：[Involution: Inverting the Inherence of Convolution for Visual Recognition](https://arxiv.org/abs/2103.06255)
+    * 官方项目：[d-li14/involution](https://github.com/d-li14/involution)
+    * 验证集数据处理：
         ```python
-        # backend: cv2
-        # input_size: 224x224
+        # 图像后端：cv2
+        # 输入图像大小：224x224
         transforms = T.Compose([
             T.Resize(256),
             T.CenterCrop(224),
@@ -136,7 +136,7 @@ A PaddlePaddle version image model zoo.
             T.ToTensor(),
         ])
         ```
-    * Model Details：
+    * 模型细节：
 
         |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
         |:---------------------:|:---------:|:--------:|:---------:|:---------:|
@@ -147,12 +147,12 @@ A PaddlePaddle version image model zoo.
         | RedNet-152            | 33.99 | 6.79 | 79.12 | 94.38 |
 
 * RepVGG
-    * Paper：[RepVGG: Making VGG-style ConvNets Great Again](https://arxiv.org/abs/2101.03697)
-    * Origin Repo：[DingXiaoH/RepVGG](https://github.com/DingXiaoH/RepVGG)
-    * Evaluate Transforms：
+    * 论文：[RepVGG: Making VGG-style ConvNets Great Again](https://arxiv.org/abs/2101.03697)
+    * 官方项目：[DingXiaoH/RepVGG](https://github.com/DingXiaoH/RepVGG)
+    * 验证集数据处理：
         ```python
-        # backend: pil
-        # input_size: 224x224
+        # 图像后端：pil
+        # 输入图像大小：224x224
         transforms = T.Compose([
             T.Resize(256),
             T.CenterCrop(224),
@@ -160,7 +160,7 @@ A PaddlePaddle version image model zoo.
             T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
         ```
-    * Model Details：
+    * 模型细节：
 
         |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
         |:---------------------:|:---------:|:--------:|:---------:|:---------:|
@@ -177,13 +177,13 @@ A PaddlePaddle version image model zoo.
         | RepVGG-B3g4           | 75.62  | 16.1 | 80.21 |       |
     
 * DeiT
-    * Paper：[Training data-efficient image transformers & distillation through attention
+    * 论文：[Training data-efficient image transformers & distillation through attention
 ](https://arxiv.org/abs/2012.12877)
-    * Origin Repo：[facebookresearch/deit](https://github.com/facebookresearch/deit)
-    * Evaluate Transforms：
+    * 官方项目：[facebookresearch/deit](https://github.com/facebookresearch/deit)
+    * 验证集数据处理：
         ```python
-        # backend: pil
-        # input_size: 224x224
+        # 图像后端：pil
+        # 输入图像大小：224x224
         transforms = T.Compose([
             T.Resize(248, interpolation='bicubic'),
             T.CenterCrop(224),
@@ -191,8 +191,8 @@ A PaddlePaddle version image model zoo.
             T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
 
-        # backend: pil
-        # input_size: 384x384
+        # 图像后端：pil
+        # 输入图像大小：384x384
         transforms = T.Compose([
             T.Resize(384, interpolation='bicubic'),
             T.CenterCrop(384),
@@ -200,7 +200,7 @@ A PaddlePaddle version image model zoo.
             T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
         ```
-    * Model Details：
+    * 模型细节：
 
         |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
         |:---------------------:|:---------:|:--------:|:---------:|:---------:|
@@ -213,7 +213,7 @@ A PaddlePaddle version image model zoo.
         | DeiT-base 384           | 87  | | 82.9 |  96.2     |
         | DeiT-base distilled 384 | 88  | | 85.2 |  97.2     |
 
-## Citation
+## 引用
 ```
 @article{han2020rexnet,
     title = {{ReXNet}: Diminishing Representational Bottleneck on Convolutional Neural Network},
