@@ -193,10 +193,10 @@ class PoolingTransformer(nn.Layer):
         return cls_tokens
 
     def forward(self, x):
-        cls_token = self.forward_features(x)
+        cls_token = self.forward_features(x)[:, 0]
 
         if self.class_dim > 0:
-            cls_token = self.head(cls_token[:, 0])
+            cls_token = self.head(cls_token)
 
         return cls_token
 
