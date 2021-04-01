@@ -19,14 +19,14 @@ transforms = T.Compose([
 
 
 urls = {
-    'pit_ti': 'https://bj.bcebos.com/v1/ai-studio-online/1e91e6ab967b4b0f9940891c6f77f98ca612d5a767b8482498c364c11d65b44b?responseContentDisposition=attachment%3B%20filename%3DDeiT_tiny_patch16_224.pdparams',
-    'pit_xs': 'https://bj.bcebos.com/v1/ai-studio-online/56fb3b56543d495aa36cc244e8f25e3e321747cfcedd48c28830ea3a22f4a82a?responseContentDisposition=attachment%3B%20filename%3DDeiT_small_patch16_224.pdparams',
-    'pit_s': 'https://bj.bcebos.com/v1/ai-studio-online/38be4cdffc0240c18e9e4905641e9e8171277f42646947e5b3dbcd68c59a6d81?responseContentDisposition=attachment%3B%20filename%3DDeiT_base_patch16_224.pdparams',
-    'pit_b': 'https://bj.bcebos.com/v1/ai-studio-online/de491e7155e94ac2b13b2a97e432155ed6d502e8a0114e4e90ffd6ce9dce63cc?responseContentDisposition=attachment%3B%20filename%3DDeiT_base_patch16_384.pdparams',
-    'pit_ti_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/dd0ff3e26c1e4fd4b56698a43a62febd35bdc8153563435b898cdd9480cd8720?responseContentDisposition=attachment%3B%20filename%3DDeiT_tiny_distilled_patch16_224.pdparams',
-    'pit_xs_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/5ab1d5f92e1f44d39db09ab2233143f8fd27788c9b4f46bd9f1d5f2cb760933e?responseContentDisposition=attachment%3B%20filename%3DDeiT_small_distilled_patch16_224.pdparams',
-    'pit_s_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/24692c628ab64bfc9bb72fc8a5b3d209080b5ad94227472f98d3bb7cb6732e67?responseContentDisposition=attachment%3B%20filename%3DDeiT_base_distilled_patch16_224.pdparams',
-    'pit_b_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/0a84b9ea45d0412d9bebae9ea3404e679221c3d0c8e542bf9d6a64f810983b25?responseContentDisposition=attachment%3B%20filename%3DDeiT_base_distilled_patch16_384.pdparams'
+    'pit_ti': 'https://bj.bcebos.com/v1/ai-studio-online/3d0fe9a33bb74abaa0648f6200b37e5b49ca9a4f15a04afbab7a885da64dfa62?responseContentDisposition=attachment%3B%20filename%3Dpit_ti.pdparams',
+    'pit_xs': 'https://bj.bcebos.com/v1/ai-studio-online/4bee539cc81a477a8bae4795f91d583c810ea4832e6d4ed983b37883669e6a6d?responseContentDisposition=attachment%3B%20filename%3Dpit_xs.pdparams',
+    'pit_s': 'https://bj.bcebos.com/v1/ai-studio-online/232c216331d04fb58f77839673b34652ea229a9ab84044a493e08cd802ab4fe3?responseContentDisposition=attachment%3B%20filename%3Dpit_s.pdparams',
+    'pit_b': 'https://bj.bcebos.com/v1/ai-studio-online/26f33b44d9424626b74eb7cfad2041582afabdebd6474afa976cc0a55c226791?responseContentDisposition=attachment%3B%20filename%3Dpit_b.pdparams',
+    'pit_ti_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/9707c73717274b5e880e8401b85dcf9ad12b0d7e47944af68b3d6a2236b70567?responseContentDisposition=attachment%3B%20filename%3Dpit_ti_distill.pdparams',
+    'pit_xs_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/61aa3339366d4315854bf67a8df1cea20f4a2402b2d94d7688d995423a197df1?responseContentDisposition=attachment%3B%20filename%3Dpit_xs_distill.pdparams',
+    'pit_s_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/65acbfa1d6a94c689225fe95c6ec48567f5c05ee051243d6abe3bbcbd6119f5d?responseContentDisposition=attachment%3B%20filename%3Dpit_s_distill.pdparams',
+    'pit_b_distilled': 'https://bj.bcebos.com/v1/ai-studio-online/2d6631b21542486b8333440c612847f35a7782d2890f4514ad8007c34ae77e66?responseContentDisposition=attachment%3B%20filename%3Dpit_b_distill.pdparams'
 }
 
 
