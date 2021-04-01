@@ -222,7 +222,9 @@ class VisionTransformer(nn.Layer):
                 attn_drop=attn_drop_rate,
                 drop_path=dpr[i],
                 norm_layer=norm_layer,
-                epsilon=epsilon) for i in range(depth)
+                epsilon=epsilon
+            )
+            for i in range(depth)
         ])
 
         self.norm = eval(norm_layer)(embed_dim, epsilon=epsilon)
