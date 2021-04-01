@@ -278,11 +278,18 @@
 }
 ```
 ```
+@article{heo2021pit,
+    title={Rethinking Spatial Dimensions of Vision Transformers},
+    author={Byeongho Heo and Sangdoo Yun and Dongyoon Han and Sanghyuk Chun and Junsuk Choe and Seong Joon Oh},
+    journal={arXiv: 2103.16302},
+    year={2021},
+}
+```
+```
 @article{touvron2020deit,
     title = {Training data-efficient image transformers & distillation through attention},
     author = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv'e J'egou},
     journal = {arXiv preprint arXiv:2012.12877},
     year = {2020}
 }
-
 ```

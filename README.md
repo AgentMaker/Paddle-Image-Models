@@ -237,7 +237,7 @@ A PaddlePaddle version image model zoo.
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
     ```
-    
+
 * Model Details：
 
     |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
@@ -278,11 +278,18 @@ A PaddlePaddle version image model zoo.
 }
 ```
 ```
+@article{heo2021pit,
+    title={Rethinking Spatial Dimensions of Vision Transformers},
+    author={Byeongho Heo and Sangdoo Yun and Dongyoon Han and Sanghyuk Chun and Junsuk Choe and Seong Joon Oh},
+    journal={arXiv: 2103.16302},
+    year={2021},
+}
+```
+```
 @article{touvron2020deit,
     title = {Training data-efficient image transformers & distillation through attention},
     author = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv'e J'egou},
     journal = {arXiv preprint arXiv:2012.12877},
     year = {2020}
 }
-
 ```
