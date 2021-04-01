@@ -1,5 +1,7 @@
 import math
+
 import paddle
+import paddle.vision.transforms as T
 
 from paddle import nn
 from paddle.nn.initializer import Assign
@@ -242,7 +244,7 @@ def pit_b(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_b'])
-    return model
+    return model, transforms
 
 
 def pit_s(pretrained, **kwargs):
@@ -258,7 +260,7 @@ def pit_s(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_s'])
-    return model
+    return model, transforms
 
 
 def pit_xs(pretrained, **kwargs):
@@ -274,7 +276,7 @@ def pit_xs(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_xs'])
-    return model
+    return model, transforms
 
 
 def pit_ti(pretrained, **kwargs):
@@ -290,7 +292,7 @@ def pit_ti(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_ti'])
-    return model
+    return model, transforms
 
 
 def pit_b_distilled(pretrained, **kwargs):
@@ -306,7 +308,7 @@ def pit_b_distilled(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_b_distilled'])
-    return model
+    return model, transforms
 
 
 def pit_s_distilled(pretrained, **kwargs):
@@ -322,7 +324,7 @@ def pit_s_distilled(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_s_distilled'])
-    return model
+    return model, transforms
 
 
 def pit_xs_distilled(pretrained, **kwargs):
@@ -338,7 +340,7 @@ def pit_xs_distilled(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_xs_distilled'])
-    return model
+    return model, transforms
 
 
 def pit_ti_distilled(pretrained, **kwargs):
@@ -354,4 +356,4 @@ def pit_ti_distilled(pretrained, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_ti_distilled'])
-    return model
+    return model, transforms
