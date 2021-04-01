@@ -56,7 +56,6 @@ class Transformer(nn.Layer):
 
     def forward(self, x, cls_tokens):
         n, c, h, w = x.shape
-        # x = rearrange(x, 'b c h w -> b (h w) c')
         x = x.transpose((0, 2, 3, 1))
         x = paddle.flatten(x, start_axis=1, stop_axis=2)
 
@@ -67,7 +66,6 @@ class Transformer(nn.Layer):
 
         cls_tokens = x[:, :token_length]
         x = x[:, token_length:]
-        # x = rearrange(x, 'b (h w) c -> b c h w', h=h, w=w)
         x = x.transpose((0, 2, 1))
         x = x.reshape((n, c, h, w))
         return x, cls_tokens
