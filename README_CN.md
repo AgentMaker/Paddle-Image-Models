@@ -190,8 +190,8 @@
 * 验证集数据处理：
 
     ```python
-    # backend: pil
-    # input_size: 224x224
+    # 图像后端：pil
+    # 输入图像大小：224x224
     transforms = T.Compose([
         T.Resize(248, interpolation='bicubic'),
         T.CenterCrop(224),
