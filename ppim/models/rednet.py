@@ -163,35 +163,35 @@ class RedNet(resnet.ResNet):
         return x
 
 
-def rednet26(pretrained=False, **kwargs):
+def rednet_26(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 26, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet26'])
     return model, transforms
 
 
-def rednet38(pretrained=False, **kwargs):
+def rednet_38(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 38, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet38'])
     return model, transforms
 
 
-def rednet50(pretrained=False, **kwargs):
+def rednet_50(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 50, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet50'])
     return model, transforms
 
 
-def rednet101(pretrained=False, **kwargs):
+def rednet_101(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 101, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet101'])
     return model, transforms
 
 
-def rednet152(pretrained=False, **kwargs):
+def rednet_152(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 152, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet152'])

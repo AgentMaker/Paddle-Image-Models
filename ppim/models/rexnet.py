@@ -169,35 +169,35 @@ class ReXNetV1(nn.Layer):
         return x
 
 
-def rexnet_100(pretrained=False, **kwargs):
+def rexnet_1_0(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=1.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_100'])
     return model, transforms
 
 
-def rexnet_130(pretrained=False, **kwargs):
+def rexnet_1_3(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=1.3, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_130'])
     return model, transforms
 
 
-def rexnet_150(pretrained=False, **kwargs):
+def rexnet_1_5(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=1.5, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_150'])
     return model, transforms
 
 
-def rexnet_200(pretrained=False, **kwargs):
+def rexnet_2_0(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=2.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_200'])
     return model, transforms
 
 
-def rexnet_300(pretrained=False, **kwargs):
+def rexnet_3_0(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=3.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_300'])

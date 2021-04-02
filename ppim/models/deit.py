@@ -100,7 +100,7 @@ class DistilledVisionTransformer(VisionTransformer):
         return (x + x_dist) / 2
 
 
-def deit_tiny_patch16_224(pretrained=False, **kwargs):
+def deit_ti(pretrained=False, **kwargs):
     model = VisionTransformer(
         patch_size=16,
         embed_dim=192,
@@ -115,7 +115,7 @@ def deit_tiny_patch16_224(pretrained=False, **kwargs):
     return model, transforms_224
 
 
-def deit_small_patch16_224(pretrained=False, **kwargs):
+def deit_s(pretrained=False, **kwargs):
     model = VisionTransformer(
         patch_size=16,
         embed_dim=384,
@@ -130,7 +130,7 @@ def deit_small_patch16_224(pretrained=False, **kwargs):
     return model, transforms_224
 
 
-def deit_base_patch16_224(pretrained=False, **kwargs):
+def deit_b(pretrained=False, **kwargs):
     model = VisionTransformer(
         patch_size=16,
         embed_dim=768,
@@ -145,7 +145,7 @@ def deit_base_patch16_224(pretrained=False, **kwargs):
     return model, transforms_224
 
 
-def deit_base_patch16_384(pretrained=False, **kwargs):
+def deit_b_384(pretrained=False, **kwargs):
     model = VisionTransformer(
         img_size=384,
         patch_size=16,
@@ -161,7 +161,7 @@ def deit_base_patch16_384(pretrained=False, **kwargs):
     return model, transforms_384
 
 
-def deit_tiny_distilled_patch16_224(pretrained=False, **kwargs):
+def deit_ti_distilled(pretrained=False, **kwargs):
     model = DistilledVisionTransformer(
         patch_size=16,
         embed_dim=192,
@@ -176,7 +176,7 @@ def deit_tiny_distilled_patch16_224(pretrained=False, **kwargs):
     return model, transforms_224
 
 
-def deit_small_distilled_patch16_224(pretrained=False, **kwargs):
+def deit_s_distilled(pretrained=False, **kwargs):
     model = DistilledVisionTransformer(
         patch_size=16,
         embed_dim=384,
@@ -191,7 +191,7 @@ def deit_small_distilled_patch16_224(pretrained=False, **kwargs):
     return model, transforms_224
 
 
-def deit_base_distilled_patch16_224(pretrained=False, **kwargs):
+def deit_b_distilled(pretrained=False, **kwargs):
     model = DistilledVisionTransformer(
         patch_size=16,
         embed_dim=768,
@@ -206,7 +206,7 @@ def deit_base_distilled_patch16_224(pretrained=False, **kwargs):
     return model, transforms_224
 
 
-def deit_base_distilled_patch16_384(pretrained=False, **kwargs):
+def deit_b_distilled_384(pretrained=False, **kwargs):
     model = DistilledVisionTransformer(
         img_size=384,
         patch_size=16,
