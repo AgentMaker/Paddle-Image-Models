@@ -15,11 +15,11 @@ transforms = T.Compose([
 
 
 urls = {
-    'rexnet_100': r'https://bj.bcebos.com/v1/ai-studio-online/6c890dd95dfc4e388335adfa298163d3ab413cca558e4abe966d52cb5c3aee31?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.0x.pdparams',
-    'rexnet_130': r'https://bj.bcebos.com/v1/ai-studio-online/41a4cc3e6d9545b9b69b4782cafa01147eb7661ec6af4f43841adc734149b3a7?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.3x.pdparams',
-    'rexnet_150': r'https://bj.bcebos.com/v1/ai-studio-online/20b131a7cb1840b5aed37c512b2665fb20c72eebe4344da5a3c6f0ab0592a323?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.5x.pdparams',
-    'rexnet_200': r'https://bj.bcebos.com/v1/ai-studio-online/b4df9f7be43446b0952a25ee6e83f2e443e3b879a00046f6bb33278319cb5fd0?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_2.0x.pdparams',
-    'rexnet_300': r'https://bj.bcebos.com/v1/ai-studio-online/9663f0570f0a4e4a8dde0b9799c539f5e22f46917d3d4e5a9d566cd213032d25?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_3.0x.pdparams'
+    'rexnet_1_0': r'https://bj.bcebos.com/v1/ai-studio-online/6c890dd95dfc4e388335adfa298163d3ab413cca558e4abe966d52cb5c3aee31?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.0x.pdparams',
+    'rexnet_1_3': r'https://bj.bcebos.com/v1/ai-studio-online/41a4cc3e6d9545b9b69b4782cafa01147eb7661ec6af4f43841adc734149b3a7?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.3x.pdparams',
+    'rexnet_1_5': r'https://bj.bcebos.com/v1/ai-studio-online/20b131a7cb1840b5aed37c512b2665fb20c72eebe4344da5a3c6f0ab0592a323?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.5x.pdparams',
+    'rexnet_2_0': r'https://bj.bcebos.com/v1/ai-studio-online/b4df9f7be43446b0952a25ee6e83f2e443e3b879a00046f6bb33278319cb5fd0?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_2.0x.pdparams',
+    'rexnet_3_0': r'https://bj.bcebos.com/v1/ai-studio-online/9663f0570f0a4e4a8dde0b9799c539f5e22f46917d3d4e5a9d566cd213032d25?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_3.0x.pdparams'
 }
 
 
@@ -172,33 +172,33 @@ class ReXNetV1(nn.Layer):
 def rexnet_1_0(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=1.0, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_100'])
+        model = load_model(model, urls['rexnet_1_0'])
     return model, transforms
 
 
 def rexnet_1_3(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=1.3, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_130'])
+        model = load_model(model, urls['rexnet_1_3'])
     return model, transforms
 
 
 def rexnet_1_5(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=1.5, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_150'])
+        model = load_model(model, urls['rexnet_1_5'])
     return model, transforms
 
 
 def rexnet_2_0(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=2.0, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_200'])
+        model = load_model(model, urls['rexnet_2_0'])
     return model, transforms
 
 
 def rexnet_3_0(pretrained=False, **kwargs):
     model = ReXNetV1(width_mult=3.0, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_300'])
+        model = load_model(model, urls['rexnet_3_0'])
     return model, transforms
