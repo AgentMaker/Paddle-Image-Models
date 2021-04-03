@@ -19,14 +19,14 @@
 
     |         Model         |     Model Name        | Params (M) | FLOPs (G) | Top-1 (%) | Top-5 (%) |      Pretrained Model        |
     |:---------------------:|:---------------------:|:----------:|:---------:|:---------:|:---------:|:----------------------------:|
-    | PiT-Ti                | pit_ti                | 4.9        | 0.7       | 73.0      |           | [Download][pit_ti]           |
-    | PiT-XS                | pit_xs                | 10.6       | 1.4       | 78.1      |           | [Download][pit_xs]           |
-    | PiT-S                 | pit_s                 | 23.5       | 2.9       | 80.9      |           | [Download][pit_s]            |
-    | PiT-B                 | pit_b                 | 73.8       | 12.5      | 82.0      |           | [Download][pit_b]            |
-    | PiT-Ti distilled      | pit_ti_distilled      | 4.9        | 0.7       | 74.6      |           | [Download][pit_ti_distilled] |
-    | PiT-XS distilled      | pit_xs_distilled      | 10.6       | 1.4       | 79.1      |           | [Download][pit_xs_distilled] |
-    | PiT-S distilled       | pit_s_distilled       | 23.5       | 2.9       | 81.9      |           | [Download][pit_s_distilled]  |
-    | PiT-B distilled       | pit_b_distilled       | 73.8       | 12.5      | 84.0      |           | [Download][pit_b_distilled]  |
+    | PiT-Ti                | pit_ti                | 4.9        | 0.7       | 72.91     |  91.40    | [Download][pit_ti]           |
+    | PiT-XS                | pit_xs                | 10.6       | 1.4       | 78.18     |  94.16    | [Download][pit_xs]           |
+    | PiT-S                 | pit_s                 | 23.5       | 2.9       | 81.08     |  95.33    | [Download][pit_s]            |
+    | PiT-B                 | pit_b                 | 73.8       | 12.5      | 82.44     |  95.71    | [Download][pit_b]            |
+    | PiT-Ti distilled      | pit_ti_distilled      | 4.9        | 0.7       | 74.54     |  92.10    | [Download][pit_ti_distilled] |
+    | PiT-XS distilled      | pit_xs_distilled      | 10.6       | 1.4       | 79.31     |  94.36    | [Download][pit_xs_distilled] |
+    | PiT-S distilled       | pit_s_distilled       | 23.5       | 2.9       | 81.99     |  95.79    | [Download][pit_s_distilled]  |
+    | PiT-B distilled       | pit_b_distilled       | 73.8       | 12.5      | 84.14     |  96.86    | [Download][pit_b_distilled]  |
 
 
 [pit_ti]:https://bj.bcebos.com/v1/ai-studio-online/3d0fe9a33bb74abaa0648f6200b37e5b49ca9a4f15a04afbab7a885da64dfa62?responseContentDisposition=attachment%3B%20filename%3Dpit_ti.pdparams
