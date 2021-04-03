@@ -8,6 +8,8 @@ English | [简体中文](README_CN.md)
 
 A PaddlePaddle version image model zoo.
 
+![](https://ai-studio-static-online.cdn.bcebos.com/0386a9c0f7ee4948985e4db463a229af4f3cf5cce20244a78e71aca90a95cb38)
+
 ## Install Package
 * Install by pip：
 
@@ -95,6 +97,7 @@ A PaddlePaddle version image model zoo.
     ```
 
 ## Model Zoo
+
 * [DLA](./docs/en/model_zoo/dla.md)
 
 * [ReXNet](./docs/en/model_zoo/rexnet.md)

@@ -8,6 +8,8 @@
 
 一个基于飞桨框架实现的图像预训练模型库。
 
+![](https://ai-studio-static-online.cdn.bcebos.com/0386a9c0f7ee4948985e4db463a229af4f3cf5cce20244a78e71aca90a95cb38)
+
 ## 安装
 * 通过 pip 进行安装：
 
@@ -95,6 +97,7 @@
     ```
 
 ## 模型库
+
 * [DLA](./docs/cn/model_zoo/dla.md)
 
 * [ReXNet](./docs/cn/model_zoo/rexnet.md)
