@@ -19,17 +19,17 @@
 
     |         Model         |     Model Name        | Params (M) | FLOPs (G) | Top-1 (%) | Top-5 (%) |     Pretrained Model    |
     |:---------------------:|:---------------------:|:----------:|:---------:|:---------:|:---------:|:-----------------------:|
-    | RepVGG-A0             | repvgg_a0             |  8.3       | 1.4       | 72.41     |           | [Download][repvgg_a0]   |
-    | RepVGG-A1             | repvgg_a1             | 12.8       | 2.4       | 74.46     |           | [Download][repvgg_a1]   |
-    | RepVGG-A2             | repvgg_a2             | 25.5       | 5.1       | 76.48     |           | [Download][repvgg_a2]   |
-    | RepVGG-B0             | repvgg_b0             | 14.3       | 3.1       | 75.14     |           | [Download][repvgg_b0]   |
-    | RepVGG-B1             | repvgg_b1             | 51.8       | 11.8      | 78.37     |           | [Download][repvgg_b1]   |
-    | RepVGG-B2             | repvgg_b2             | 80.3       | 18.4      | 78.78     |           | [Download][repvgg_b2]   |
-    | RepVGG-B3             | repvgg_b3             | 111.0      | 26.2      | 80.52     |           | [Download][repvgg_b3]   |
-    | RepVGG-B1g2           | repvgg_b1g2           | 41.4       | 8.8       | 77.78     |           | [Download][repvgg_b1g2] |
-    | RepVGG-B1g4           | repvgg_b1g4           | 36.1       | 7.3       | 77.58     |           | [Download][repvgg_b1g4] |
-    | RepVGG-B2g4           | repvgg_b2g4           | 55.8       | 11.3      | 79.38     |           | [Download][repvgg_b2g4] |
-    | RepVGG-B3g4           | repvgg_b3g4           | 75.6       | 16.1      | 80.21     |           | [Download][repvgg_b3g4] |
+    | RepVGG-A0             | repvgg_a0             |  8.3       | 1.4       | 72.42     |  90.49    | [Download][repvgg_a0]   |
+    | RepVGG-A1             | repvgg_a1             | 12.8       | 2.4       | 74.46     |  91.85    | [Download][repvgg_a1]   |
+    | RepVGG-A2             | repvgg_a2             | 25.5       | 5.1       | 76.46     |  93.00    | [Download][repvgg_a2]   |
+    | RepVGG-B0             | repvgg_b0             | 14.3       | 3.1       | 75.15     |  92.42    | [Download][repvgg_b0]   |
+    | RepVGG-B1             | repvgg_b1             | 51.8       | 11.8      | 78.37     |  94.10    | [Download][repvgg_b1]   |
+    | RepVGG-B2             | repvgg_b2             | 80.3       | 18.4      | 78.79     |  94.42    | [Download][repvgg_b2]   |
+    | RepVGG-B3             | repvgg_b3             | 111.0      | 26.2      | 80.50     |  95.26    | [Download][repvgg_b3]   |
+    | RepVGG-B1g2           | repvgg_b1g2           | 41.4       | 8.8       | 77.80     |  93.88    | [Download][repvgg_b1g2] |
+    | RepVGG-B1g4           | repvgg_b1g4           | 36.1       | 7.3       | 77.58     |  93.84    | [Download][repvgg_b1g4] |
+    | RepVGG-B2g4           | repvgg_b2g4           | 55.8       | 11.3      | 79.38     |  94.68    | [Download][repvgg_b2g4] |
+    | RepVGG-B3g4           | repvgg_b3g4           | 75.6       | 16.1      | 80.21     |  95.09    | [Download][repvgg_b3g4] |
 
 
 [repvgg_a0]:https://bj.bcebos.com/v1/ai-studio-online/26d1d26e0d0141deafeb7e9980ec8b5a555232b938e44fefa93da930422af42b?responseContentDisposition=attachment%3B%20filename%3DRepVGG_A0.pdparams
