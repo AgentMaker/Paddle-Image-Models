@@ -96,10 +96,10 @@ class LinearBottleneck(nn.Layer):
         return out
 
 
-class ReXNetV1(nn.Layer):
+class ReXNet(nn.Layer):
     def __init__(self, input_ch=16, final_ch=180, width_mult=1.0, depth_mult=1.0, use_se=True,
                  se_ratio=12, dropout_ratio=0.2, class_dim=1000, with_pool=True):
-        super(ReXNetV1, self).__init__()
+        super(ReXNet, self).__init__()
 
         self.class_dim = class_dim
         self.with_pool = with_pool
@@ -170,35 +170,35 @@ class ReXNetV1(nn.Layer):
 
 
 def rexnet_1_0(pretrained=False, **kwargs):
-    model = ReXNetV1(width_mult=1.0, **kwargs)
+    model = ReXNet(width_mult=1.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_1_0'])
     return model, transforms
 
 
 def rexnet_1_3(pretrained=False, **kwargs):
-    model = ReXNetV1(width_mult=1.3, **kwargs)
+    model = ReXNet(width_mult=1.3, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_1_3'])
     return model, transforms
 
 
 def rexnet_1_5(pretrained=False, **kwargs):
-    model = ReXNetV1(width_mult=1.5, **kwargs)
+    model = ReXNet(width_mult=1.5, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_1_5'])
     return model, transforms
 
 
 def rexnet_2_0(pretrained=False, **kwargs):
-    model = ReXNetV1(width_mult=2.0, **kwargs)
+    model = ReXNet(width_mult=2.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_2_0'])
     return model, transforms
 
 
 def rexnet_3_0(pretrained=False, **kwargs):
-    model = ReXNetV1(width_mult=3.0, **kwargs)
+    model = ReXNet(width_mult=3.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_3_0'])
     return model, transforms

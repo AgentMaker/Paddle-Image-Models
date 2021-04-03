@@ -1,6 +1,8 @@
 import numpy as np
+
 import paddle
 import paddle.nn as nn
+
 from paddle.nn.initializer import TruncatedNormal, Constant
 
 
@@ -14,9 +16,10 @@ def to_2tuple(x):
 
 
 def drop_path(x, drop_prob=0., training=False):
-    """Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
-    the original name is misleading as 'Drop Connect' is a different form of dropout in a separate paper...
-    See discussion: https://github.com/tensorflow/tpu/issues/494#issuecomment-532968956 ...
+    """
+        Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
+        the original name is misleading as 'Drop Connect' is a different form of dropout in a separate paper...
+        See discussion: https://github.com/tensorflow/tpu/issues/494#issuecomment-532968956 ...
     """
     if drop_prob == 0. or not training:
         return x
@@ -29,9 +32,6 @@ def drop_path(x, drop_prob=0., training=False):
 
 
 class DropPath(nn.Layer):
-    """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
-    """
-
     def __init__(self, drop_prob=None):
         super(DropPath, self).__init__()
         self.drop_prob = drop_prob
@@ -145,9 +145,6 @@ class Block(nn.Layer):
 
 
 class PatchEmbed(nn.Layer):
-    """ Image to Patch Embedding
-    """
-
     def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dim=768):
         super().__init__()
         img_size = to_2tuple(img_size)
@@ -171,9 +168,6 @@ class PatchEmbed(nn.Layer):
 
 
 class VisionTransformer(nn.Layer):
-    """ Vision Transformer with support for patch input
-    """
-
     def __init__(self,
                  img_size=224,
                  patch_size=16,
