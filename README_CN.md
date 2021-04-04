@@ -8,7 +8,7 @@
 
 一个基于飞桨框架实现的图像预训练模型库。
 
-![](https://ai-studio-static-online.cdn.bcebos.com/0386a9c0f7ee4948985e4db463a229af4f3cf5cce20244a78e71aca90a95cb38)
+![](https://ai-studio-static-online.cdn.bcebos.com/34e7bbbc80d24412b3c21efb56778ad43b53f9b1be104e499e0ff8b663a64a53)
 
 ## 安装
 * 通过 pip 进行安装：
