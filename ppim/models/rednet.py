@@ -26,7 +26,7 @@ urls = {
     'rednet_38': r'https://bj.bcebos.com/v1/ai-studio-online/3c11f732a7804f3d8f6ed2e0cca6da25c2925d841a4d43be8bde60a6d521bf89?responseContentDisposition=attachment%3B%20filename%3Drednet38.pdparams',
     'rednet_50': r'https://bj.bcebos.com/v1/ai-studio-online/084442aeea424f419ce62934bed78af56d0d85d1179146f68dc2ccdf640f8bf3?responseContentDisposition=attachment%3B%20filename%3Drednet50.pdparams',
     'rednet_101': r'https://bj.bcebos.com/v1/ai-studio-online/1527bc759488475981c2daef2f20a13bf181bf55b6b6487691ac0d829873d7df?responseContentDisposition=attachment%3B%20filename%3Drednet101.pdparams',
-    'rednet_152': r'https://bj.bcebos.com/v1/ai-studio-online/df78cfc5492541818761fd7f2d8652bffcb6c470c66848949ffd3fc3254ba461?responseContentDisposition=attachment%3B%20filename%3Drednet152.pdparams',
+    'rednet_152': r'https://bj.bcebos.com/v1/ai-studio-online/df78cfc5492541818761fd7f2d8652bffcb6c470c66848949ffd3fc3254ba461?responseContentDisposition=attachment%3B%20filename%3Drednet152.pdparams'
 }
 
 
