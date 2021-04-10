@@ -49,7 +49,7 @@ class Transformer(nn.Layer):
                 drop=drop_rate,
                 attn_drop=attn_drop_rate,
                 drop_path=drop_path_prob[i],
-                norm_layer='nn.LayerNorm',
+                norm_layer=nn.LayerNorm,
                 epsilon=1e-6,
             )
             for i in range(depth)])
@@ -229,7 +229,7 @@ class DistilledPoolingTransformer(PoolingTransformer):
         return (x_cls + x_dist) / 2
 
 
-def pit_b(pretrained, **kwargs):
+def pit_b(pretrained=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=14,
@@ -245,7 +245,7 @@ def pit_b(pretrained, **kwargs):
     return model, transforms
 
 
-def pit_s(pretrained, **kwargs):
+def pit_s(pretrained=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -261,7 +261,7 @@ def pit_s(pretrained, **kwargs):
     return model, transforms
 
 
-def pit_xs(pretrained, **kwargs):
+def pit_xs(pretrained=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -277,7 +277,7 @@ def pit_xs(pretrained, **kwargs):
     return model, transforms
 
 
-def pit_ti(pretrained, **kwargs):
+def pit_ti(pretrained=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -293,7 +293,7 @@ def pit_ti(pretrained, **kwargs):
     return model, transforms
 
 
-def pit_b_distilled(pretrained, **kwargs):
+def pit_b_distilled(pretrained=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=14,
@@ -309,7 +309,7 @@ def pit_b_distilled(pretrained, **kwargs):
     return model, transforms
 
 
-def pit_s_distilled(pretrained, **kwargs):
+def pit_s_distilled(pretrained=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -325,7 +325,7 @@ def pit_s_distilled(pretrained, **kwargs):
     return model, transforms
 
 
-def pit_xs_distilled(pretrained, **kwargs):
+def pit_xs_distilled(pretrained=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -341,7 +341,7 @@ def pit_xs_distilled(pretrained, **kwargs):
     return model, transforms
 
 
-def pit_ti_distilled(pretrained, **kwargs):
+def pit_ti_distilled(pretrained=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=16,

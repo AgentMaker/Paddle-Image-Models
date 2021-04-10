@@ -118,10 +118,10 @@ class Block(nn.Layer):
                  attn_drop=0.,
                  drop_path=0.,
                  act_layer=nn.GELU,
-                 norm_layer='nn.LayerNorm',
+                 norm_layer=nn.LayerNorm,
                  epsilon=1e-5):
         super().__init__()
-        self.norm1 = eval(norm_layer)(dim, epsilon=epsilon)
+        self.norm1 = norm_layer(dim, epsilon=epsilon)
         self.attn = Attention(
             dim,
             num_heads=num_heads,
@@ -131,7 +131,7 @@ class Block(nn.Layer):
             proj_drop=drop)
         # NOTE: drop path for stochastic depth, we shall see if this is better than dropout here
         self.drop_path = DropPath(drop_path) if drop_path > 0. else Identity()
-        self.norm2 = eval(norm_layer)(dim, epsilon=epsilon)
+        self.norm2 = norm_layer(dim, epsilon=epsilon)
         mlp_hidden_dim = int(dim * mlp_ratio)
         self.mlp = Mlp(in_features=dim,
                        hidden_features=mlp_hidden_dim,
@@ -181,7 +181,7 @@ class VisionTransformer(nn.Layer):
                  drop_rate=0.,
                  attn_drop_rate=0.,
                  drop_path_rate=0.,
-                 norm_layer='nn.LayerNorm',
+                 norm_layer=nn.LayerNorm,
                  epsilon=1e-5,
                  class_dim=1000):
         super().__init__()
@@ -221,7 +221,7 @@ class VisionTransformer(nn.Layer):
             for i in range(depth)
         ])
 
-        self.norm = eval(norm_layer)(embed_dim, epsilon=epsilon)
+        self.norm = norm_layer(embed_dim, epsilon=epsilon)
 
         # Classifier head
         if class_dim > 0:

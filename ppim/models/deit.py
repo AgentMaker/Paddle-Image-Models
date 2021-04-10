@@ -41,7 +41,7 @@ class DistilledVisionTransformer(VisionTransformer):
                  num_heads=12,
                  mlp_ratio=4,
                  qkv_bias=False,
-                 norm_layer='nn.LayerNorm',
+                 norm_layer=nn.LayerNorm,
                  epsilon=1e-5,
                  class_dim=1000,
                  **kwargs):
