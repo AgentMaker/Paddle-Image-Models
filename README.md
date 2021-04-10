@@ -14,7 +14,7 @@ A PaddlePaddle version image model zoo.
 * Install by pip：
 
     ```shell
-    $ pip install ppim==1.0.5 -i https://pypi.python.org/pypi 
+    $ pip install ppim
     ```
 
 * Install by wheel package：[【Releases Packages】](https://github.com/AgentMaker/Paddle-Image-Models/releases)
