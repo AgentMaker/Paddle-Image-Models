@@ -8,6 +8,8 @@
 
 一个基于飞桨框架实现的图像预训练模型库。
 
+![](https://ai-studio-static-online.cdn.bcebos.com/34e7bbbc80d24412b3c21efb56778ad43b53f9b1be104e499e0ff8b663a64a53)
+
 ## 安装
 * 通过 pip 进行安装：
 
@@ -22,10 +24,10 @@
 
     ```python
     import paddle
-    from ppim import rednet26
+    from ppim import rednet_26
 
     # 加载模型
-    model, val_transforms = rednet26(pretrained=True)
+    model, val_transforms = rednet_26(pretrained=True)
 
     # 模型结构总览 
     paddle.summary(model, input_size=(1, 3, 224, 224))
@@ -45,10 +47,10 @@
     import paddle.vision.transforms as T
     from paddle.vision import Cifar100
 
-    from ppim import rexnet_100
+    from ppim import rexnet_1_0
 
     # 加载模型
-    model, val_transforms = rexnet_100(pretrained=True)
+    model, val_transforms = rexnet_1_0(pretrained=True)
 
     # 使用飞桨高层 API Model
     model = paddle.Model(model)
@@ -95,161 +97,24 @@
     ```
 
 ## 模型库
-### ReXNet
-* 论文：[ReXNet: Diminishing Representational Bottleneck on Convolutional Neural Network](https://arxiv.org/abs/2007.00992)
-* 官方项目：[clovaai/rexnet](https://github.com/clovaai/rexnet)
-* 验证集数据处理：
 
-    ```python
-    # 图像后端：pil
-    # 输入图像大小：224x224
-    transforms = T.Compose([
-        T.Resize(256, interpolation='bicubic'),
-        T.CenterCrop(224),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-    ```
+* [DLA](./docs/cn/model_zoo/dla.md)
 
-* 模型细节：
+* [ReXNet](./docs/cn/model_zoo/rexnet.md)
 
-    |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
-    |:---------------------:|:---------:|:--------:|:---------:|:---------:|
-    | ReXNet-1.0             |  4.8 | 0.40 | 77.9 | 93.9 |
-    | ReXNet-1.3             |  7.6 | 0.66 | 79.5 | 94.7 |
-    | ReXNet-1.5             |  7.6 | 0.66 | 80.3 | 95.2 |
-    | ReXNet-2.0             |  16  | 1.5  | 81.6 | 95.7 |
-    | ReXNet-3.0             |  34  | 3.4  | 82.8 | 96.2 |
+* [RedNet](./docs/cn/model_zoo/rednet.md)
 
-### RedNet
-* 论文：[Involution: Inverting the Inherence of Convolution for Visual Recognition](https://arxiv.org/abs/2103.06255)
-* 官方项目：[d-li14/involution](https://github.com/d-li14/involution)
-* 验证集数据处理：
+* [RepVGG](./docs/cn/model_zoo/repvgg.md)
 
-    ```python
-    # 图像后端：cv2
-    # 输入图像大小：224x224
-    transforms = T.Compose([
-        T.Resize(256),
-        T.CenterCrop(224),
-        T.Normalize(
-            mean=[123.675, 116.28, 103.53],
-            std=[58.395, 57.12, 57.375],
-            to_rgb=True,
-            data_format='HWC'
-        ),
-        T.ToTensor(),
-    ])
-    ```
+* [HarDNet](./docs/cn/model_zoo/hardnet.md)
 
-* 模型细节：
+* [PiT](./docs/cn/model_zoo/pit.md)
 
-    |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
-    |:---------------------:|:---------:|:--------:|:---------:|:---------:|
-    | RedNet-26             |  9.23 | 1.73 | 75.96 | 93.19 |
-    | RedNet-38             | 12.39 | 2.22 | 77.48 | 93.57 |
-    | RedNet-50             | 15.54 | 2.71 | 78.35 | 94.13 |
-    | RedNet-101            | 25.65 | 4.74 | 78.92 | 94.35 |
-    | RedNet-152            | 33.99 | 6.79 | 79.12 | 94.38 |
+* [PVT](./docs/cn/model_zoo/pvt.md)
 
-### RepVGG
-* 论文：[RepVGG: Making VGG-style ConvNets Great Again](https://arxiv.org/abs/2101.03697)
-* 官方项目：[DingXiaoH/RepVGG](https://github.com/DingXiaoH/RepVGG)
-* 验证集数据处理：
+* [TNT](./docs/cn/model_zoo/tnt.md)
 
-    ```python
-    # 图像后端：pil
-    # 输入图像大小：224x224
-    transforms = T.Compose([
-        T.Resize(256),
-        T.CenterCrop(224),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-    ```
-
-* 模型细节：
-
-    |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
-    |:---------------------:|:---------:|:--------:|:---------:|:---------:|
-    | RepVGG-A0             |  8.30  | 1.4  | 72.41 |       |
-    | RepVGG-A1             | 12.78  | 2.4  | 74.46 |       |
-    | RepVGG-A2             | 25.49  | 5.1  | 76.48 |       |
-    | RepVGG-B0             | 14.33  | 3.1  | 75.14 |       |
-    | RepVGG-B1             | 51.82  | 11.8 | 78.37 |       |
-    | RepVGG-B2             | 80.31  | 18.4 | 78.78 |       |
-    | RepVGG-B3             | 110.96 | 26.2 | 80.52 |       |
-    | RepVGG-B1g2           | 41.36  | 8.8  | 77.78 |       |
-    | RepVGG-B1g4           | 36.12  | 7.3  | 77.58 |       |
-    | RepVGG-B2g4           | 55.77  | 11.3 | 79.38 |       |
-    | RepVGG-B3g4           | 75.62  | 16.1 | 80.21 |       |
-
-### PiT
-* 论文：[Rethinking Spatial Dimensions of Vision Transformers](https://arxiv.org/abs/2103.16302)
-* 官方项目：[naver-ai/pit](https://github.com/naver-ai/pit)
-* 验证集数据处理：
-
-    ```python
-    # backend: pil
-    # input_size: 224x224
-    transforms = T.Compose([
-        T.Resize(248, interpolation='bicubic'),
-        T.CenterCrop(224),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-    ```
-
-* 模型细节：
-
-    |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
-    |:---------------------:|:---------:|:--------:|:---------:|:---------:|
-    | PiT-Ti            | 4.9  | 0.71 | 73.0 |    |
-    | PiT-XS            | 10.6 | 1.4  | 78.1 |    |
-    | PiT-S             | 23.5 | 2.9  | 80.9 |    |
-    | PiT-B             | 73.8 | 12.5 | 82.0 |    |
-    | PiT-Ti distilled  | 4.9  | 0.71 | 74.6 |    |
-    | PiT-XS distilled  | 10.6 | 1.4  | 79.1 |    |
-    | PiT-S distilled   | 23.5 | 2.9  | 81.9 |    |
-    | PiT-B distilled   | 73.8 | 12.5 | 84.0 |    |
-
-### DeiT
-* 论文：[Training data-efficient image transformers & distillation through attention](https://arxiv.org/abs/2012.12877)
-* 官方项目：[facebookresearch/deit](https://github.com/facebookresearch/deit)
-* 验证集数据处理：
-
-    ```python
-    # 图像后端：pil
-    # 输入图像大小：224x224
-    transforms = T.Compose([
-        T.Resize(248, interpolation='bicubic'),
-        T.CenterCrop(224),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-
-    # 图像后端：pil
-    # 输入图像大小：384x384
-    transforms = T.Compose([
-        T.Resize(384, interpolation='bicubic'),
-        T.CenterCrop(384),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-    ```
-
-* 模型细节：
-
-    |         Model         | Params(M) | FLOPs(G) | Top-1 (%) | Top-5 (%) |
-    |:---------------------:|:---------:|:--------:|:---------:|:---------:|
-    | DeiT-tiny               |  5  | | 72.2 |  91.1     |
-    | DeiT-small              | 22  | | 79.9 |  95.0     |
-    | DeiT-base               | 86  | | 81.8 |  95.6     |
-    | DeiT-tiny distilled     | 6   | | 74.5 |  91.9     |
-    | DeiT-small distilled    | 22  | | 81.2 |  95.4     |
-    | DeiT-base distilled     | 87  | | 83.4 |  96.5     |
-    | DeiT-base 384           | 87  | | 82.9 |  96.2     |
-    | DeiT-base distilled 384 | 88  | | 85.2 |  97.2     |
+* [DeiT](./docs/cn/model_zoo/deit.md)
 
 ## 引用
 ```
@@ -259,8 +124,7 @@
     journal = {arXiv preprint arXiv:2007.00992},
     year = {2020},
 }
-```
-```
+
 @InProceedings{Li_2021_CVPR,
     title = {Involution: Inverting the Inherence of Convolution for Visual Recognition},
     author = {Li, Duo and Hu, Jie and Wang, Changhu and Li, Xiangtai and She, Qi and Zhu, Lei and Zhang, Tong and Chen, Qifeng},
@@ -268,28 +132,70 @@
     month = {June},
     year = {2021}
 }
-```
-```
+
 @article{ding2021repvgg,
     title={RepVGG: Making VGG-style ConvNets Great Again},
     author={Ding, Xiaohan and Zhang, Xiangyu and Ma, Ningning and Han, Jungong and Ding, Guiguang and Sun, Jian},
     journal={arXiv preprint arXiv:2101.03697},
     year={2021}
 }
-```
-```
+
 @article{heo2021pit,
     title={Rethinking Spatial Dimensions of Vision Transformers},
     author={Byeongho Heo and Sangdoo Yun and Dongyoon Han and Sanghyuk Chun and Junsuk Choe and Seong Joon Oh},
     journal={arXiv: 2103.16302},
     year={2021},
 }
-```
-```
+
 @article{touvron2020deit,
     title = {Training data-efficient image transformers & distillation through attention},
     author = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv'e J'egou},
     journal = {arXiv preprint arXiv:2012.12877},
     year = {2020}
+}
+
+@misc{han2021transformer,
+    title={Transformer in Transformer}, 
+    author={Kai Han and An Xiao and Enhua Wu and Jianyuan Guo and Chunjing Xu and Yunhe Wang},
+    year={2021},
+    eprint={2103.00112},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+
+@misc{chao2019hardnet,
+    title={HarDNet: A Low Memory Traffic Network}, 
+    author={Ping Chao and Chao-Yang Kao and Yu-Shan Ruan and Chien-Hsiang Huang and Youn-Long Lin},
+    year={2019},
+    eprint={1909.00948},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+
+@misc{yu2019deep,
+    title={Deep Layer Aggregation}, 
+    author={Fisher Yu and Dequan Wang and Evan Shelhamer and Trevor Darrell},
+    year={2019},
+    eprint={1707.06484},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+
+@misc{dosovitskiy2020image,
+    title={An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale}, 
+    author={Alexey Dosovitskiy and Lucas Beyer and Alexander Kolesnikov and Dirk Weissenborn and Xiaohua Zhai and Thomas Unterthiner and Mostafa Dehghani and Matthias Minderer and Georg Heigold and Sylvain Gelly and Jakob Uszkoreit and Neil Houlsby},
+    year={2020},
+    eprint={2010.11929},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+
+@misc{wang2021pyramid,
+      title={Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions}, 
+      author={Wenhai Wang and Enze Xie and Xiang Li and Deng-Ping Fan and Kaitao Song and Ding Liang and Tong Lu and Ping Luo and Ling Shao},
+      year={2021},
+      eprint={2102.12122},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
 }
 ```

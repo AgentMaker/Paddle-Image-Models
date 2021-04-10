@@ -1,11 +1,13 @@
 import paddle
 import paddle.nn as nn
 import paddle.vision.transforms as T
+
 from paddle.vision.models import resnet
 
 from ..units import load_model
 
 
+# Backend: cv2
 transforms = T.Compose([
     T.Resize(256),
     T.CenterCrop(224),
@@ -20,11 +22,11 @@ transforms = T.Compose([
 
 
 urls = {
-    'rednet26': 'https://bj.bcebos.com/v1/ai-studio-online/14091d6c21774c5fb48d74723db7eaf22e1c5ff621154a588534cb92918c04e2?responseContentDisposition=attachment%3B%20filename%3Drednet26.pdparams',
-    'rednet38': 'https://bj.bcebos.com/v1/ai-studio-online/3c11f732a7804f3d8f6ed2e0cca6da25c2925d841a4d43be8bde60a6d521bf89?responseContentDisposition=attachment%3B%20filename%3Drednet38.pdparams',
-    'rednet50': 'https://bj.bcebos.com/v1/ai-studio-online/084442aeea424f419ce62934bed78af56d0d85d1179146f68dc2ccdf640f8bf3?responseContentDisposition=attachment%3B%20filename%3Drednet50.pdparams',
-    'rednet101': 'https://bj.bcebos.com/v1/ai-studio-online/1527bc759488475981c2daef2f20a13bf181bf55b6b6487691ac0d829873d7df?responseContentDisposition=attachment%3B%20filename%3Drednet101.pdparams',
-    'rednet152': 'https://bj.bcebos.com/v1/ai-studio-online/df78cfc5492541818761fd7f2d8652bffcb6c470c66848949ffd3fc3254ba461?responseContentDisposition=attachment%3B%20filename%3Drednet152.pdparams',
+    'rednet_26': r'https://bj.bcebos.com/v1/ai-studio-online/14091d6c21774c5fb48d74723db7eaf22e1c5ff621154a588534cb92918c04e2?responseContentDisposition=attachment%3B%20filename%3Drednet26.pdparams',
+    'rednet_38': r'https://bj.bcebos.com/v1/ai-studio-online/3c11f732a7804f3d8f6ed2e0cca6da25c2925d841a4d43be8bde60a6d521bf89?responseContentDisposition=attachment%3B%20filename%3Drednet38.pdparams',
+    'rednet_50': r'https://bj.bcebos.com/v1/ai-studio-online/084442aeea424f419ce62934bed78af56d0d85d1179146f68dc2ccdf640f8bf3?responseContentDisposition=attachment%3B%20filename%3Drednet50.pdparams',
+    'rednet_101': r'https://bj.bcebos.com/v1/ai-studio-online/1527bc759488475981c2daef2f20a13bf181bf55b6b6487691ac0d829873d7df?responseContentDisposition=attachment%3B%20filename%3Drednet101.pdparams',
+    'rednet_152': r'https://bj.bcebos.com/v1/ai-studio-online/df78cfc5492541818761fd7f2d8652bffcb6c470c66848949ffd3fc3254ba461?responseContentDisposition=attachment%3B%20filename%3Drednet152.pdparams',
 }
 
 
@@ -163,36 +165,36 @@ class RedNet(resnet.ResNet):
         return x
 
 
-def rednet26(pretrained=False, **kwargs):
+def rednet_26(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 26, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rednet26'])
+        model = load_model(model, urls['rednet_26'])
     return model, transforms
 
 
-def rednet38(pretrained=False, **kwargs):
+def rednet_38(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 38, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rednet38'])
+        model = load_model(model, urls['rednet_38'])
     return model, transforms
 
 
-def rednet50(pretrained=False, **kwargs):
+def rednet_50(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 50, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rednet50'])
+        model = load_model(model, urls['rednet_50'])
     return model, transforms
 
 
-def rednet101(pretrained=False, **kwargs):
+def rednet_101(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 101, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rednet101'])
+        model = load_model(model, urls['rednet_101'])
     return model, transforms
 
 
-def rednet152(pretrained=False, **kwargs):
+def rednet_152(pretrained=False, **kwargs):
     model = RedNet(BottleneckBlock, 152, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rednet152'])
+        model = load_model(model, urls['rednet_152'])
     return model, transforms

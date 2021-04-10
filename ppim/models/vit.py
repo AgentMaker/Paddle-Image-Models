@@ -1,6 +1,8 @@
 import numpy as np
+
 import paddle
 import paddle.nn as nn
+
 from paddle.nn.initializer import TruncatedNormal, Constant
 
 
@@ -14,9 +16,10 @@ def to_2tuple(x):
 
 
 def drop_path(x, drop_prob=0., training=False):
-    """Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
-    the original name is misleading as 'Drop Connect' is a different form of dropout in a separate paper...
-    See discussion: https://github.com/tensorflow/tpu/issues/494#issuecomment-532968956 ...
+    """
+        Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
+        the original name is misleading as 'Drop Connect' is a different form of dropout in a separate paper...
+        See discussion: https://github.com/tensorflow/tpu/issues/494#issuecomment-532968956 ...
     """
     if drop_prob == 0. or not training:
         return x
@@ -29,9 +32,6 @@ def drop_path(x, drop_prob=0., training=False):
 
 
 class DropPath(nn.Layer):
-    """Drop paths (Stochastic Depth) per sample  (when applied in main path of residual blocks).
-    """
-
     def __init__(self, drop_prob=None):
         super(DropPath, self).__init__()
         self.drop_prob = drop_prob
@@ -118,10 +118,10 @@ class Block(nn.Layer):
                  attn_drop=0.,
                  drop_path=0.,
                  act_layer=nn.GELU,
-                 norm_layer='nn.LayerNorm',
+                 norm_layer=nn.LayerNorm,
                  epsilon=1e-5):
         super().__init__()
-        self.norm1 = eval(norm_layer)(dim, epsilon=epsilon)
+        self.norm1 = norm_layer(dim, epsilon=epsilon)
         self.attn = Attention(
             dim,
             num_heads=num_heads,
@@ -131,7 +131,7 @@ class Block(nn.Layer):
             proj_drop=drop)
         # NOTE: drop path for stochastic depth, we shall see if this is better than dropout here
         self.drop_path = DropPath(drop_path) if drop_path > 0. else Identity()
-        self.norm2 = eval(norm_layer)(dim, epsilon=epsilon)
+        self.norm2 = norm_layer(dim, epsilon=epsilon)
         mlp_hidden_dim = int(dim * mlp_ratio)
         self.mlp = Mlp(in_features=dim,
                        hidden_features=mlp_hidden_dim,
@@ -145,9 +145,6 @@ class Block(nn.Layer):
 
 
 class PatchEmbed(nn.Layer):
-    """ Image to Patch Embedding
-    """
-
     def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dim=768):
         super().__init__()
         img_size = to_2tuple(img_size)
@@ -171,9 +168,6 @@ class PatchEmbed(nn.Layer):
 
 
 class VisionTransformer(nn.Layer):
-    """ Vision Transformer with support for patch input
-    """
-
     def __init__(self,
                  img_size=224,
                  patch_size=16,
@@ -187,7 +181,7 @@ class VisionTransformer(nn.Layer):
                  drop_rate=0.,
                  attn_drop_rate=0.,
                  drop_path_rate=0.,
-                 norm_layer='nn.LayerNorm',
+                 norm_layer=nn.LayerNorm,
                  epsilon=1e-5,
                  class_dim=1000):
         super().__init__()
@@ -227,7 +221,7 @@ class VisionTransformer(nn.Layer):
             for i in range(depth)
         ])
 
-        self.norm = eval(norm_layer)(embed_dim, epsilon=epsilon)
+        self.norm = norm_layer(embed_dim, epsilon=epsilon)
 
         # Classifier head
         if class_dim > 0:
