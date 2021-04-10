@@ -1,7 +1,7 @@
 # PVT
 * Paper：[Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions](https://arxiv.org/abs/2102.12122)
 * Origin Repo：[whai362/PVT](https://github.com/whai362/PVT)
-* Code：[pit.py](../../../ppim/models/pvt.py)
+* Code：[pvt.py](../../../ppim/models/pvt.py)
 * Evaluate Transforms：
 
     ```python
