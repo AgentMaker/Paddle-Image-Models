@@ -1,6 +1,7 @@
 # Transformer
 # from .tnt import tnt_s, TNT
 from .vit import VisionTransformer
+from .pvt import pvt_ti, pvt_s, pvt_m, pvt_l, PyramidVisionTransformer
 from .pit import pit_ti, pit_s, pit_xs, pit_b, pit_ti_distilled, pit_s_distilled, pit_xs_distilled, pit_b_distilled, PoolingTransformer, DistilledPoolingTransformer
 from .deit import deit_ti, deit_s, deit_b, deit_b_384, deit_ti_distilled, deit_s_distilled, deit_b_distilled, deit_b_distilled_384, DistilledVisionTransformer
 
