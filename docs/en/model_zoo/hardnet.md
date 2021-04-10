@@ -29,3 +29,16 @@
 [hardnet_68_ds]:https://bj.bcebos.com/v1/ai-studio-online/a8939896a12243db942263747687cabcad4aae89890345199f1ecfa4fadd6b27?responseContentDisposition=attachment%3B%20filename%3Dhardnet_68_ds.pdparams
 [hardnet_68]:https://bj.bcebos.com/v1/ai-studio-online/c82332d24182481db918a848e2ec6d3a6167bd0a96cb4dc1876ce00e224bcb24?responseContentDisposition=attachment%3B%20filename%3Dhardnet_68.pdparams
 [hardnet_85]:https://bj.bcebos.com/v1/ai-studio-online/e6f9e798149343968bf80a7ca5e8a7b2e447339202fe451c80878da91895f794?responseContentDisposition=attachment%3B%20filename%3Dhardnet_85.pdparams
+
+* Citation：
+
+    ```
+    @misc{chao2019hardnet,
+        title={HarDNet: A Low Memory Traffic Network}, 
+        author={Ping Chao and Chao-Yang Kao and Yu-Shan Ruan and Chien-Hsiang Huang and Youn-Long Lin},
+        year={2019},
+        eprint={1909.00948},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV}
+    }
+    ```

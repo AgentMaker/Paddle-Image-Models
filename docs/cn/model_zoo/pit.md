@@ -37,3 +37,14 @@
 [pit_xs_distilled]:https://bj.bcebos.com/v1/ai-studio-online/61aa3339366d4315854bf67a8df1cea20f4a2402b2d94d7688d995423a197df1?responseContentDisposition=attachment%3B%20filename%3Dpit_xs_distill.pdparams
 [pit_s_distilled]:https://bj.bcebos.com/v1/ai-studio-online/65acbfa1d6a94c689225fe95c6ec48567f5c05ee051243d6abe3bbcbd6119f5d?responseContentDisposition=attachment%3B%20filename%3Dpit_s_distill.pdparams
 [pit_b_distilled]:https://bj.bcebos.com/v1/ai-studio-online/2d6631b21542486b8333440c612847f35a7782d2890f4514ad8007c34ae77e66?responseContentDisposition=attachment%3B%20filename%3Dpit_b_distill.pdparams
+
+* 引用：
+
+    ```
+    @article{heo2021pit,
+        title={Rethinking Spatial Dimensions of Vision Transformers},
+        author={Byeongho Heo and Sangdoo Yun and Dongyoon Han and Sanghyuk Chun and Junsuk Choe and Seong Joon Oh},
+        journal={arXiv: 2103.16302},
+        year={2021},
+    }
+    ```

@@ -31,3 +31,14 @@
 [rexnet_1_5]:https://bj.bcebos.com/v1/ai-studio-online/20b131a7cb1840b5aed37c512b2665fb20c72eebe4344da5a3c6f0ab0592a323?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.5x.pdparams
 [rexnet_2_0]:https://bj.bcebos.com/v1/ai-studio-online/b4df9f7be43446b0952a25ee6e83f2e443e3b879a00046f6bb33278319cb5fd0?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_2.0x.pdparams
 [rexnet_3_0]:https://bj.bcebos.com/v1/ai-studio-online/9663f0570f0a4e4a8dde0b9799c539f5e22f46917d3d4e5a9d566cd213032d25?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_3.0x.pdparams
+
+* 引用：
+
+    ```
+    @article{han2020rexnet,
+        title = {ReXNet: Diminishing Representational Bottleneck on Convolutional Neural Network},
+        author = {Han, Dongyoon and Yun, Sangdoo and Heo, Byeongho and Yoo, YoungJoon},
+        journal = {arXiv preprint arXiv:2007.00992},
+        year = {2020},
+    }
+    ```

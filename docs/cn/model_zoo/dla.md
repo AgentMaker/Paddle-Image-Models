@@ -41,3 +41,16 @@
 [dla_102x]:https://bj.bcebos.com/v1/ai-studio-online/0653e6aae7594e2a8de94728f6656c375557f7960a8949a1926eb017e978c477?responseContentDisposition=attachment%3B%20filename%3Ddla102x.pdparams
 [dla_102x2]:https://bj.bcebos.com/v1/ai-studio-online/80cd37d877974ad18d1ccefdae2a5c2cce1cba2831544deeaea1fa672343cc17?responseContentDisposition=attachment%3B%20filename%3Ddla102x2.pdparams
 [dla_169]:https://bj.bcebos.com/v1/ai-studio-online/f299fab9020344d4aee7ccf3a79e98858494e0536bca4703a5f5152747395cca?responseContentDisposition=attachment%3B%20filename%3Ddla169.pdparams
+
+* 引用：
+
+    ```
+    @misc{yu2019deep,
+        title={Deep Layer Aggregation}, 
+        author={Fisher Yu and Dequan Wang and Evan Shelhamer and Trevor Darrell},
+        year={2019},
+        eprint={1707.06484},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV}
+    }
+    ```

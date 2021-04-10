@@ -29,3 +29,16 @@
 [pvt_s]:https://bj.bcebos.com/v1/ai-studio-online/608703b1387b44a78d01f09f0c572bd163edecf2354243dda1afeab2b58abb06?responseContentDisposition=attachment%3B%20filename%3Dpvt_small.pdparams
 [pvt_m]:https://bj.bcebos.com/v1/ai-studio-online/232d73f40a3b45bb96786a8ae6a58f93967ada580a354266910bb63caa96201b?responseContentDisposition=attachment%3B%20filename%3Dpvt_medium.pdparams
 [pvt_l]:https://bj.bcebos.com/v1/ai-studio-online/08b2064702304e13893337d1b1017941ced31fc4f7c644acb4a44a1a81c66e55?responseContentDisposition=attachment%3B%20filename%3Dpvt_large.pdparams
+
+* Citation：
+
+    ```
+    @misc{wang2021pyramid,
+        title={Pyramid Vision Transformer: A Versatile Backbone for Dense Prediction without Convolutions}, 
+        author={Wenhai Wang and Enze Xie and Xiang Li and Deng-Ping Fan and Kaitao Song and Ding Liang and Tong Lu and Ping Luo and Ling Shao},
+        year={2021},
+        eprint={2102.12122},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV}
+    }
+    ```

@@ -46,3 +46,14 @@
 [deit_b_distilled]:https://bj.bcebos.com/v1/ai-studio-online/24692c628ab64bfc9bb72fc8a5b3d209080b5ad94227472f98d3bb7cb6732e67?responseContentDisposition=attachment%3B%20filename%3DDeiT_base_distilled_patch16_224.pdparams
 [deit_b_384]:https://bj.bcebos.com/v1/ai-studio-online/de491e7155e94ac2b13b2a97e432155ed6d502e8a0114e4e90ffd6ce9dce63cc?responseContentDisposition=attachment%3B%20filename%3DDeiT_base_patch16_384.pdparams
 [deit_b_distilled_384]:https://bj.bcebos.com/v1/ai-studio-online/0a84b9ea45d0412d9bebae9ea3404e679221c3d0c8e542bf9d6a64f810983b25?responseContentDisposition=attachment%3B%20filename%3DDeiT_base_distilled_patch16_384.pdparams
+
+* 引用：
+
+    ```
+    @article{touvron2020deit,
+        title = {Training data-efficient image transformers & distillation through attention},
+        author = {Hugo Touvron and Matthieu Cord and Matthijs Douze and Francisco Massa and Alexandre Sablayrolles and Herv'e J'egou},
+        journal = {arXiv preprint arXiv:2012.12877},
+        year = {2020}
+    }
+    ```

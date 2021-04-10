@@ -43,3 +43,14 @@
 [repvgg_b1g4]:https://bj.bcebos.com/v1/ai-studio-online/440040d200b14bcb9951e47877b7b416454affd75f8e4eaba6fedfa87c4ab66a?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B1g4.pdparams
 [repvgg_b2g4]:https://bj.bcebos.com/v1/ai-studio-online/42b0654c15f942c9828a7ca7d117638417c48ccdeac84123bcd72558db7a01c2?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B2g4_200epochs.pdparams
 [repvgg_b3g4]:https://bj.bcebos.com/v1/ai-studio-online/5e4f6084ee954a319c2e0c11aadae680c643ae88bdbb44d2a1875a38f5278060?responseContentDisposition=attachment%3B%20filename%3DRepVGG_B3g4_200epochs.pdparams
+
+* 引用：
+
+    ```
+    @article{ding2021repvgg,
+        title={RepVGG: Making VGG-style ConvNets Great Again},
+        author={Ding, Xiaohan and Zhang, Xiangyu and Ma, Ningning and Han, Jungong and Ding, Guiguang and Sun, Jian},
+        journal={arXiv preprint arXiv:2101.03697},
+        year={2021}
+    }
+    ```

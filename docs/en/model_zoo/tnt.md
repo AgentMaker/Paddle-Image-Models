@@ -23,3 +23,16 @@
 
 
 [tnt_s]:https://bj.bcebos.com/v1/ai-studio-online/e8777c29886a47e896f23a26d84917ee51efd05d341a403baed9107160857636?responseContentDisposition=attachment%3B%20filename%3Dtnt_s.pdparams
+
+* Citation：
+
+    ```
+    @misc{han2021transformer,
+        title={Transformer in Transformer}, 
+        author={Kai Han and An Xiao and Enhua Wu and Jianyuan Guo and Chunjing Xu and Yunhe Wang},
+        year={2021},
+        eprint={2103.00112},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV}
+    }
+    ```
