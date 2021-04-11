@@ -4,7 +4,7 @@ import paddle
 import paddle.nn as nn
 import paddle.vision.transforms as T
 
-from ..units import load_model
+from ppim.units import load_model
 
 
 transforms = T.Compose([

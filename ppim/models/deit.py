@@ -2,8 +2,9 @@ import paddle
 import paddle.nn as nn
 import paddle.vision.transforms as T
 
-from ..units import load_model
-from .vit import VisionTransformer, Identity, trunc_normal_, zeros_
+from ppim.units import load_model
+from ppim.models.vit import VisionTransformer
+from ppim.models.common import trunc_normal_, zeros_
 
 
 def get_transforms(resize, crop):

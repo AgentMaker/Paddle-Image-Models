@@ -6,8 +6,8 @@ import paddle.vision.transforms as T
 
 import ppim.models.vit as vit
 
-from ..units import load_model
-from .vit import Identity, trunc_normal_, zeros_, ones_
+from ppim.units import load_model
+from ppim.models.common import trunc_normal_, zeros_, ones_
 
 
 transforms = T.Compose([
