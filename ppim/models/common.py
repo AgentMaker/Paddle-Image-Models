@@ -4,15 +4,18 @@ import paddle.nn as nn
 from paddle.nn.initializer import TruncatedNormal, Constant
 
 
+# Initialize
 trunc_normal_ = TruncatedNormal(std=.02)
 zeros_ = Constant(value=0.)
 ones_ = Constant(value=1.)
 
 
+# Common Functions
 def to_2tuple(x):
     return tuple([x] * 2)
 
 
+# DropPath
 def drop_path(x, drop_prob=0., training=False):
     """
         Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
@@ -38,6 +41,7 @@ class DropPath(nn.Layer):
         return drop_path(x, self.drop_prob, self.training)
 
 
+# Identity
 class Identity(nn.Layer):
     def __init__(self):
         super(Identity, self).__init__()
