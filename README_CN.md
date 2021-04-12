@@ -108,6 +108,8 @@
 
 * [HarDNet](./docs/cn/model_zoo/hardnet.md)
 
+* [CondenseNet V2](./docs/cn/model_zoo/cdnv2.md)
+
 * [PiT](./docs/cn/model_zoo/pit.md)
 
 * [PVT](./docs/cn/model_zoo/pvt.md)

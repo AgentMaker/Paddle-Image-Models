@@ -1,14 +1,14 @@
 import paddle
 import paddle.nn as nn
 
-from paddle.nn.initializer import TruncatedNormal, Constant
+from paddle.nn.initializer import TruncatedNormal, KaimingNormal, Constant
 
 
 # Initialize
-trunc_normal_ = TruncatedNormal(std=.02)
-zeros_ = Constant(value=0.)
 ones_ = Constant(value=1.)
-
+zeros_ = Constant(value=0.)
+kaiming_normal_ = KaimingNormal()
+trunc_normal_ = TruncatedNormal(std=.02)
 
 # Common Functions
 def to_2tuple(x):
