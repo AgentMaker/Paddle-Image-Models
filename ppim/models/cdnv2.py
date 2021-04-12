@@ -320,7 +320,7 @@ def cdnv2_a(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['cdnv2_a'])
-    return model, get_transforms('bilinear')
+    return model, get_transforms('bicubic')
 
 
 def cdnv2_b(pretrained=False, **kwargs):
@@ -339,7 +339,7 @@ def cdnv2_b(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['cdnv2_b'])
-    return model, get_transforms('bilinear')
+    return model, get_transforms('bicubic')
 
 
 def cdnv2_c(pretrained=False, **kwargs):
@@ -358,4 +358,4 @@ def cdnv2_c(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['cdnv2_c'])
-    return model, get_transforms('bicubic')
+    return model, get_transforms('bilinear')

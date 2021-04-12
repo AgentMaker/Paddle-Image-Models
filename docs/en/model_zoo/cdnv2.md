@@ -9,7 +9,7 @@
     # input_size: 224x224
     # models: cdnv2_a and cdnv2_b
     transforms = T.Compose([
-        T.Resize(256, interpolation='bilinear'),
+        T.Resize(256, interpolation='bicubic'),
         T.CenterCrop(224),
         T.ToTensor(),
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
@@ -19,7 +19,7 @@
     # input_size: 224x224
     # models: cdnv2_c
     transforms = T.Compose([
-        T.Resize(256, interpolation='bicubic'),
+        T.Resize(256, interpolation='bilinear'),
         T.CenterCrop(224),
         T.ToTensor(),
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
@@ -30,9 +30,9 @@
 
     |         Model         |       Model Name      | Params (M) | FLOPs (G) | Top-1 (%) | Top-5 (%) |   Pretrained Model    |
     |:---------------------:|:---------------------:|:----------:|:---------:|:---------:|:---------:|:---------------------:|
-    |     CondenseNetV2-A   |        cdnv2_a        | 2.0        | 0.05      | 64.37     |   85.15   | [Download][cdnv2_a]   |
-    |     CondenseNetV2-B   |        cdnv2_b        | 3.6        | 0.15      | 71.71     |   90.16   | [Download][cdnv2_b]   |
-    |     CondenseNetV2-C   |        cdnv2_c        | 6.1        | 0.31      | 75.83     |   92.68   | [Download][cdnv2_c]   |
+    |     CondenseNetV2-A   |        cdnv2_a        | 2.0        | 0.05      | 64.38     |   85.24   | [Download][cdnv2_a]   |
+    |     CondenseNetV2-B   |        cdnv2_b        | 3.6        | 0.15      | 71.89     |   90.27   | [Download][cdnv2_b]   |
+    |     CondenseNetV2-C   |        cdnv2_c        | 6.1        | 0.31      | 75.87     |   92.64   | [Download][cdnv2_c]   |
 
 
 [cdnv2_a]:https://bj.bcebos.com/v1/ai-studio-online/6ccaae861d004593977e2e3f4d3ad8c9a96e42bbb83347afb58f0d8858abc926?responseContentDisposition=attachment%3B%20filename%3Dcdnv2_a.pdparams
