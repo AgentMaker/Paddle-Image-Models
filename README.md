@@ -50,7 +50,7 @@ A PaddlePaddle version image model zoo.
     from ppim import rexnet_1_0
 
     # Load the model
-    model, val_transforms = rexnet_1_0(pretrained=True)
+    model, val_transforms = rexnet_1_0(pretrained=True, class_dim=100)
 
     # Use the PaddleHapi Model
     model = paddle.Model(model)
