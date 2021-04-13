@@ -50,7 +50,7 @@
     from ppim import rexnet_1_0
 
     # 加载模型
-    model, val_transforms = rexnet_1_0(pretrained=True)
+    model, val_transforms = rexnet_1_0(pretrained=True, class_dim=100)
 
     # 使用飞桨高层 API Model
     model = paddle.Model(model)
