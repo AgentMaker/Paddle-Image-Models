@@ -1,6 +1,7 @@
 # Paddle-Image-Models
 ![GitHub forks](https://img.shields.io/github/forks/AgentMaker/Paddle-Image-Models)
 ![GitHub Repo stars](https://img.shields.io/github/stars/AgentMaker/Paddle-Image-Models)
+![Pypi Downloads](https://pepy.tech/badge/ppim)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/AgentMaker/Paddle-Image-Models?include_prereleases)
 ![GitHub](https://img.shields.io/github/license/AgentMaker/Paddle-Image-Models)  
 
