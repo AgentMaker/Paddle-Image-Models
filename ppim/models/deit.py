@@ -4,7 +4,8 @@ import paddle.vision.transforms as T
 
 from ppim.units import load_model
 from ppim.models.vit import VisionTransformer
-from ppim.models.common import trunc_normal_, zeros_
+from ppim.models.common import add_parameter
+from ppim.models.common import trunc_normal_
 
 
 def get_transforms(resize, crop):
@@ -58,14 +59,15 @@ class DistilledVisionTransformer(VisionTransformer):
             norm_layer=norm_layer,
             epsilon=epsilon,
             **kwargs)
-        self.pos_embed = self.create_parameter(
-            shape=(1, self.patch_embed.num_patches + 2, self.embed_dim),
-            default_initializer=zeros_)
-        self.add_parameter("pos_embed", self.pos_embed)
 
-        self.dist_token = self.create_parameter(
-            shape=(1, 1, self.embed_dim), default_initializer=zeros_)
-        self.add_parameter("cls_token", self.cls_token)
+        self.pos_embed = add_parameter(
+            self, paddle.zeros(
+                (1, self.patch_embed.num_patches + 2, self.embed_dim)
+            )
+        )
+        self.dist_token = add_parameter(
+            self, paddle.zeros((1, 1, self.embed_dim))
+        )
 
         if class_dim > 0:
             self.head_dist = nn.Linear(self.embed_dim, self.class_dim)

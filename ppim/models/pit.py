@@ -4,10 +4,10 @@ import paddle
 import paddle.vision.transforms as T
 
 from paddle import nn
-from paddle.nn.initializer import Assign
 
 from ppim.units import load_model
 from ppim.models.vit import Block
+from ppim.models.common import add_parameter
 from ppim.models.common import trunc_normal_, zeros_, ones_
 
 
@@ -121,22 +121,18 @@ class PoolingTransformer(nn.Layer):
 
         self.patch_size = patch_size
 
-        self.pos_embed = self.create_parameter(
-            shape=(1, base_dims[0] * heads[0], width, width),
-            default_initializer=Assign(
-                paddle.randn((1, base_dims[0] * heads[0], width, width))
-            ))
-        self.add_parameter("pos_embed", self.pos_embed)
+        self.pos_embed = add_parameter(
+            self, paddle.randn(
+                (1, base_dims[0] * heads[0], width, width)
+            )
+        )
 
         self.patch_embed = conv_embedding(in_chans, base_dims[0] * heads[0],
                                           patch_size, stride, padding)
 
-        self.cls_token = self.create_parameter(
-            shape=(1, 1, base_dims[0] * heads[0]),
-            default_initializer=Assign(
-                paddle.randn((1, 1, base_dims[0] * heads[0]))
-            ))
-        self.add_parameter("cls_token", self.cls_token)
+        self.cls_token = add_parameter(
+            self, paddle.randn((1, 1, base_dims[0] * heads[0]))
+        )
 
         self.pos_drop = nn.Dropout(p=drop_rate)
 
@@ -205,12 +201,11 @@ class PoolingTransformer(nn.Layer):
 class DistilledPoolingTransformer(PoolingTransformer):
     def __init__(self, *args, **kwargs):
         super(DistilledPoolingTransformer, self).__init__(*args, **kwargs)
-        self.cls_token = self.create_parameter(
-            shape=(1, 2, self.base_dims[0] * self.heads[0]),
-            default_initializer=Assign(
-                paddle.randn((1, 2, self.base_dims[0] * self.heads[0]))
-            ))
-        self.add_parameter("cls_token", self.cls_token)
+        self.cls_token = add_parameter(
+            self, paddle.randn(
+                (1, 2, self.base_dims[0] * self.heads[0])
+            )
+        )
 
         if self.class_dim > 0:
             self.head_dist = nn.Linear(self.base_dims[-1] * self.heads[-1],

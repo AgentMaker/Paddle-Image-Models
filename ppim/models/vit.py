@@ -3,7 +3,7 @@ import numpy as np
 import paddle
 import paddle.nn as nn
 
-from ppim.models.common import to_2tuple
+from ppim.models.common import to_2tuple, add_parameter
 from ppim.models.common import trunc_normal_, zeros_, ones_
 from ppim.models.common import Identity, DropPath
 
@@ -155,12 +155,13 @@ class VisionTransformer(nn.Layer):
             embed_dim=embed_dim)
         num_patches = self.patch_embed.num_patches
 
-        self.pos_embed = self.create_parameter(
-            shape=(1, num_patches + 1, embed_dim), default_initializer=zeros_)
-        self.add_parameter("pos_embed", self.pos_embed)
-        self.cls_token = self.create_parameter(
-            shape=(1, 1, embed_dim), default_initializer=zeros_)
-        self.add_parameter("cls_token", self.cls_token)
+        self.pos_embed = add_parameter(
+            self, paddle.zeros((1, num_patches + 1, embed_dim))
+        )
+        self.cls_token = add_parameter(
+            self, paddle.zeros((1, 1, embed_dim))
+        )
+
         self.pos_drop = nn.Dropout(p=drop_rate)
 
         dpr = np.linspace(0, drop_path_rate, depth)

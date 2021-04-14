@@ -7,6 +7,7 @@ import paddle.vision.transforms as T
 import ppim.models.vit as vit
 
 from ppim.units import load_model
+from ppim.models.common import add_parameter
 from ppim.models.common import trunc_normal_, zeros_, ones_
 
 
@@ -127,24 +128,32 @@ class PyramidVisionTransformer(nn.Layer):
                                        embed_dim=embed_dims[3])
 
         # pos_embed
-        self.pos_embed1 = self.create_parameter(
-            shape=(1, self.patch_embed1.num_patches, embed_dims[0]), default_initializer=zeros_)
-        self.add_parameter("pos_embed1", self.pos_embed1)
+        self.pos_embed1 = add_parameter(
+            self, paddle.zeros(
+                (1, self.patch_embed1.num_patches, embed_dims[0])
+            )
+        )
         self.pos_drop1 = nn.Dropout(p=drop_rate)
 
-        self.pos_embed2 = self.create_parameter(
-            shape=(1, self.patch_embed2.num_patches, embed_dims[1]), default_initializer=zeros_)
-        self.add_parameter("pos_embed2", self.pos_embed2)
+        self.pos_embed2 = add_parameter(
+            self, paddle.zeros(
+                (1, self.patch_embed2.num_patches, embed_dims[1])
+            )
+        )
         self.pos_drop2 = nn.Dropout(p=drop_rate)
 
-        self.pos_embed3 = self.create_parameter(
-            shape=(1, self.patch_embed3.num_patches, embed_dims[2]), default_initializer=zeros_)
-        self.add_parameter("pos_embed3", self.pos_embed3)
+        self.pos_embed3 = add_parameter(
+            self, paddle.zeros(
+                (1, self.patch_embed3.num_patches, embed_dims[2])
+            )
+        )
         self.pos_drop3 = nn.Dropout(p=drop_rate)
 
-        self.pos_embed4 = self.create_parameter(
-            shape=(1, self.patch_embed4.num_patches + 1, embed_dims[3]), default_initializer=zeros_)
-        self.add_parameter("pos_embed4", self.pos_embed4)
+        self.pos_embed4 = add_parameter(
+            self, paddle.zeros(
+                (1, self.patch_embed4.num_patches + 1, embed_dims[3])
+            )
+        )
         self.pos_drop4 = nn.Dropout(p=drop_rate)
 
         # transformer encoder
@@ -183,9 +192,9 @@ class PyramidVisionTransformer(nn.Layer):
         self.norm = norm_layer(embed_dims[3])
 
         # cls_token
-        self.cls_token = self.create_parameter(
-            shape=(1, 1, embed_dims[3]), default_initializer=zeros_)
-        self.add_parameter("cls_token", self.cls_token)
+        self.cls_token = add_parameter(
+            self, paddle.zeros((1, 1, embed_dims[3]))
+        )
 
         # classification head
         if class_dim > 0:
