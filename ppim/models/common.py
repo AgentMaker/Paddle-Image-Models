@@ -1,21 +1,32 @@
 import paddle
 import paddle.nn as nn
 
-from paddle.nn.initializer import TruncatedNormal, KaimingNormal, Constant
+from paddle.nn.initializer import TruncatedNormal, KaimingNormal, Constant, Assign
 
 
-# Initialize
+# Common initializations
 ones_ = Constant(value=1.)
 zeros_ = Constant(value=0.)
 kaiming_normal_ = KaimingNormal()
 trunc_normal_ = TruncatedNormal(std=.02)
+
 
 # Common Functions
 def to_2tuple(x):
     return tuple([x] * 2)
 
 
-# DropPath
+def add_parameter(layer, datas, name=None):
+    parameter = layer.create_parameter(
+        shape=(datas.shape),
+        default_initializer=Assign(datas)
+    )
+    if name:
+        layer.add_parameter(name, parameter)
+    return parameter
+
+
+# Common Layers
 def drop_path(x, drop_prob=0., training=False):
     """
         Drop paths (Stochastic Depth) per sample (when applied in main path of residual blocks).
@@ -41,7 +52,6 @@ class DropPath(nn.Layer):
         return drop_path(x, self.drop_prob, self.training)
 
 
-# Identity
 class Identity(nn.Layer):
     def __init__(self):
         super(Identity, self).__init__()
