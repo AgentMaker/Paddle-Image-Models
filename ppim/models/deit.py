@@ -19,7 +19,7 @@ def get_transforms(resize, crop):
 
 
 transforms_224 = get_transforms(248, 224)
-transforms_384 = get_transforms(426, 384)
+transforms_384 = get_transforms(384, 384)
 
 
 urls = {
