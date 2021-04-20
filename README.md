@@ -118,3 +118,7 @@ A PaddlePaddle version image model zoo.
 * [TNT](./docs/en/model_zoo/tnt.md)
 
 * [DeiT](./docs/en/model_zoo/deit.md)
+
+* [CaiT](./docs/en/model_zoo/cait.md)
+
+* [Swin Transformer](./docs/en/model_zoo/swin.md)

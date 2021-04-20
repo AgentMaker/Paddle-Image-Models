@@ -118,3 +118,7 @@
 * [TNT](./docs/cn/model_zoo/tnt.md)
 
 * [DeiT](./docs/cn/model_zoo/deit.md)
+
+* [CaiT](./docs/cn/model_zoo/cait.md)
+
+* [Swin Transformer](./docs/cn/model_zoo/swin.md)
