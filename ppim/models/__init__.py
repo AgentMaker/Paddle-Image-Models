@@ -4,6 +4,7 @@ from .vit import VisionTransformer
 from .pvt import pvt_ti, pvt_s, pvt_m, pvt_l, PyramidVisionTransformer
 from .pit import pit_ti, pit_s, pit_xs, pit_b, pit_ti_distilled, pit_s_distilled, pit_xs_distilled, pit_b_distilled, PoolingTransformer, DistilledPoolingTransformer
 from .deit import deit_ti, deit_s, deit_b, deit_b_384, deit_ti_distilled, deit_s_distilled, deit_b_distilled, deit_b_distilled_384, DistilledVisionTransformer
+from .cait import cait_xxs_24, cait_xxs_36, cait_s_24, cait_xxs_24_384, cait_xxs_36_384, cait_xs_24_384, cait_s_24_384, cait_s_36_384, cait_m_36_384, cait_m_48_448, CaiT
 
 # CNN
 # from .dla import dla_34, dla_46_c, dla_46x_c, dla_60, dla_60x, dla_60x_c, dla_102, dla_102x, dla_102x2, dla_169, DLA
