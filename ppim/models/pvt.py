@@ -109,8 +109,8 @@ class PatchEmbed(vit.PatchEmbed):
 
 
 class PyramidVisionTransformer(nn.Layer):
-    def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dims=[64, 128, 256, 512],
-                 num_heads=[1, 2, 4, 8], mlp_ratios=[4, 4, 4, 4], qkv_bias=False, qk_scale=None,
+    def __init__(self, img_size=224, patch_size=4, in_chans=3, embed_dims=[64, 128, 320, 512],
+                 num_heads=[1, 2, 5, 8], mlp_ratios=[8, 8, 4, 4], qkv_bias=True, qk_scale=None,
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0., norm_layer=nn.LayerNorm,
                  epsilon=1e-6, depths=[3, 4, 6, 3], sr_ratios=[8, 4, 2, 1], class_dim=1000):
         super().__init__()
@@ -160,36 +160,32 @@ class PyramidVisionTransformer(nn.Layer):
         dpr = np.linspace(0, drop_path_rate, sum(depths))
         cur = 0
         self.block1 = nn.LayerList([Block(
-            dim=embed_dims[0], num_heads=num_heads[0], mlp_ratio=mlp_ratios[0], qkv_bias=qkv_bias, qk_scale=qk_scale,
-            drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[cur +
-                                                                    i], norm_layer=norm_layer, epsilon=epsilon,
-            sr_ratio=sr_ratios[0])
+            dim=embed_dims[0], num_heads=num_heads[0], mlp_ratio=mlp_ratios[0],
+            qkv_bias=qkv_bias, qk_scale=qk_scale, drop=drop_rate, attn_drop=attn_drop_rate,
+            drop_path=dpr[cur + i], norm_layer=norm_layer, epsilon=epsilon, sr_ratio=sr_ratios[0])
             for i in range(depths[0])])
 
         cur += depths[0]
         self.block2 = nn.LayerList([Block(
-            dim=embed_dims[1], num_heads=num_heads[1], mlp_ratio=mlp_ratios[1], qkv_bias=qkv_bias, qk_scale=qk_scale,
-            drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[cur +
-                                                                    i], norm_layer=norm_layer, epsilon=epsilon,
-            sr_ratio=sr_ratios[1])
+            dim=embed_dims[1], num_heads=num_heads[1], mlp_ratio=mlp_ratios[1],
+            qkv_bias=qkv_bias, qk_scale=qk_scale, drop=drop_rate, attn_drop=attn_drop_rate,
+            drop_path=dpr[cur + i], norm_layer=norm_layer, epsilon=epsilon, sr_ratio=sr_ratios[1])
             for i in range(depths[1])])
 
         cur += depths[1]
         self.block3 = nn.LayerList([Block(
-            dim=embed_dims[2], num_heads=num_heads[2], mlp_ratio=mlp_ratios[2], qkv_bias=qkv_bias, qk_scale=qk_scale,
-            drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[cur +
-                                                                    i], norm_layer=norm_layer, epsilon=epsilon,
-            sr_ratio=sr_ratios[2])
+            dim=embed_dims[2], num_heads=num_heads[2], mlp_ratio=mlp_ratios[2],
+            qkv_bias=qkv_bias, qk_scale=qk_scale, drop=drop_rate, attn_drop=attn_drop_rate,
+            drop_path=dpr[cur + i], norm_layer=norm_layer, epsilon=epsilon, sr_ratio=sr_ratios[2])
             for i in range(depths[2])])
 
         cur += depths[2]
         self.block4 = nn.LayerList([Block(
-            dim=embed_dims[3], num_heads=num_heads[3], mlp_ratio=mlp_ratios[3], qkv_bias=qkv_bias, qk_scale=qk_scale,
-            drop=drop_rate, attn_drop=attn_drop_rate, drop_path=dpr[cur +
-                                                                    i], norm_layer=norm_layer, epsilon=epsilon,
-            sr_ratio=sr_ratios[3])
+            dim=embed_dims[3], num_heads=num_heads[3], mlp_ratio=mlp_ratios[3],
+            qkv_bias=qkv_bias, qk_scale=qk_scale, drop=drop_rate, attn_drop=attn_drop_rate,
+            drop_path=dpr[cur + i], norm_layer=norm_layer, epsilon=epsilon, sr_ratio=sr_ratios[3])
             for i in range(depths[3])])
-        self.norm = norm_layer(embed_dims[3])
+        self.norm = norm_layer(embed_dims[3], epsilon=epsilon)
 
         # cls_token
         self.cls_token = add_parameter(
@@ -285,36 +281,28 @@ class PyramidVisionTransformer(nn.Layer):
 
 
 def pvt_ti(pretrained=False, **kwargs):
-    model = PyramidVisionTransformer(
-        patch_size=4, embed_dims=[64, 128, 320, 512], num_heads=[1, 2, 5, 8], mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
-        norm_layer=nn.LayerNorm, depths=[2, 2, 2, 2], sr_ratios=[8, 4, 2, 1], **kwargs)
+    model = PyramidVisionTransformer(depths=[2, 2, 2, 2], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_ti'])
     return model, transforms
 
 
 def pvt_s(pretrained=False, **kwargs):
-    model = PyramidVisionTransformer(
-        patch_size=4, embed_dims=[64, 128, 320, 512], num_heads=[1, 2, 5, 8], mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
-        norm_layer=nn.LayerNorm, depths=[3, 4, 6, 3], sr_ratios=[8, 4, 2, 1], **kwargs)
+    model = PyramidVisionTransformer(depths=[3, 4, 6, 3], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_s'])
     return model, transforms
 
 
 def pvt_m(pretrained=False, **kwargs):
-    model = PyramidVisionTransformer(
-        patch_size=4, embed_dims=[64, 128, 320, 512], num_heads=[1, 2, 5, 8], mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
-        norm_layer=nn.LayerNorm, depths=[3, 4, 18, 3], sr_ratios=[8, 4, 2, 1], **kwargs)
+    model = PyramidVisionTransformer(depths=[3, 4, 18, 3], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_m'])
     return model, transforms
 
 
 def pvt_l(pretrained=False, **kwargs):
-    model = PyramidVisionTransformer(
-        patch_size=4, embed_dims=[64, 128, 320, 512], num_heads=[1, 2, 5, 8], mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
-        norm_layer=nn.LayerNorm, depths=[3, 8, 27, 3], sr_ratios=[8, 4, 2, 1], **kwargs)
+    model = PyramidVisionTransformer(depths=[3, 8, 27, 3], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_l'])
     return model, transforms
