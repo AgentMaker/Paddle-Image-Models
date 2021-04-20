@@ -176,21 +176,16 @@ class LayerScale_Block(nn.Layer):
 
 class CaiT(nn.Layer):
     # with slight modifications to adapt to our cait models
-    def __init__(self, img_size=224, patch_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
-                 num_heads=12, mlp_ratio=4, qkv_bias=True, qk_scale=None, drop_rate=0., attn_drop_rate=0.,
-                 drop_path_rate=0., norm_layer=nn.LayerNorm, epsilon=1e-6, global_pool=None,
-                 block_layers=LayerScale_Block,
-                 block_layers_token=LayerScale_Block_CA,
-                 Patch_layer=PatchEmbed, act_layer=nn.GELU,
-                 Attention_block=Attention_talking_head, Mlp_block=Mlp,
-                 init_scale=1e-4,
-                 Attention_block_token_only=Class_Attention,
-                 Mlp_block_token_only=Mlp,
-                 depth_token_only=2,
-                 mlp_ratio_clstk=4.0):
+    def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dim=768, depth=12,
+                 num_heads=12, mlp_ratio=4, qkv_bias=True, qk_scale=None, drop_rate=0., 
+                 attn_drop_rate=0., drop_path_rate=0., norm_layer=nn.LayerNorm, epsilon=1e-6,
+                 block_layers=LayerScale_Block, block_layers_token=LayerScale_Block_CA,
+                 Patch_layer=PatchEmbed, act_layer=nn.GELU, Attention_block=Attention_talking_head, 
+                 Mlp_block=Mlp, init_scale=1e-4, Attention_block_token_only=Class_Attention,
+                 Mlp_block_token_only=Mlp, depth_token_only=2, mlp_ratio_clstk=4.0, class_dim=1000):
         super().__init__()
 
-        self.num_classes = num_classes
+        self.class_dim = class_dim
         self.num_features = self.embed_dim = embed_dim
 
         self.patch_embed = Patch_layer(
@@ -222,10 +217,9 @@ class CaiT(nn.Layer):
 
         self.norm = norm_layer(embed_dim, epsilon=epsilon)
 
-        self.feature_info = [
-            dict(num_chs=embed_dim, reduction=0, module='head')]
-        self.head = nn.Linear(
-            embed_dim, num_classes) if num_classes > 0 else Identity()
+        # Classifier head
+        if class_dim > 0:
+            self.head = nn.Linear(embed_dim, num_classes)
 
         trunc_normal_(self.pos_embed)
         trunc_normal_(self.cls_token)
@@ -263,7 +257,8 @@ class CaiT(nn.Layer):
     def forward(self, x):
         x = self.forward_features(x)
 
-        x = self.head(x)
+        if self.class_dim > 0:
+            x = self.head(x)
 
         return x
 
