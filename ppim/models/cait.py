@@ -219,7 +219,7 @@ class CaiT(nn.Layer):
 
         # Classifier head
         if class_dim > 0:
-            self.head = nn.Linear(embed_dim, num_classes)
+            self.head = nn.Linear(embed_dim, class_dim)
 
         trunc_normal_(self.pos_embed)
         trunc_normal_(self.cls_token)
