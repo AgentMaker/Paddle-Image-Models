@@ -116,7 +116,7 @@ def deit_ti(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_ti'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -134,7 +134,7 @@ def deit_s(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_s'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -152,7 +152,7 @@ def deit_b(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_b'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -170,7 +170,7 @@ def deit_ti_distilled(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_ti_distilled'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -188,7 +188,7 @@ def deit_s_distilled(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_s_distilled'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -206,7 +206,7 @@ def deit_b_distilled(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_b_distilled'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -225,7 +225,7 @@ def deit_b_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_b_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model
 
@@ -244,6 +244,6 @@ def deit_b_distilled_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['deit_b_distilled_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model

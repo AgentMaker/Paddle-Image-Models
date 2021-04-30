@@ -562,7 +562,7 @@ def swin_ti(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['swin_ti'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -576,7 +576,7 @@ def swin_s(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['swin_s'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -591,7 +591,7 @@ def swin_b(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['swin_b'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -608,6 +608,6 @@ def swin_b_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['swin_b_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model

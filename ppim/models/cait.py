@@ -271,7 +271,7 @@ def cait_xxs_24(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_xxs_24'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -284,7 +284,7 @@ def cait_xxs_36(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_xxs_36'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -297,7 +297,7 @@ def cait_s_24(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_s_24'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_224
     else:
         return model
 
@@ -310,7 +310,7 @@ def cait_xxs_24_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_xxs_24_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model
 
@@ -323,7 +323,7 @@ def cait_xxs_36_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_xxs_36_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model
 
@@ -336,7 +336,7 @@ def cait_xs_24_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_xs_24_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model
 
@@ -349,7 +349,7 @@ def cait_s_24_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_s_24_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model
 
@@ -362,7 +362,7 @@ def cait_s_36_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_s_36_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model
 
@@ -375,7 +375,7 @@ def cait_m_36_384(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_m_36_384'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_384
     else:
         return model
 
@@ -388,6 +388,6 @@ def cait_m_48_448(pretrained=False, return_transforms=False, **kwargs):
     if pretrained:
         model = load_model(model, urls['cait_m_48_448'])
     if return_transforms:
-        return model, transforms
+        return model, transforms_448
     else:
         return model
