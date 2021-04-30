@@ -28,7 +28,7 @@ A PaddlePaddle version image model zoo.
     from ppim import rednet_26
 
     # Load the model
-    model, val_transforms = rednet_26(pretrained=True)
+    model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
 
     # Model summary 
     paddle.summary(model, input_size=(1, 3, 224, 224))
@@ -51,7 +51,7 @@ A PaddlePaddle version image model zoo.
     from ppim import rexnet_1_0
 
     # Load the model
-    model, val_transforms = rexnet_1_0(pretrained=True, class_dim=100)
+    model, val_transforms = rexnet_1_0(pretrained=True, return_transforms=True, class_dim=100)
 
     # Use the PaddleHapi Model
     model = paddle.Model(model)
@@ -119,7 +119,7 @@ A PaddlePaddle version image model zoo.
         ```python
         # train.py
         ...
-        
+
         '''
             Add the ppim models.
         '''
