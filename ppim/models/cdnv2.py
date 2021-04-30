@@ -304,7 +304,7 @@ class CondenseNetV2(nn.Layer):
                 zeros_(m.bias)
 
 
-def cdnv2_a(pretrained=False, **kwargs):
+def cdnv2_a(pretrained=False, return_transforms=False, **kwargs):
     model = CondenseNetV2(
         stages=[1, 1, 4, 6, 8],
         growth=[8, 8, 16, 32, 64],
@@ -320,10 +320,13 @@ def cdnv2_a(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['cdnv2_a'])
-    return model, get_transforms('bicubic')
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def cdnv2_b(pretrained=False, **kwargs):
+def cdnv2_b(pretrained=False, return_transforms=False, **kwargs):
     model = CondenseNetV2(
         stages=[2, 4, 6, 8, 6],
         growth=[6, 12, 24, 48, 96],
@@ -339,10 +342,13 @@ def cdnv2_b(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['cdnv2_b'])
-    return model, get_transforms('bicubic')
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def cdnv2_c(pretrained=False, **kwargs):
+def cdnv2_c(pretrained=False, return_transforms=False, **kwargs):
     model = CondenseNetV2(
         stages=[4, 6, 8, 10, 8],
         growth=[8, 16, 32, 64, 128],
@@ -358,4 +364,7 @@ def cdnv2_c(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['cdnv2_c'])
-    return model, get_transforms('bilinear')
+    if return_transforms:
+        return model, transforms
+    else:
+        return model

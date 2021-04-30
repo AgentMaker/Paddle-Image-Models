@@ -103,7 +103,7 @@ class DistilledVisionTransformer(VisionTransformer):
         return (x + x_dist) / 2
 
 
-def deit_ti(pretrained=False, **kwargs):
+def deit_ti(pretrained=False, return_transforms=False, **kwargs):
     model = VisionTransformer(
         patch_size=16,
         embed_dim=192,
@@ -115,10 +115,13 @@ def deit_ti(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_ti'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def deit_s(pretrained=False, **kwargs):
+def deit_s(pretrained=False, return_transforms=False, **kwargs):
     model = VisionTransformer(
         patch_size=16,
         embed_dim=384,
@@ -130,10 +133,13 @@ def deit_s(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_s'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def deit_b(pretrained=False, **kwargs):
+def deit_b(pretrained=False, return_transforms=False, **kwargs):
     model = VisionTransformer(
         patch_size=16,
         embed_dim=768,
@@ -145,10 +151,13 @@ def deit_b(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_b'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def deit_ti_distilled(pretrained=False, **kwargs):
+def deit_ti_distilled(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledVisionTransformer(
         patch_size=16,
         embed_dim=192,
@@ -160,10 +169,13 @@ def deit_ti_distilled(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_ti_distilled'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def deit_s_distilled(pretrained=False, **kwargs):
+def deit_s_distilled(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledVisionTransformer(
         patch_size=16,
         embed_dim=384,
@@ -175,10 +187,13 @@ def deit_s_distilled(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_s_distilled'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def deit_b_distilled(pretrained=False, **kwargs):
+def deit_b_distilled(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledVisionTransformer(
         patch_size=16,
         embed_dim=768,
@@ -190,10 +205,13 @@ def deit_b_distilled(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_b_distilled'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def deit_b_384(pretrained=False, **kwargs):
+def deit_b_384(pretrained=False, return_transforms=False, **kwargs):
     model = VisionTransformer(
         img_size=384,
         patch_size=16,
@@ -206,10 +224,13 @@ def deit_b_384(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_b_384'])
-    return model, transforms_384
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def deit_b_distilled_384(pretrained=False, **kwargs):
+def deit_b_distilled_384(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledVisionTransformer(
         img_size=384,
         patch_size=16,
@@ -222,4 +243,7 @@ def deit_b_distilled_384(pretrained=False, **kwargs):
         **kwargs)
     if pretrained:
         model = load_model(model, urls['deit_b_distilled_384'])
-    return model, transforms_384
+    if return_transforms:
+        return model, transforms
+    else:
+        return model

@@ -225,7 +225,7 @@ class DistilledPoolingTransformer(PoolingTransformer):
         return (x_cls + x_dist) / 2
 
 
-def pit_b(pretrained=False, **kwargs):
+def pit_b(pretrained=False, return_transforms=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=14,
@@ -238,10 +238,13 @@ def pit_b(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_b'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pit_s(pretrained=False, **kwargs):
+def pit_s(pretrained=False, return_transforms=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -254,10 +257,13 @@ def pit_s(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_s'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pit_xs(pretrained=False, **kwargs):
+def pit_xs(pretrained=False, return_transforms=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -270,10 +276,13 @@ def pit_xs(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_xs'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pit_ti(pretrained=False, **kwargs):
+def pit_ti(pretrained=False, return_transforms=False, **kwargs):
     model = PoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -286,10 +295,13 @@ def pit_ti(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_ti'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pit_b_distilled(pretrained=False, **kwargs):
+def pit_b_distilled(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=14,
@@ -302,10 +314,13 @@ def pit_b_distilled(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_b_distilled'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pit_s_distilled(pretrained=False, **kwargs):
+def pit_s_distilled(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -318,10 +333,13 @@ def pit_s_distilled(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_s_distilled'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pit_xs_distilled(pretrained=False, **kwargs):
+def pit_xs_distilled(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -334,10 +352,13 @@ def pit_xs_distilled(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_xs_distilled'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pit_ti_distilled(pretrained=False, **kwargs):
+def pit_ti_distilled(pretrained=False, return_transforms=False, **kwargs):
     model = DistilledPoolingTransformer(
         image_size=224,
         patch_size=16,
@@ -350,4 +371,7 @@ def pit_ti_distilled(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['pit_ti_distilled'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model

@@ -170,36 +170,51 @@ class ReXNet(nn.Layer):
         return x
 
 
-def rexnet_1_0(pretrained=False, **kwargs):
+def rexnet_1_0(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=1.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_1_0'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rexnet_1_3(pretrained=False, **kwargs):
+def rexnet_1_3(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=1.3, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_1_3'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rexnet_1_5(pretrained=False, **kwargs):
+def rexnet_1_5(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=1.5, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_1_5'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rexnet_2_0(pretrained=False, **kwargs):
+def rexnet_2_0(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=2.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_2_0'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rexnet_3_0(pretrained=False, **kwargs):
+def rexnet_3_0(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=3.0, **kwargs)
     if pretrained:
         model = load_model(model, urls['rexnet_3_0'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model

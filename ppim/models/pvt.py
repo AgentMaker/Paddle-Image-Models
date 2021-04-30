@@ -280,29 +280,41 @@ class PyramidVisionTransformer(nn.Layer):
         return x
 
 
-def pvt_ti(pretrained=False, **kwargs):
+def pvt_ti(pretrained=False, return_transforms=False, **kwargs):
     model = PyramidVisionTransformer(depths=[2, 2, 2, 2], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_ti'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pvt_s(pretrained=False, **kwargs):
+def pvt_s(pretrained=False, return_transforms=False, **kwargs):
     model = PyramidVisionTransformer(depths=[3, 4, 6, 3], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_s'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pvt_m(pretrained=False, **kwargs):
+def pvt_m(pretrained=False, return_transforms=False, **kwargs):
     model = PyramidVisionTransformer(depths=[3, 4, 18, 3], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_m'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def pvt_l(pretrained=False, **kwargs):
+def pvt_l(pretrained=False, return_transforms=False, **kwargs):
     model = PyramidVisionTransformer(depths=[3, 8, 27, 3], **kwargs)
     if pretrained:
         model = load_model(model, urls['pvt_l'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model

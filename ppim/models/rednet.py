@@ -165,36 +165,51 @@ class RedNet(resnet.ResNet):
         return x
 
 
-def rednet_26(pretrained=False, **kwargs):
+def rednet_26(pretrained=False, return_transforms=False, **kwargs):
     model = RedNet(BottleneckBlock, 26, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet_26'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rednet_38(pretrained=False, **kwargs):
+def rednet_38(pretrained=False, return_transforms=False, **kwargs):
     model = RedNet(BottleneckBlock, 38, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet_38'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rednet_50(pretrained=False, **kwargs):
+def rednet_50(pretrained=False, return_transforms=False, **kwargs):
     model = RedNet(BottleneckBlock, 50, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet_50'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rednet_101(pretrained=False, **kwargs):
+def rednet_101(pretrained=False, return_transforms=False, **kwargs):
     model = RedNet(BottleneckBlock, 101, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet_101'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def rednet_152(pretrained=False, **kwargs):
+def rednet_152(pretrained=False, return_transforms=False, **kwargs):
     model = RedNet(BottleneckBlock, 152, **kwargs)
     if pretrained:
         model = load_model(model, urls['rednet_152'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model

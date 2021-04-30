@@ -197,7 +197,7 @@ g2_map = {l: 2 for l in optional_groupwise_layers}
 g4_map = {l: 4 for l in optional_groupwise_layers}
 
 
-def repvgg_a0(pretrained=False, **kwargs):
+def repvgg_a0(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[2, 4, 14, 1],
         width_multiplier=[0.75, 0.75, 0.75, 2.5],
@@ -206,10 +206,13 @@ def repvgg_a0(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_a0'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_a1(pretrained=False, **kwargs):
+def repvgg_a1(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[2, 4, 14, 1],
         width_multiplier=[1, 1, 1, 2.5],
@@ -218,10 +221,13 @@ def repvgg_a1(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_a1'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_a2(pretrained=False, **kwargs):
+def repvgg_a2(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[2, 4, 14, 1],
         width_multiplier=[1.5, 1.5, 1.5, 2.75],
@@ -230,10 +236,13 @@ def repvgg_a2(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_a2'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b0(pretrained=False, **kwargs):
+def repvgg_b0(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[1, 1, 1, 2.5],
@@ -242,10 +251,13 @@ def repvgg_b0(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b0'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b1(pretrained=False, **kwargs):
+def repvgg_b1(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[2, 2, 2, 4],
@@ -254,10 +266,13 @@ def repvgg_b1(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b1'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b2(pretrained=False, **kwargs):
+def repvgg_b2(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[2.5, 2.5, 2.5, 5],
@@ -266,10 +281,13 @@ def repvgg_b2(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b2'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b3(pretrained=False, **kwargs):
+def repvgg_b3(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[3, 3, 3, 5],
@@ -278,10 +296,13 @@ def repvgg_b3(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b3'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b1g2(pretrained=False, **kwargs):
+def repvgg_b1g2(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[2, 2, 2, 4],
@@ -290,10 +311,13 @@ def repvgg_b1g2(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b1g2'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b1g4(pretrained=False, **kwargs):
+def repvgg_b1g4(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[2, 2, 2, 4],
@@ -302,10 +326,13 @@ def repvgg_b1g4(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b1g4'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b2g4(pretrained=False, **kwargs):
+def repvgg_b2g4(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[2.5, 2.5, 2.5, 5],
@@ -314,10 +341,13 @@ def repvgg_b2g4(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b2g4'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def repvgg_b3g4(pretrained=False, **kwargs):
+def repvgg_b3g4(pretrained=False, return_transforms=False, **kwargs):
     model = RepVGG(
         num_blocks=[4, 6, 16, 1],
         width_multiplier=[3, 3, 3, 5],
@@ -326,4 +356,7 @@ def repvgg_b3g4(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['repvgg_b3g4'])
-    return model, transforms
+    if return_transforms:
+        return model, transforms
+    else:
+        return model

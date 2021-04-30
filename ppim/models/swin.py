@@ -557,14 +557,17 @@ class SwinTransformer(nn.Layer):
         return x
 
 
-def swin_ti(pretrained=False, **kwargs):
+def swin_ti(pretrained=False, return_transforms=False, **kwargs):
     model = SwinTransformer(**kwargs)
     if pretrained:
         model = load_model(model, urls['swin_ti'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def swin_s(pretrained=False, **kwargs):
+def swin_s(pretrained=False, return_transforms=False, **kwargs):
     model = SwinTransformer(
         depths=[2, 2, 18, 2],
         num_heads=[3, 6, 12, 24]
@@ -572,10 +575,13 @@ def swin_s(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['swin_s'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def swin_b(pretrained=False, **kwargs):
+def swin_b(pretrained=False, return_transforms=False, **kwargs):
     model = SwinTransformer(
         embed_dim=128,
         depths=[2, 2, 18, 2],
@@ -584,10 +590,13 @@ def swin_b(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['swin_b'])
-    return model, transforms_224
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
 
 
-def swin_b_384(pretrained=False, **kwargs):
+def swin_b_384(pretrained=False, return_transforms=False, **kwargs):
     model = SwinTransformer(
         img_size=384,
         embed_dim=128,
@@ -598,4 +607,7 @@ def swin_b_384(pretrained=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls['swin_b_384'])
-    return model, transforms_384
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
