@@ -97,6 +97,43 @@ A PaddlePaddle version image model zoo.
     )
     ```
 
+* Segmentation
+
+    * PaddleSeg x PPIM
+
+        ```yaml
+        # config
+        ...
+
+        model:
+        backbone:
+            type: rexnet_1_0 # PPIM model name
+            pretrained: True # If load the pretrained model
+            get_features: True # Get image features for segmentation
+        
+        ...
+        ```
+
+    * Train script：[train.py](./tools/seg/train.py)
+    
+        ```python
+        # train.py
+        ...
+        
+        '''
+            Add the ppim models.
+        '''
+        import ppim.models as models
+        from inspect import isfunction
+
+        for model in models.__dict__.values():
+            if isfunction(model):
+                manager.BACKBONES.add_component(model)
+
+        ...
+        ```
+
+
 ## Model Zoo
 
 * [DLA](./docs/en/model_zoo/dla.md)
