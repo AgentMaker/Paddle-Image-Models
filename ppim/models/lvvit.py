@@ -101,19 +101,6 @@ class Mlp(nn.Layer):
         return x
 
 
-class GroupNorm(nn.Layer):
-    def __init__(self, num_groups, embed_dim, eps=1e-5, affine=True):
-        super().__init__()
-        self.gn = nn.GroupNorm(num_groups, embed_dim, eps, affine)
-
-    def forward(self, x):
-        B, T, C = x.shape
-        x = x.reshape((B*T, C))
-        x = self.gn(x)
-        x = x.reshape((B, T, C))
-        return x
-
-
 class Attention(nn.Layer):
     '''
     Multi-head self-attention
@@ -465,9 +452,9 @@ class LV_ViT(nn.Layer):
     """
 
     def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dim=768, depth=12,
-                 num_heads=12, mlp_ratio=3., qkv_bias=False, qk_scale=None, drop_rate=0., 
-                 attn_drop_rate=0., drop_path_rate=0., drop_path_decay='linear', 
-                 hybrid_backbone=None, norm_layer=nn.LayerNorm, p_emb='4_2', head_dim=None, 
+                 num_heads=12, mlp_ratio=3., qkv_bias=False, qk_scale=None, drop_rate=0.,
+                 attn_drop_rate=0., drop_path_rate=0., drop_path_decay='linear',
+                 hybrid_backbone=None, norm_layer=nn.LayerNorm, p_emb='4_2', head_dim=None,
                  skip_lam=1.0, order=None, mix_token=True, return_dense=True, class_dim=1000):
         super().__init__()
         self.class_dim = class_dim
@@ -589,7 +576,7 @@ class LV_ViT(nn.Layer):
 
         x = x.flatten(2).transpose((0, 2, 1))
         x = self.forward_tokens(x)
-        
+
         if self.class_dim > 0:
             x_cls = self.head(x[:, 0])
 
