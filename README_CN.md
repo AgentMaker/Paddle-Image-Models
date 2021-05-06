@@ -121,6 +121,8 @@
 
 * [CaiT](./docs/cn/model_zoo/cait.md)
 
+* [CoaT](./docs/cn/model_zoo/coat.md)
+
 * [LVViT](./docs/cn/model_zoo/lvvit.md)
 
 * [Swin Transformer](./docs/cn/model_zoo/swin.md)
