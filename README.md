@@ -158,4 +158,6 @@ A PaddlePaddle version image model zoo.
 
 * [CaiT](./docs/en/model_zoo/cait.md)
 
+* [LVViT](./docs/en/model_zoo/lvvit.md)
+
 * [Swin Transformer](./docs/en/model_zoo/swin.md)
