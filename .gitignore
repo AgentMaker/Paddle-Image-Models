@@ -129,6 +129,7 @@ dmypy.json
 .pyre/
 
 # Work
+ppim.zip
 test.py
 pretrained_models/
 build/
