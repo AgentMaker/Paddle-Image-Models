@@ -6,8 +6,7 @@ import paddle.vision.transforms as T
 
 import ppim.models.vit as vit
 
-from ppim.units import load_model
-from ppim.models.common import add_parameter
+from ppim.models.common import add_parameter, load_model
 from ppim.models.common import trunc_normal_, zeros_, ones_
 
 

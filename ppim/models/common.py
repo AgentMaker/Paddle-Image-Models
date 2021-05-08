@@ -12,6 +12,12 @@ trunc_normal_ = TruncatedNormal(std=.02)
 
 
 # Common Functions
+def load_model(model, url):
+    path = paddle.utils.download.get_weights_path_from_url(url)
+    model.set_state_dict(paddle.load(path))
+    return model
+
+
 def to_2tuple(x):
     return tuple([x] * 2)
 

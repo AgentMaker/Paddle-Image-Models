@@ -4,7 +4,7 @@ import paddle.vision.transforms as T
 
 from math import ceil
 
-from ppim.units import load_model
+from ppim.models.common import load_model
 
 
 transforms = T.Compose([

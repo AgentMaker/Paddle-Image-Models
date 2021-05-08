@@ -4,7 +4,7 @@ import paddle.vision.transforms as T
 
 from paddle.vision.models import resnet
 
-from ppim.units import load_model
+from ppim.models.common import load_model
 
 
 # Backend: cv2

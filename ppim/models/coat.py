@@ -3,10 +3,9 @@ import paddle.nn as nn
 import paddle.nn.functional as F
 import paddle.vision.transforms as T
 
-from ppim.units import load_model
 from ppim.models.common import DropPath, Identity
-from ppim.models.common import to_2tuple, add_parameter
 from ppim.models.common import trunc_normal_, ones_, zeros_
+from ppim.models.common import to_2tuple, add_parameter, load_model
 
 
 transforms = T.Compose([
@@ -18,8 +17,8 @@ transforms = T.Compose([
 
 
 urls = {
-    'coat_t': r'https://bj.bcebos.com/v1/ai-studio-online/5250fdb938de4126a25f9d3f84b75ab114a268349b8744afb159408b6797ca81?responseContentDisposition=attachment%3B%20filename%3Dcoat_tiny.pdparams',
-    'coat_lite_t': r'https://bj.bcebos.com/v1/ai-studio-online/e33788c2a6e540b3aa92b169ed0ea2c61eff43479ff644d98cdb767f33bcc199?responseContentDisposition=attachment%3B%20filename%3Dcoat_lite_tiny.pdparams',
+    'coat_ti': r'https://bj.bcebos.com/v1/ai-studio-online/5250fdb938de4126a25f9d3f84b75ab114a268349b8744afb159408b6797ca81?responseContentDisposition=attachment%3B%20filename%3Dcoat_tiny.pdparams',
+    'coat_lite_ti': r'https://bj.bcebos.com/v1/ai-studio-online/e33788c2a6e540b3aa92b169ed0ea2c61eff43479ff644d98cdb767f33bcc199?responseContentDisposition=attachment%3B%20filename%3Dcoat_lite_tiny.pdparams',
     'coat_lite_m': r'https://bj.bcebos.com/v1/ai-studio-online/c303c26af4974cfb97bd9b9dc400a4d5981c43fc149a401e937cd0186f31b92c?responseContentDisposition=attachment%3B%20filename%3Dcoat_lite_mini.pdparams'
 }
 
@@ -657,28 +656,28 @@ class CoaT(nn.Layer):
             return x
 
 
-def coat_t(pretrained=False, return_transforms=False, **kwargs):
+def coat_ti(pretrained=False, return_transforms=False, **kwargs):
     model = CoaT(
         patch_size=4, embed_dims=[152, 152, 152, 152],
         serial_depths=[2, 2, 2, 2], parallel_depth=6,
         num_heads=8, mlp_ratios=[4, 4, 4, 4], **kwargs
     )
     if pretrained:
-        model = load_model(model, urls['coat_t'])
+        model = load_model(model, urls['coat_ti'])
     if return_transforms:
         return model, transforms
     else:
         return model
 
 
-def coat_lite_t(pretrained=False, return_transforms=False, **kwargs):
+def coat_lite_ti(pretrained=False, return_transforms=False, **kwargs):
     model = CoaT(
         patch_size=4, embed_dims=[64, 128, 256, 320],
         serial_depths=[2, 2, 2, 2], parallel_depth=0,
         num_heads=8, mlp_ratios=[8, 8, 4, 4], **kwargs
     )
     if pretrained:
-        model = load_model(model, urls['coat_lite_t'])
+        model = load_model(model, urls['coat_lite_ti'])
     if return_transforms:
         return model, transforms
     else:
