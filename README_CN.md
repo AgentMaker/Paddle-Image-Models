@@ -29,8 +29,21 @@
 import paddle
 from ppim import rednet_26
 
-# 加载模型
+# 使用 PPIM whl 包加载模型
 model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
+
+# 使用 paddle.hub API 加载模型
+# paddlepaddle >= 2.1.0
+'''
+model, val_transforms = paddle.hub.load(
+    'AgentMaker/Paddle-Image-Models:release', 
+    'rednet_26', 
+    source='github', 
+    force_reload=False, 
+    pretrained=True, 
+    return_transforms=True
+)
+'''
 
 # 模型结构总览 
 paddle.summary(model, input_size=(1, 3, 224, 224))

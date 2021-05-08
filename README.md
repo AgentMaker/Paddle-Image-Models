@@ -29,8 +29,21 @@ A PaddlePaddle version image model zoo.
 import paddle
 from ppim import rednet_26
 
-# Load the model
+# Load the model with PPIM wheel package
 model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
+
+# Load the model with paddle.hub API
+# paddlepaddle >= 2.1.0
+'''
+model, val_transforms = paddle.hub.load(
+    'AgentMaker/Paddle-Image-Models:release', 
+    'rednet_26', 
+    source='github', 
+    force_reload=False, 
+    pretrained=True, 
+    return_transforms=True
+)
+'''
 
 # Model summary 
 paddle.summary(model, input_size=(1, 3, 224, 224))
