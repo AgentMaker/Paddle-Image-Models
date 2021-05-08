@@ -101,6 +101,13 @@ model.fit(
 
 ### 分割（PaddleSeg）
 
+|   支持的模型             |
+|:-----------------------:|
+| ReXNet                  |
+| RedNet                  |
+| RepVGG                  |
+| CondenseNet V2          |
+
 ```yaml
 # config
 ...

@@ -101,6 +101,13 @@ model.fit(
 
 ### Segmentation（PaddleSeg）
 
+|   Supported Models      |
+|:-----------------------:|
+| ReXNet                  |
+| RedNet                  |
+| RepVGG                  |
+| CondenseNet V2          |
+
 ```yaml
 # config
 ...
