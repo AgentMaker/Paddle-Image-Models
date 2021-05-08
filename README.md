@@ -23,117 +23,113 @@ A PaddlePaddle version image model zoo.
 * Install by wheel package：[【Releases Packages】](https://github.com/AgentMaker/Paddle-Image-Models/releases)
 
 ## Usage
-* Quick Start
+### Quick Start
 
-    ```python
-    import paddle
-    from ppim import rednet_26
+```python
+import paddle
+from ppim import rednet_26
 
-    # Load the model
-    model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
+# Load the model
+model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
 
-    # Model summary 
-    paddle.summary(model, input_size=(1, 3, 224, 224))
+# Model summary 
+paddle.summary(model, input_size=(1, 3, 224, 224))
 
-    # Random a input
-    x = paddle.randn(shape=(1, 3, 224, 224))
+# Random a input
+x = paddle.randn(shape=(1, 3, 224, 224))
 
-    # Model forword
-    out = model(x)
-    ```
+# Model forword
+out = model(x)
+```
 
-* Finetune
+### Classification（PaddleHapi）
     
-    ```python
-    import paddle
-    import paddle.nn as nn
-    import paddle.vision.transforms as T
-    from paddle.vision import Cifar100
+```python
+import paddle
+import paddle.nn as nn
+import paddle.vision.transforms as T
+from paddle.vision import Cifar100
 
-    from ppim import rexnet_1_0
+from ppim import rexnet_1_0
 
-    # Load the model
-    model, val_transforms = rexnet_1_0(pretrained=True, return_transforms=True, class_dim=100)
+# Load the model
+model, val_transforms = rexnet_1_0(pretrained=True, return_transforms=True, class_dim=100)
 
-    # Use the PaddleHapi Model
-    model = paddle.Model(model)
+# Use the PaddleHapi Model
+model = paddle.Model(model)
 
-    # Set the optimizer
-    opt = paddle.optimizer.Adam(learning_rate=0.001, parameters=model.parameters())
+# Set the optimizer
+opt = paddle.optimizer.Adam(learning_rate=0.001, parameters=model.parameters())
 
-    # Set the loss function
-    loss = nn.CrossEntropyLoss()
+# Set the loss function
+loss = nn.CrossEntropyLoss()
 
-    # Set the evaluate metric
-    metric = paddle.metric.Accuracy(topk=(1, 5))
+# Set the evaluate metric
+metric = paddle.metric.Accuracy(topk=(1, 5))
 
-    # Prepare the model 
-    model.prepare(optimizer=opt, loss=loss, metrics=metric)
+# Prepare the model 
+model.prepare(optimizer=opt, loss=loss, metrics=metric)
 
-    # Set the data preprocess
-    train_transforms = T.Compose([
-        T.Resize(256, interpolation='bicubic'),
-        T.RandomCrop(224),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
+# Set the data preprocess
+train_transforms = T.Compose([
+    T.Resize(256, interpolation='bicubic'),
+    T.RandomCrop(224),
+    T.ToTensor(),
+    T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
 
-    # Load the Cifar100 dataset
-    train_dataset = Cifar100(mode='train', transform=train_transforms, backend='pil')
-    val_dataset = Cifar100(mode='test',  transform=val_transforms, backend='pil')
+# Load the Cifar100 dataset
+train_dataset = Cifar100(mode='train', transform=train_transforms, backend='pil')
+val_dataset = Cifar100(mode='test',  transform=val_transforms, backend='pil')
 
-    # Finetune the model 
-    model.fit(
-        train_data=train_dataset, 
-        eval_data=val_dataset, 
-        batch_size=256, 
-        epochs=2, 
-        eval_freq=1, 
-        log_freq=1, 
-        save_dir='save_models', 
-        save_freq=1, 
-        verbose=1, 
-        drop_last=False, 
-        shuffle=True,
-        num_workers=0
-    )
-    ```
+# Finetune the model 
+model.fit(
+    train_data=train_dataset, 
+    eval_data=val_dataset, 
+    batch_size=256, 
+    epochs=2, 
+    eval_freq=1, 
+    log_freq=1, 
+    save_dir='save_models', 
+    save_freq=1, 
+    verbose=1, 
+    drop_last=False, 
+    shuffle=True,
+    num_workers=0
+)
+```
 
-* Segmentation
+### Segmentation（PaddleSeg）
 
-    * PaddleSeg x PPIM
+```yaml
+# config
+...
 
-        ```yaml
-        # config
-        ...
+model:
+backbone:
+    type: rexnet_1_0 # PPIM model name
+    pretrained: True # If load the pretrained model
+    get_features: True # Get image features for segmentation
 
-        model:
-        backbone:
-            type: rexnet_1_0 # PPIM model name
-            pretrained: True # If load the pretrained model
-            get_features: True # Get image features for segmentation
-        
-        ...
-        ```
+...
+```
 
-    * Train script：[train.py](./tools/seg/train.py)
-    
-        ```python
-        # train.py
-        ...
+```python
+# train.py
+...
 
-        '''
-            Add the ppim models.
-        '''
-        import ppim.models as models
-        from inspect import isfunction
+'''
+    Add the ppim models.
+'''
+import ppim.models as models
+from inspect import isfunction
 
-        for model in models.__dict__.values():
-            if isfunction(model):
-                manager.BACKBONES.add_component(model)
+for model in models.__dict__.values():
+    if isfunction(model):
+        manager.BACKBONES.add_component(model)
 
-        ...
-        ```
+...
+```
 
 
 ## Model Zoo
