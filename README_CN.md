@@ -9,6 +9,8 @@
 
 一个基于飞桨框架实现的图像预训练模型库。
 
+![](https://ai-studio-static-online.cdn.bcebos.com/56745793c18340648142135564979fc919714e8de28b48e1bd7d71f4178fa598)
+
 ![](https://ai-studio-static-online.cdn.bcebos.com/34e7bbbc80d24412b3c21efb56778ad43b53f9b1be104e499e0ff8b663a64a53)
 
 ## 安装
@@ -21,81 +23,113 @@
 * 通过 whl 包进行安装：[【Releases Packages】](https://github.com/AgentMaker/Paddle-Image-Models/releases)
 
 ## 使用方法
-* 快速使用
+### 快速使用
 
-    ```python
-    import paddle
-    from ppim import rednet_26
+```python
+import paddle
+from ppim import rednet_26
 
-    # 加载模型
-    model, val_transforms = rednet_26(pretrained=True)
+# 加载模型
+model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
 
-    # 模型结构总览 
-    paddle.summary(model, input_size=(1, 3, 224, 224))
+# 模型结构总览 
+paddle.summary(model, input_size=(1, 3, 224, 224))
 
-    # 准备一个随机的输入
-    x = paddle.randn(shape=(1, 3, 224, 224))
+# 准备一个随机的输入
+x = paddle.randn(shape=(1, 3, 224, 224))
 
-    # 模型前向计算
-    out = model(x)
-    ```
+# 模型前向计算
+out = model(x)
+```
 
-* 模型微调
+### 分类（PaddleHapi）
     
-    ```python
-    import paddle
-    import paddle.nn as nn
-    import paddle.vision.transforms as T
-    from paddle.vision import Cifar100
+```python
+import paddle
+import paddle.nn as nn
+import paddle.vision.transforms as T
+from paddle.vision import Cifar100
 
-    from ppim import rexnet_1_0
+from ppim import rexnet_1_0
 
-    # 加载模型
-    model, val_transforms = rexnet_1_0(pretrained=True, class_dim=100)
+# 加载模型
+model, val_transforms = rexnet_1_0(pretrained=True, return_transforms=True, class_dim=100)
 
-    # 使用飞桨高层 API Model
-    model = paddle.Model(model)
+# 使用飞桨高层 API Model
+model = paddle.Model(model)
 
-    # 配置优化器
-    opt = paddle.optimizer.Adam(learning_rate=0.001, parameters=model.parameters())
+# 配置优化器
+opt = paddle.optimizer.Adam(learning_rate=0.001, parameters=model.parameters())
 
-    # 配置损失函数
-    loss = nn.CrossEntropyLoss()
+# 配置损失函数
+loss = nn.CrossEntropyLoss()
 
-    # 配置评估指标
-    metric = paddle.metric.Accuracy(topk=(1, 5))
+# 配置评估指标
+metric = paddle.metric.Accuracy(topk=(1, 5))
 
-    # 模型准备
-    model.prepare(optimizer=opt, loss=loss, metrics=metric)
+# 模型准备
+model.prepare(optimizer=opt, loss=loss, metrics=metric)
 
-    # 配置训练集数据处理
-    train_transforms = T.Compose([
-        T.Resize(256, interpolation='bicubic'),
-        T.RandomCrop(224),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
+# 配置训练集数据处理
+train_transforms = T.Compose([
+    T.Resize(256, interpolation='bicubic'),
+    T.RandomCrop(224),
+    T.ToTensor(),
+    T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
 
-    # 加载 Cifar100 数据集
-    train_dataset = Cifar100(mode='train', transform=train_transforms, backend='pil')
-    val_dataset = Cifar100(mode='test',  transform=val_transforms, backend='pil')
+# 加载 Cifar100 数据集
+train_dataset = Cifar100(mode='train', transform=train_transforms, backend='pil')
+val_dataset = Cifar100(mode='test',  transform=val_transforms, backend='pil')
 
-    # 模型微调
-    model.fit(
-        train_data=train_dataset, 
-        eval_data=val_dataset, 
-        batch_size=256, 
-        epochs=2, 
-        eval_freq=1, 
-        log_freq=1, 
-        save_dir='save_models', 
-        save_freq=1, 
-        verbose=1, 
-        drop_last=False, 
-        shuffle=True,
-        num_workers=0
-    )
-    ```
+# 模型微调
+model.fit(
+    train_data=train_dataset, 
+    eval_data=val_dataset, 
+    batch_size=256, 
+    epochs=2, 
+    eval_freq=1, 
+    log_freq=1, 
+    save_dir='save_models', 
+    save_freq=1, 
+    verbose=1, 
+    drop_last=False, 
+    shuffle=True,
+    num_workers=0
+)
+```
+
+### 分割（PaddleSeg）
+
+```yaml
+# config
+...
+
+model:
+backbone:
+    type: rexnet_1_0 # PPIM 模型名称
+    pretrained: True # 是否加载预训练模型
+    get_features: True # 获取分割所需的图像特征
+
+...
+```
+
+```python
+# train.py
+...
+
+'''
+    添加 PPIM 模型
+'''
+import ppim.models as models
+from inspect import isfunction
+
+for model in models.__dict__.values():
+    if isfunction(model):
+        manager.BACKBONES.add_component(model)
+
+...
+```
 
 ## 模型库
 
