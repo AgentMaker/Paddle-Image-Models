@@ -3,7 +3,7 @@ from .vit import VisionTransformer
 from .tnt import tnt_s, TNT
 from .pvt import pvt_ti, pvt_s, pvt_m, pvt_l, PyramidVisionTransformer
 from .pit import pit_ti, pit_s, pit_xs, pit_b, pit_ti_distilled, pit_s_distilled, pit_xs_distilled, pit_b_distilled, PoolingTransformer, DistilledPoolingTransformer
-from .coat import coat_ti, coat_lite_ti, coat_lite_m, CoaT
+from .coat import coat_ti, coat_m, coat_lite_ti, coat_lite_m, CoaT
 from .deit import deit_ti, deit_s, deit_b, deit_b_384, deit_ti_distilled, deit_s_distilled, deit_b_distilled, deit_b_distilled_384, DistilledVisionTransformer
 from .cait import cait_xxs_24, cait_xxs_36, cait_s_24, cait_xxs_24_384, cait_xxs_36_384, cait_xs_24_384, cait_s_24_384, cait_s_36_384, cait_m_36_384, cait_m_48_448, CaiT
 from .lvvit import lvvit_s, lvvit_s_384, lvvit_m, lvvit_m_384, lvvit_m_448, lvvit_l_448, LV_ViT
