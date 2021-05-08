@@ -9,8 +9,6 @@ English | [简体中文](README_CN.md)
 
 A PaddlePaddle version image model zoo.
 
-![](https://ai-studio-static-online.cdn.bcebos.com/56745793c18340648142135564979fc919714e8de28b48e1bd7d71f4178fa598)
-
 ## Install Package
 * Install by pip：
 
