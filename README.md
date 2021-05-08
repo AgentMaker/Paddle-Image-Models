@@ -107,6 +107,7 @@ model.fit(
 | RedNet                  |
 | RepVGG                  |
 | CondenseNet V2          |
+| Coming soon...          |
 
 ```yaml
 # config
