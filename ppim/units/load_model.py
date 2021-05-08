@@ -1,15 +1,7 @@
-import os
-import wget
-import paddle
+from paddle.utils.download import get_weights_path_from_url
 
 
 def load_model(model, url):
-    file_name = url.split(r'filename%3D')[-1]
-    model_path = os.path.join('pretrained_models', file_name)
-    if not os.path.isfile(model_path):
-        if not os.path.exists('pretrained_models'):
-            os.mkdir('pretrained_models')
-        wget.download(url, out=model_path)
-    params = paddle.load(model_path)
-    model.set_dict(params)
+    path = get_weights_path_from_url(url)
+    model.set_state_dict(paddle.load(path))
     return model
