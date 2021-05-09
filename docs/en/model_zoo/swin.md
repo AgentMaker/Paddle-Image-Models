@@ -17,8 +17,7 @@
     # backend: pil
     # input_size: 384x384
     transforms = T.Compose([
-        T.Resize(384, interpolation='bicubic'),
-        T.CenterCrop(384),
+        T.Resize((384, 384), interpolation='bicubic'),
         T.ToTensor(),
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
