@@ -8,6 +8,7 @@
 English | [简体中文](README_CN.md)
 
 A PaddlePaddle version image model zoo.
+
 <table>
   <tbody>
     <tr>
@@ -186,34 +187,3 @@ for model in models.__dict__.values():
 
 ...
 ```
-
-
-## Model Zoo
-
-* [DLA](./docs/en/model_zoo/dla.md)
-
-* [ReXNet](./docs/en/model_zoo/rexnet.md)
-
-* [RedNet](./docs/en/model_zoo/rednet.md)
-
-* [RepVGG](./docs/en/model_zoo/repvgg.md)
-
-* [HarDNet](./docs/en/model_zoo/hardnet.md)
-
-* [CondenseNet V2](./docs/en/model_zoo/cdnv2.md)
-
-* [PiT](./docs/en/model_zoo/pit.md)
-
-* [PVT](./docs/en/model_zoo/pvt.md)
-
-* [TNT](./docs/en/model_zoo/tnt.md)
-
-* [DeiT](./docs/en/model_zoo/deit.md)
-
-* [CaiT](./docs/en/model_zoo/cait.md)
-
-* [CoaT](./docs/en/model_zoo/coat.md)
-
-* [LVViT](./docs/en/model_zoo/lvvit.md)
-
-* [Swin Transformer](./docs/en/model_zoo/swin.md)
