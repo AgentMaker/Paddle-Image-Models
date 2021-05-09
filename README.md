@@ -8,10 +8,45 @@
 English | [简体中文](README_CN.md)
 
 A PaddlePaddle version image model zoo.
-
-![](https://ai-studio-static-online.cdn.bcebos.com/56745793c18340648142135564979fc919714e8de28b48e1bd7d71f4178fa598)
-
-![](https://ai-studio-static-online.cdn.bcebos.com/34e7bbbc80d24412b3c21efb56778ad43b53f9b1be104e499e0ff8b663a64a53)
+<table>
+  <tbody>
+    <tr>
+        <td colspan="6" align="center"><b>Model Zoo</b></td>
+    </tr>
+    <tr align="center" valign="bottom">
+      <td>
+        <b>CNN</b>
+      </td>
+      <td>
+        <b>Transformer</b>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td>
+        <ul>
+          <li><a href="./docs/en/model_zoo/dla.md">DLA</a></li>
+          <li><a href="./docs/en/model_zoo/rexnet.md">ReXNet</a></li>
+          <li><a href="./docs/en/model_zoo/rednet.md">RedNet</a></li>
+          <li><a href="./docs/en/model_zoo/repvgg.md">RepVGG</a></li>
+          <li><a href="./docs/en/model_zoo/hardnet.md">HardNet</a></li>
+          <li><a href="./docs/en/model_zoo/cdnv2.md">CondenseNet V2</a></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><a href="./docs/en/model_zoo/pit.md">PiT</a></li>
+          <li><a href="./docs/en/model_zoo/pvt.md">PvT</a></li>
+          <li><a href="./docs/en/model_zoo/tnt.md">TNT</a></li>
+          <li><a href="./docs/en/model_zoo/deit.md">DeiT</a></li>
+          <li><a href="./docs/en/model_zoo/cait.md">CaiT</a></li>
+          <li><a href="./docs/en/model_zoo/coat.md">CoaT</a></li>
+          <li><a href="./docs/en/model_zoo/lvvit.md">LVViT</a></li>
+          <li><a href="./docs/en/model_zoo/swin.md">Swin Transformer</a></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Install Package
 * Install by pip：
