@@ -22,14 +22,14 @@ def get_transforms(resize, crop):
 
 
 transforms_224 = get_transforms(256, 224)
-transforms_384 = get_transforms((426, 384), None)
+transforms_384 = get_transforms((384, 384), False)
 
 
 urls = {
     'swin_ti': r'https://bj.bcebos.com/v1/ai-studio-online/19a72dd9eb884f4581492a61fab901e60e858e34569f4805b619eceabd6a4315?responseContentDisposition=attachment%3B%20filename%3Dswin_tiny_patch4_window7_224.pdparams',
     'swin_s': r'https://bj.bcebos.com/v1/ai-studio-online/5a34e4e087824ba48ba9ddd29a22e6fce5d6a2a4a2754e208c61f02090f9d12b?responseContentDisposition=attachment%3B%20filename%3Dswin_small_patch4_window7_224.pdparams',
-    'swin_b': r'https://bj.bcebos.com/v1/ai-studio-online/156336afd998473e850ac47385b63f73f569531a9f0c405ca96243c7d586f7fb?responseContentDisposition=attachment%3B%20filename%3Dswin_base_patch4_window7_224.pdparams',
-    'swin_b_384': r'https://bj.bcebos.com/v1/ai-studio-online/b27b27abe9614b91ae348a550ed5835fed586af46f4245f58ceca21710349ea2?responseContentDisposition=attachment%3B%20filename%3Dswin_base_patch4_window12_384.pdparams',
+    'swin_b': r'https://bj.bcebos.com/v1/ai-studio-online/dc2e80e3d4f14880b0700abcb1609c65d541139ab2424b21b6ccdfb64c904a36?responseContentDisposition=attachment%3B%20filename%3Dswin_base_patch4_window7_224.pdparams',
+    'swin_b_384': r'https://bj.bcebos.com/v1/ai-studio-online/e013c51b9e134b69933ee7a7c0349be27b8a1a13f823465e8ecbd09fff4aba38?responseContentDisposition=attachment%3B%20filename%3Dswin_base_patch4_window12_384.pdparams',
 }
 
 
@@ -569,8 +569,8 @@ def swin_ti(pretrained=False, return_transforms=False, **kwargs):
 def swin_s(pretrained=False, return_transforms=False, **kwargs):
     model = SwinTransformer(
         depths=[2, 2, 18, 2],
-        num_heads=[3, 6, 12, 24]
-        ** kwargs
+        num_heads=[3, 6, 12, 24],
+        **kwargs
     )
     if pretrained:
         model = load_model(model, urls['swin_s'])
@@ -584,8 +584,8 @@ def swin_b(pretrained=False, return_transforms=False, **kwargs):
     model = SwinTransformer(
         embed_dim=128,
         depths=[2, 2, 18, 2],
-        num_heads=[4, 8, 16, 32]
-        ** kwargs
+        num_heads=[4, 8, 16, 32],
+        **kwargs
     )
     if pretrained:
         model = load_model(model, urls['swin_b'])

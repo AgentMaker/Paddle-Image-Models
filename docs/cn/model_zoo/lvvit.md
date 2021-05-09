@@ -5,8 +5,8 @@
 * 验证集数据处理：
 
     ```python
-    # backend: pil
-    # input_size: 224x224
+    # 图像后端：pil
+    # 输入图像大小：224x224
     transforms = T.Compose([
         T.Resize(248, interpolation='bicubic'),
         T.CenterCrop(224),
@@ -14,8 +14,8 @@
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
-    # backend: pil
-    # input_size: 384x384
+    # 图像后端：pil
+    # 输入图像大小：384x384
     transforms = T.Compose([
         T.Resize(384, interpolation='bicubic'),
         T.CenterCrop(384),
@@ -23,8 +23,8 @@
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
-    # backend: pil
-    # input_size: 448x448
+    # 图像后端：pil
+    # 输入图像大小：448x448
     transforms = T.Compose([
         T.Resize(448, interpolation='bicubic'),
         T.CenterCrop(448),
