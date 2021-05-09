@@ -44,9 +44,9 @@
     | CaiT-xxs-36-384         |  cait_xxs_36_384        | 17.3       | 14.2      | 82.20     |  96.15    | [Download][cait_xxs_36_384]      |
     | CaiT-xs-24-384          |  cait_xs_24_384         | 26.6       | 19.3      | 84.06     |  96.89    | [Download][cait_xs_24_384]       |
     | CaiT-s-24-384           |  cait_s_24_384          | 49.6       | 32.2      | 85.05     |  97.34    | [Download][cait_s_24_384]        |
-    | CaiT-s-36-384           |  cait_s_36_384          | 68.2       | 48.0      | 85.43     |  97.33    | [Download][cait_s_36_384]        |
-    | CaiT-m-36-384           |  cait_m_36_384          | 270.9      | 173.3     | 85.43     |  97.33    | [Download][cait_m_36_384]        |
-    | CaiT-m-48-448           |  cait_m_48_448          | 356.0      | 329.6     | 85.43     |  97.33    | [Download][cait_m_48_448]        |
+    | CaiT-s-36-384           |  cait_s_36_384          | 68.2       | 48.0      | 85.45     |  97.48    | [Download][cait_s_36_384]        |
+    | CaiT-m-36-384           |  cait_m_36_384          | 270.9      | 173.3     | 86.06     |  97.73    | [Download][cait_m_36_384]        |
+    | CaiT-m-48-448           |  cait_m_48_448          | 356.0      | 329.6     | 86.49     |  97.75    | [Download][cait_m_48_448]        |
 
 
 [cait_xxs_24]:https://bj.bcebos.com/v1/ai-studio-online/f104732e10e64c48b2848a78b7fa5db45d27a8eed0754c04b367d0708e7242ea?responseContentDisposition=attachment%3B%20filename%3DCaiT_XXS24_224.pdparams
