@@ -41,7 +41,7 @@ A PaddlePaddle version image model zoo.
           <li><a href="./docs/en/model_zoo/deit.md">DeiT</a></li>
           <li><a href="./docs/en/model_zoo/cait.md">CaiT</a></li>
           <li><a href="./docs/en/model_zoo/coat.md">CoaT</a></li>
-          <li><a href="./docs/en/model_zoo/lvvit.md">LVViT</a></li>
+          <li><a href="./docs/en/model_zoo/lvvit.md">LV ViT</a></li>
           <li><a href="./docs/en/model_zoo/swin.md">Swin Transformer</a></li>
         </ul>
       </td>

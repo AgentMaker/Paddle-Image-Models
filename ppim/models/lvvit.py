@@ -26,10 +26,10 @@ transforms_448 = get_transforms(448, 448)
 
 urls = {
     'lvvit_s': r'https://bj.bcebos.com/v1/ai-studio-online/bf798145d3094d4ab89f99d87a3f99ad576361f3e05e46f4a622de90ef565e9b?responseContentDisposition=attachment%3B%20filename%3Dlvvit_s_224.pdparams',
+    'lvvit_m': r'https://bj.bcebos.com/v1/ai-studio-online/c34bcd65d1c94089ab269ffb8927133a7fab39c6a0c44dca8e1c995155cabcd0?responseContentDisposition=attachment%3B%20filename%3Dlvvit_m_224.pdparams',
     'lvvit_s_384': r'https://bj.bcebos.com/v1/ai-studio-online/aa4fa51138ea41cb9b413db1308ccc01319f896413764a2d9a3b6e6a23da1ade?responseContentDisposition=attachment%3B%20filename%3Dlvvit_s_384.pdparams',
-    'lvvit_m': r'https://bj.bcebos.com/v1/ai-studio-online/aa4fa51138ea41cb9b413db1308ccc01319f896413764a2d9a3b6e6a23da1ade?responseContentDisposition=attachment%3B%20filename%3Dlvvit_s_384.pdparams',
     'lvvit_m_384': r'https://bj.bcebos.com/v1/ai-studio-online/97d6a53daf55477bbf6e386e00d4763157bcbcea295b402ebb3a26725eaeb772?responseContentDisposition=attachment%3B%20filename%3Dlvvit_m_384.pdparams',
-    'lvvit_m_448': r'https://bj.bcebos.com/v1/ai-studio-online/97d6a53daf55477bbf6e386e00d4763157bcbcea295b402ebb3a26725eaeb772?responseContentDisposition=attachment%3B%20filename%3Dlvvit_m_384.pdparams',
+    'lvvit_m_448': r'https://bj.bcebos.com/v1/ai-studio-online/b83be46049ac44cfb0821f429e54621020e815f8019944dca81e73a6736b0fdf?responseContentDisposition=attachment%3B%20filename%3Dlvvit_m_448.pdparams',
     'lvvit_l_448': r'https://bj.bcebos.com/v1/ai-studio-online/abd5019da732445eae48ed4eaeff874fc2c00d8d43934ff783d77720b09faef8?responseContentDisposition=attachment%3B%20filename%3Dlvvit_l_448.pdparams'
 }
 
