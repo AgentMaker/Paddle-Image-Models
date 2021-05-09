@@ -25,24 +25,24 @@
     <tr valign="top">
       <td>
         <ul>
-          <li><a href="./docs/en/model_zoo/dla.md">DLA</a></li>
-          <li><a href="./docs/en/model_zoo/rexnet.md">ReXNet</a></li>
-          <li><a href="./docs/en/model_zoo/rednet.md">RedNet</a></li>
-          <li><a href="./docs/en/model_zoo/repvgg.md">RepVGG</a></li>
-          <li><a href="./docs/en/model_zoo/hardnet.md">HardNet</a></li>
-          <li><a href="./docs/en/model_zoo/cdnv2.md">CondenseNet V2</a></li>
+          <li><a href="./docs/cn/model_zoo/dla.md">DLA</a></li>
+          <li><a href="./docs/cn/model_zoo/rexnet.md">ReXNet</a></li>
+          <li><a href="./docs/cn/model_zoo/rednet.md">RedNet</a></li>
+          <li><a href="./docs/cn/model_zoo/repvgg.md">RepVGG</a></li>
+          <li><a href="./docs/cn/model_zoo/hardnet.md">HardNet</a></li>
+          <li><a href="./docs/cn/model_zoo/cdnv2.md">CondenseNet V2</a></li>
         </ul>
       </td>
       <td>
         <ul>
-          <li><a href="./docs/en/model_zoo/pit.md">PiT</a></li>
-          <li><a href="./docs/en/model_zoo/pvt.md">PvT</a></li>
-          <li><a href="./docs/en/model_zoo/tnt.md">TNT</a></li>
-          <li><a href="./docs/en/model_zoo/deit.md">DeiT</a></li>
-          <li><a href="./docs/en/model_zoo/cait.md">CaiT</a></li>
-          <li><a href="./docs/en/model_zoo/coat.md">CoaT</a></li>
-          <li><a href="./docs/en/model_zoo/lvvit.md">LVViT</a></li>
-          <li><a href="./docs/en/model_zoo/swin.md">Swin Transformer</a></li>
+          <li><a href="./docs/cn/model_zoo/pit.md">PiT</a></li>
+          <li><a href="./docs/cn/model_zoo/pvt.md">PvT</a></li>
+          <li><a href="./docs/cn/model_zoo/tnt.md">TNT</a></li>
+          <li><a href="./docs/cn/model_zoo/deit.md">DeiT</a></li>
+          <li><a href="./docs/cn/model_zoo/cait.md">CaiT</a></li>
+          <li><a href="./docs/cn/model_zoo/coat.md">CoaT</a></li>
+          <li><a href="./docs/cn/model_zoo/lvvit.md">LVViT</a></li>
+          <li><a href="./docs/cn/model_zoo/swin.md">Swin Transformer</a></li>
         </ul>
       </td>
     </tr>
