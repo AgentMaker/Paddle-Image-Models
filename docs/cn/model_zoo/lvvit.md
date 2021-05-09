@@ -38,11 +38,11 @@
     |         Model           |       Model Name        | Params (M) | FLOPs (G) | Top-1 (%) | Top-5 (%) |          Pretrained Model        |
     |:-----------------------:|:-----------------------:|:----------:|:---------:|:---------:|:---------:|:--------------------------------:|
     | LV-ViT-S                |  lvvit_s                | 26.2       |  6.6      | 83.17     |  95.87    | [Download][lvvit_s]              |
-    | LV-ViT-M                |  lvvit_m                | 55.8       | 16.0      | 79.87     |  94.90    | [Download][lvvit_m]              |
-    | LV-ViT-S-384            |  lvvit_s_384            | 26.3       | 22.2      | 83.40     |  96.62    | [Download][lvvit_s_384]          |
-    | LV-ViT-M-384            |  lvvit_m_384            | 56.0       | 42.2      | 80.97     |  95.64    | [Download][lvvit_m_384]          |
-    | LV-ViT-M-448            |  lvvit_m_448            | 56.1       | 14.2      | 82.20     |  96.15    | [Download][lvvit_m_448]          |
-    | LV-ViT-L-448            |  lvvit_l_448            | 150.5      | 157.2     | 84.06     |  96.89    | [Download][lvvit_l_448]          |
+    | LV-ViT-M                |  lvvit_m                | 55.8       | 16.0      | 83.88     |  96.05    | [Download][lvvit_m]              |
+    | LV-ViT-S-384            |  lvvit_s_384            | 26.3       | 22.2      | 84.56     |  96.39    | [Download][lvvit_s_384]          |
+    | LV-ViT-M-384            |  lvvit_m_384            | 56.0       | 42.2      | 85.34     |  96.72    | [Download][lvvit_m_384]          |
+    | LV-ViT-M-448            |  lvvit_m_448            | 56.1       | 61.0      | 85.47     |  96.82    | [Download][lvvit_m_448]          |
+    | LV-ViT-L-448            |  lvvit_l_448            | 150.5      | 157.2     | 86.09     |  96.85    | [Download][lvvit_l_448]          |
 
 
 [lvvit_s]:https://bj.bcebos.com/v1/ai-studio-online/bf798145d3094d4ab89f99d87a3f99ad576361f3e05e46f4a622de90ef565e9b?responseContentDisposition=attachment%3B%20filename%3Dlvvit_s_224.pdparams

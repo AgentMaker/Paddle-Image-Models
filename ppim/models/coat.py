@@ -674,7 +674,7 @@ def coat_ti(pretrained=False, return_transforms=False, **kwargs):
 def coat_m(pretrained=False, return_transforms=False, **kwargs):
     model = CoaT(
         patch_size=4, embed_dims=[152, 216, 216, 216],
-        serial_depths=[2, 2, 2, 2], parallel_depth=6, 
+        serial_depths=[2, 2, 2, 2], parallel_depth=6,
         num_heads=8, mlp_ratios=[4, 4, 4, 4], **kwargs
     )
     if pretrained:
