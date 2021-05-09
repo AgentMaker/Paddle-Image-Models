@@ -12,7 +12,7 @@
 <table>
   <tbody>
     <tr>
-        <td colspan="6" align="center"><b>Model Zoo</b></td>
+        <td colspan="6" align="center"><b>模型库</b></td>
     </tr>
     <tr align="center" valign="bottom">
       <td>
