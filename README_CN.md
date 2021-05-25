@@ -21,6 +21,9 @@
       <td>
         <b>Transformer</b>
       </td>
+      <td>
+        <b>MLP</b>
+      </td>
     </tr>
     <tr valign="top">
       <td>
@@ -43,6 +46,11 @@
           <li><a href="./docs/cn/model_zoo/coat.md">CoaT</a></li>
           <li><a href="./docs/cn/model_zoo/lvvit.md">LV ViT</a></li>
           <li><a href="./docs/cn/model_zoo/swin.md">Swin Transformer</a></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><a href="./docs/cn/model_zoo/mixer.md">MLP-Mixer</a></li>
         </ul>
       </td>
     </tr>

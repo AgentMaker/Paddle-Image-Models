@@ -21,6 +21,9 @@ A PaddlePaddle version image model zoo.
       <td>
         <b>Transformer</b>
       </td>
+      <td>
+        <b>MLP</b>
+      </td>
     </tr>
     <tr valign="top">
       <td>
@@ -43,6 +46,11 @@ A PaddlePaddle version image model zoo.
           <li><a href="./docs/en/model_zoo/coat.md">CoaT</a></li>
           <li><a href="./docs/en/model_zoo/lvvit.md">LV ViT</a></li>
           <li><a href="./docs/en/model_zoo/swin.md">Swin Transformer</a></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><a href="./docs/en/model_zoo/mixer.md">MLP-Mixer</a></li>
         </ul>
       </td>
     </tr>
