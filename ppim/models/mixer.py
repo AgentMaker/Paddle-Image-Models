@@ -56,10 +56,13 @@ class MixerBlock(nn.Layer):
 
 class MlpMixer(nn.Layer):
     def __init__(self, img_size=(224, 224), patch_size=(16, 16),
-                 num_classes=1000, num_blocks=12, hidden_dim=768,
+                 num_blocks=12, hidden_dim=768,
                  tokens_mlp_dim=384, channels_mlp_dim=3072,
-                 norm_layer=nn.LayerNorm, epsilon=1e-6):
+                 norm_layer=nn.LayerNorm, epsilon=1e-6,
+                 class_dim=1000):
         super().__init__()
+        self.class_dim = class_dim
+
         self.stem = nn.Conv2D(
             3, hidden_dim, kernel_size=patch_size, stride=patch_size)
 
@@ -76,16 +79,23 @@ class MlpMixer(nn.Layer):
         self.blocks = nn.Sequential(*blocks)
 
         self.pre_head_layer_norm = norm_layer(hidden_dim, epsilon=epsilon)
-        self.head = nn.Linear(hidden_dim, num_classes)
+
+        if class_dim > 0:
+            self.head = nn.Linear(hidden_dim, class_dim)
 
     def forward(self, inputs):
         x = self.stem(inputs)
+
         x = x.transpose((0, 2, 3, 1))
         x = x.flatten(1, 2)
+
         x = self.blocks(x)
         x = self.pre_head_layer_norm(x)
-        x = x.mean(axis=1)
-        x = self.head(x)
+
+        if self.class_dim > 0:
+            x = x.mean(axis=1)
+            x = self.head(x)
+
         return x
 
 
