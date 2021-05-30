@@ -7,6 +7,7 @@ from .coat import coat_ti, coat_m, coat_lite_ti, coat_lite_m, CoaT
 from .deit import deit_ti, deit_s, deit_b, deit_b_384, deit_ti_distilled, deit_s_distilled, deit_b_distilled, deit_b_distilled_384, DistilledVisionTransformer
 from .cait import cait_xxs_24, cait_xxs_36, cait_s_24, cait_xxs_24_384, cait_xxs_36_384, cait_xs_24_384, cait_s_24_384, cait_s_36_384, cait_m_36_384, cait_m_48_448, CaiT
 from .swin import swin_ti, swin_s, swin_b, swin_b_384, SwinTransformer
+from .levit import levit_128s, levit_128, levit_192, levit_256, levit_384, LeViT
 from .lvvit import lvvit_s, lvvit_s_384, lvvit_m, lvvit_m_384, lvvit_m_448, lvvit_l_448, LV_ViT
 
 # CNN
