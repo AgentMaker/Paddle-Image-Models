@@ -218,17 +218,11 @@ class _Transition(nn.Layer):
 
 class CondenseNetV2(nn.Layer):
     def __init__(self, stages, growth, HS_start_block, SE_start_block, fc_channel, group_1x1,
-                 group_3x3, group_trans, bottleneck, last_se_reduction, class_dim=1000, get_features=False):
+                 group_3x3, group_trans, bottleneck, last_se_reduction, class_dim=1000):
         super(CondenseNetV2, self).__init__()
         self.stages = stages
         self.growth = growth
         self.class_dim = class_dim
-        self.get_features = get_features
-
-        if get_features:
-            self.feat_channels = []
-            self.feat_list = []
-
         self.last_se_reduction = last_se_reduction
         assert len(self.stages) == len(self.growth)
         self.progress = 0.0
@@ -255,25 +249,9 @@ class CondenseNetV2(nn.Layer):
         self.fc = nn.Linear(self.num_features, fc_channel)
         self.fc_act = HS()
 
-        if get_features:
-            idx = 0
-            count = 1
-            target = self.stages[idx]
-            self.feat_channels = self.feat_channels[-4:]
-            for layer in self.features.sublayers():
-                if isinstance(layer, _SFR_DenseLayer):
-                    if count == target:
-                        if idx != 0:
-                            layer.register_forward_post_hook(self.get_feature)
-                        idx += 1
-                        if idx < len(self.stages):
-                            target = self.stages[idx]
-                        count = 0
-                    count += 1
-        else:
-            # Classifier layer
-            if class_dim > 0:
-                self.classifier = nn.Linear(fc_channel, class_dim)
+        # Classifier layer
+        if class_dim > 0:
+            self.classifier = nn.Linear(fc_channel, class_dim)
         self._initialize()
 
     def add_block(self, i, group_1x1, group_3x3, group_trans, bottleneck, activation, use_se):
@@ -292,10 +270,6 @@ class CondenseNetV2(nn.Layer):
         )
         self.features.add_sublayer('denseblock_%d' % (i + 1), block)
         self.num_features += self.stages[i] * self.growth[i]
-
-        if self.get_features:
-            self.feat_channels.append(self.num_features)
-
         if not last:
             trans = _Transition()
             self.features.add_sublayer('transition_%d' % (i + 1), trans)
@@ -308,29 +282,18 @@ class CondenseNetV2(nn.Layer):
                                        nn.AvgPool2D(self.pool_size))
             # if useSE:
             self.features.add_sublayer('se_last',
-                                       SELayer(self.num_features,
-                                               reduction=self.last_se_reduction))
-
-    def get_feature(self, layer, input, output):
-        self.feat_list.append(output)
-        return output
+                                       SELayer(self.num_features, reduction=self.last_se_reduction))
 
     def forward(self, x):
-        self.feat_list = []
-
         features = self.features(x)
+        out = features.reshape((features.shape[0], -1))
+        out = self.fc(out)
+        out = self.fc_act(out)
 
-        if self.get_features:
-            return self.feat_list
-        else:
-            out = features.reshape((features.shape[0], -1))
-            out = self.fc(out)
-            out = self.fc_act(out)
+        if self.class_dim > 0:
+            out = self.classifier(out)
 
-            if self.class_dim > 0:
-                out = self.classifier(out)
-
-            return out
+        return out
 
     def _initialize(self):
         # initialize

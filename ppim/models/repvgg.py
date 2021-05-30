@@ -135,12 +135,11 @@ class RepVGGBlock(nn.Layer):
 
 class RepVGG(nn.Layer):
     def __init__(self, num_blocks, width_multiplier=None, override_groups_map=None,
-                 class_dim=1000, with_pool=True, get_features=False):
+                 class_dim=1000, with_pool=True):
         super(RepVGG, self).__init__()
         assert len(width_multiplier) == 4
         self.class_dim = class_dim
         self.with_pool = with_pool
-        self.get_features = get_features
         self.override_groups_map = override_groups_map or dict()
 
         assert 0 not in self.override_groups_map
@@ -159,20 +158,12 @@ class RepVGG(nn.Layer):
         self.stage4 = self._make_stage(
             int(512 * width_multiplier[3]), num_blocks[3], stride=2)
 
-        if get_features:
-            self.feat_channels = [
-                int(64 * width_multiplier[0]),
-                int(128 * width_multiplier[1]),
-                int(256 * width_multiplier[2]),
-                int(512 * width_multiplier[3])
-            ]
-        else:
-            if with_pool:
-                self.gap = nn.AdaptiveAvgPool2D(output_size=1)
+        if with_pool:
+            self.gap = nn.AdaptiveAvgPool2D(output_size=1)
 
-            if class_dim > 0:
-                self.linear = nn.Linear(
-                    int(512 * width_multiplier[3]), class_dim)
+        if class_dim > 0:
+            self.linear = nn.Linear(
+                int(512 * width_multiplier[3]), class_dim)
 
     def _make_stage(self, planes, num_blocks, stride):
         strides = [stride] + [1]*(num_blocks-1)
@@ -186,35 +177,20 @@ class RepVGG(nn.Layer):
         return nn.Sequential(*blocks)
 
     def forward(self, x):
-        if self.get_features:
-            out = self.stage0(x)
+        out = self.stage0(x)
+        out = self.stage1(out)
+        out = self.stage2(out)
+        out = self.stage3(out)
+        out = self.stage4(out)
 
-            feat_list = []
-            out = self.stage1(out)
-            feat_list.append(out)
-            out = self.stage2(out)
-            feat_list.append(out)
-            out = self.stage3(out)
-            feat_list.append(out)
-            out = self.stage4(out)
-            feat_list.append(out)
+        if self.with_pool:
+            out = self.gap(out)
 
-            return feat_list
-        else:
-            out = self.stage0(x)
-            out = self.stage1(out)
-            out = self.stage2(out)
-            out = self.stage3(out)
-            out = self.stage4(out)
+        if self.class_dim > 0:
+            out = paddle.flatten(out, start_axis=1)
+            out = self.linear(out)
 
-            if self.with_pool:
-                out = self.gap(out)
-
-            if self.class_dim > 0:
-                out = paddle.flatten(out, start_axis=1)
-                out = self.linear(out)
-
-            return out
+        return out
 
 
 optional_groupwise_layers = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26]

@@ -94,9 +94,10 @@ class BottleneckBlock(resnet.BottleneckBlock):
 
 
 class RedNet(resnet.ResNet):
-    def __init__(self, block, depth, class_dim=1000, with_pool=True, get_features=False):
+    def __init__(self, block, depth, class_dim=1000, with_pool=True):
         super(RedNet, self).__init__(block=block, depth=50,
-                                     num_classes=class_dim, with_pool=with_pool)
+                                     num_classes=class_dim,
+                                     with_pool=with_pool)
         layer_cfg = {
             26: [1, 2, 4, 1],
             38: [2, 3, 5, 2],
@@ -111,7 +112,7 @@ class RedNet(resnet.ResNet):
         self.relu = None
         self.inplanes = 64
         self.class_dim = class_dim
-        self.get_features = get_features
+
         self.stem = nn.Sequential(
             nn.Sequential(
                 ('conv', nn.Conv2D(
@@ -147,41 +148,23 @@ class RedNet(resnet.ResNet):
         self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
 
-        if get_features:
-            self.fc = None
-            self.avgpool = None
-            self.feat_channels = [256, 512, 1024, 2048]
-
     def forward(self, x):
         x = self.stem(x)
         x = self.maxpool(x)
 
-        if self.get_features:
-            feat_list = []
-            x = self.layer1(x)
-            feat_list.append(x)
-            x = self.layer2(x)
-            feat_list.append(x)
-            x = self.layer3(x)
-            feat_list.append(x)
-            x = self.layer4(x)
-            feat_list.append(x)
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
 
-            return feat_list
-        else:
-            x = self.layer1(x)
-            x = self.layer2(x)
-            x = self.layer3(x)
-            x = self.layer4(x)
+        if self.with_pool:
+            x = self.avgpool(x)
 
-            if self.with_pool:
-                x = self.avgpool(x)
+        if self.class_dim > 0:
+            x = paddle.flatten(x, 1)
+            x = self.fc(x)
 
-            if self.class_dim > 0:
-                x = paddle.flatten(x, 1)
-                x = self.fc(x)
-
-            return x
+        return x
 
 
 def rednet_26(pretrained=False, return_transforms=False, **kwargs):
