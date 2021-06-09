@@ -81,7 +81,7 @@ model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
 # paddlepaddle >= 2.1.0
 '''
 model, val_transforms = paddle.hub.load(
-    'AgentMaker/Paddle-Image-Models:release', 
+    'AgentMaker/Paddle-Image-Models:dev', 
     'rednet_26', 
     source='github', 
     force_reload=False, 
