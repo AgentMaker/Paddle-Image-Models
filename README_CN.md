@@ -46,6 +46,7 @@
           <li><a href="./docs/cn/model_zoo/coat.md">CoaT</a></li>
           <li><a href="./docs/cn/model_zoo/levit.md">LeViT</a></li>
           <li><a href="./docs/cn/model_zoo/lvvit.md">LV ViT</a></li>
+          <li><a href="./docs/cn/model_zoo/t2t.md">T2T ViT</a></li>
           <li><a href="./docs/cn/model_zoo/swin.md">Swin Transformer</a></li>
         </ul>
       </td>
@@ -81,7 +82,7 @@ model, val_transforms = rednet_26(pretrained=True, return_transforms=True)
 # paddlepaddle >= 2.1.0
 '''
 model, val_transforms = paddle.hub.load(
-    'AgentMaker/Paddle-Image-Models:release', 
+    'AgentMaker/Paddle-Image-Models:dev', 
     'rednet_26', 
     source='github', 
     force_reload=False, 
