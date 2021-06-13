@@ -18,3 +18,6 @@ from .rexnet import rexnet_1_0, rexnet_1_3, rexnet_1_5, rexnet_2_0, rexnet_3_0, 
 from .repvgg import repvgg_a0, repvgg_a1, repvgg_a2, repvgg_b0, repvgg_b1, repvgg_b2, repvgg_b3, repvgg_b1g2, repvgg_b1g4, repvgg_b2g4, repvgg_b3g4, RepVGG
 from .hardnet import hardnet_68, hardnet_85, hardnet_39_ds, hardnet_68_ds, HarDNet
 from .rednet import rednet_26, rednet_38, rednet_50, rednet_101, rednet_152, RedNet
+
+# MLP
+from .mixer import mixer_b, mixer_l, MlpMixer
