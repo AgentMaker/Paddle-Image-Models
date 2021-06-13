@@ -23,6 +23,7 @@ urls = {
     "coat_m": r"https://bj.bcebos.com/v1/ai-studio-online/ee967c7384e24ffb91ecc72a3bf8e79dea2be6a74f8446719822d6772cfdcd2f?responseContentDisposition=attachment%3B%20filename%3Dcoat_mini.pdparams",
     "coat_lite_ti": r"https://bj.bcebos.com/v1/ai-studio-online/e33788c2a6e540b3aa92b169ed0ea2c61eff43479ff644d98cdb767f33bcc199?responseContentDisposition=attachment%3B%20filename%3Dcoat_lite_tiny.pdparams",
     "coat_lite_m": r"https://bj.bcebos.com/v1/ai-studio-online/c303c26af4974cfb97bd9b9dc400a4d5981c43fc149a401e937cd0186f31b92c?responseContentDisposition=attachment%3B%20filename%3Dcoat_lite_mini.pdparams",
+    "coat_lite_s": r"https://bj.bcebos.com/v1/ai-studio-online/183aa1b4dad84887a31ea61ef3f7576d4e9a18f93db74136b16e7f8ec31af1e0?responseContentDisposition=attachment%3B%20filename%3Dcoat_lite_small.pdparams",
 }
 
 
@@ -866,6 +867,24 @@ def coat_lite_m(pretrained=False, return_transforms=False, **kwargs):
     )
     if pretrained:
         model = load_model(model, urls["coat_lite_m"])
+    if return_transforms:
+        return model, transforms
+    else:
+        return model
+
+
+def coat_lite_s(pretrained=False, return_transforms=False, **kwargs):
+    model = CoaT(
+        patch_size=4,
+        embed_dims=[64, 128, 320, 512],
+        serial_depths=[3, 4, 6, 3],
+        parallel_depth=0,
+        num_heads=8,
+        mlp_ratios=[8, 8, 4, 4],
+        **kwargs,
+    )
+    if pretrained:
+        model = load_model(model, urls["coat_lite_s"])
     if return_transforms:
         return model, transforms
     else:
