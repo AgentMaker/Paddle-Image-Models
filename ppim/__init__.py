@@ -1,1 +1,1 @@
-from .models import *
+from ppim.models import *
