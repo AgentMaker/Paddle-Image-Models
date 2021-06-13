@@ -7,19 +7,21 @@ from ppim.models.common import kaiming_normal_, zeros_, ones_
 
 
 def get_transforms(interpolation):
-    transforms = T.Compose([
-        T.Resize(256, interpolation=interpolation),
-        T.CenterCrop(224),
-        T.ToTensor(),
-        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
+    transforms = T.Compose(
+        [
+            T.Resize(256, interpolation=interpolation),
+            T.CenterCrop(224),
+            T.ToTensor(),
+            T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    )
     return transforms
 
 
 urls = {
-    'cdnv2_a': r'https://bj.bcebos.com/v1/ai-studio-online/6ccaae861d004593977e2e3f4d3ad8c9a96e42bbb83347afb58f0d8858abc926?responseContentDisposition=attachment%3B%20filename%3Dcdnv2_a.pdparams',
-    'cdnv2_b': r'https://bj.bcebos.com/v1/ai-studio-online/68dbd2a319f34792ae986a0afe6a1db8a1524c0409b4407d8c4c9d699f61d865?responseContentDisposition=attachment%3B%20filename%3Dcdnv2_b.pdparams',
-    'cdnv2_c': r'https://bj.bcebos.com/v1/ai-studio-online/d93f60cabe864567b7b8202e614442fbc65b8cbf7ce54b4f98746bc0072832b3?responseContentDisposition=attachment%3B%20filename%3Dcdnv2_c.pdparams'
+    "cdnv2_a": r"https://bj.bcebos.com/v1/ai-studio-online/6ccaae861d004593977e2e3f4d3ad8c9a96e42bbb83347afb58f0d8858abc926?responseContentDisposition=attachment%3B%20filename%3Dcdnv2_a.pdparams",
+    "cdnv2_b": r"https://bj.bcebos.com/v1/ai-studio-online/68dbd2a319f34792ae986a0afe6a1db8a1524c0409b4407d8c4c9d699f61d865?responseContentDisposition=attachment%3B%20filename%3Dcdnv2_b.pdparams",
+    "cdnv2_c": r"https://bj.bcebos.com/v1/ai-studio-online/d93f60cabe864567b7b8202e614442fbc65b8cbf7ce54b4f98746bc0072832b3?responseContentDisposition=attachment%3B%20filename%3Dcdnv2_c.pdparams",
 }
 
 
@@ -31,7 +33,7 @@ class SELayer(nn.Layer):
             nn.Linear(inplanes, inplanes // reduction, bias_attr=False),
             nn.ReLU(),
             nn.Linear(inplanes // reduction, inplanes, bias_attr=False),
-            nn.Sigmoid()
+            nn.Sigmoid(),
         )
 
     def forward(self, x):
@@ -51,22 +53,37 @@ class HS(nn.Layer):
 
 
 class Conv(nn.Sequential):
-    def __init__(self, in_channels, out_channels, kernel_size,
-                 stride=1, padding=0, groups=1, activation='ReLU', bn_momentum=0.9):
+    def __init__(
+        self,
+        in_channels,
+        out_channels,
+        kernel_size,
+        stride=1,
+        padding=0,
+        groups=1,
+        activation="ReLU",
+        bn_momentum=0.9,
+    ):
         super(Conv, self).__init__()
-        self.add_sublayer('norm', nn.BatchNorm2D(
-            in_channels, momentum=bn_momentum))
-        if activation == 'ReLU':
-            self.add_sublayer('activation', nn.ReLU())
-        elif activation == 'HS':
-            self.add_sublayer('activation', HS())
+        self.add_sublayer("norm", nn.BatchNorm2D(in_channels, momentum=bn_momentum))
+        if activation == "ReLU":
+            self.add_sublayer("activation", nn.ReLU())
+        elif activation == "HS":
+            self.add_sublayer("activation", HS())
         else:
             raise NotImplementedError
-        self.add_sublayer('conv', nn.Conv2D(in_channels, out_channels,
-                                            kernel_size=kernel_size,
-                                            stride=stride,
-                                            padding=padding, bias_attr=False,
-                                            groups=groups))
+        self.add_sublayer(
+            "conv",
+            nn.Conv2D(
+                in_channels,
+                out_channels,
+                kernel_size=kernel_size,
+                stride=stride,
+                padding=padding,
+                bias_attr=False,
+                groups=groups,
+            ),
+        )
 
 
 def ShuffleLayer(x, groups):
@@ -94,27 +111,37 @@ def ShuffleLayerTrans(x, groups):
 
 
 class CondenseLGC(nn.Layer):
-    def __init__(self, in_channels, out_channels, kernel_size,
-                 stride=1, padding=0, groups=1, activation='ReLU'):
+    def __init__(
+        self,
+        in_channels,
+        out_channels,
+        kernel_size,
+        stride=1,
+        padding=0,
+        groups=1,
+        activation="ReLU",
+    ):
         super(CondenseLGC, self).__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.groups = groups
         self.norm = nn.BatchNorm2D(self.in_channels)
-        if activation == 'ReLU':
+        if activation == "ReLU":
             self.activation = nn.ReLU()
-        elif activation == 'HS':
+        elif activation == "HS":
             self.activation = HS()
         else:
             raise NotImplementedError
-        self.conv = nn.Conv2D(self.in_channels, self.out_channels,
-                              kernel_size=kernel_size,
-                              stride=stride,
-                              padding=padding,
-                              groups=self.groups,
-                              bias_attr=False)
-        self.register_buffer('index', paddle.zeros(
-            (self.in_channels,), dtype='int64'))
+        self.conv = nn.Conv2D(
+            self.in_channels,
+            self.out_channels,
+            kernel_size=kernel_size,
+            stride=stride,
+            padding=padding,
+            groups=self.groups,
+            bias_attr=False,
+        )
+        self.register_buffer("index", paddle.zeros((self.in_channels,), dtype="int64"))
 
     def forward(self, x):
         x = paddle.index_select(x, self.index, axis=1)
@@ -126,27 +153,39 @@ class CondenseLGC(nn.Layer):
 
 
 class CondenseSFR(nn.Layer):
-    def __init__(self, in_channels, out_channels, kernel_size,
-                 stride=1, padding=0, groups=1, activation='ReLU'):
+    def __init__(
+        self,
+        in_channels,
+        out_channels,
+        kernel_size,
+        stride=1,
+        padding=0,
+        groups=1,
+        activation="ReLU",
+    ):
         super(CondenseSFR, self).__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.groups = groups
         self.norm = nn.BatchNorm2D(self.in_channels)
-        if activation == 'ReLU':
+        if activation == "ReLU":
             self.activation = nn.ReLU()
-        elif activation == 'HS':
+        elif activation == "HS":
             self.activation = HS()
         else:
             raise NotImplementedError
-        self.conv = nn.Conv2D(self.in_channels, self.out_channels,
-                              kernel_size=kernel_size,
-                              padding=padding,
-                              groups=self.groups,
-                              bias_attr=False,
-                              stride=stride)
-        self.register_buffer('index', paddle.zeros(
-            (self.out_channels, self.out_channels)))
+        self.conv = nn.Conv2D(
+            self.in_channels,
+            self.out_channels,
+            kernel_size=kernel_size,
+            padding=padding,
+            groups=self.groups,
+            bias_attr=False,
+            stride=stride,
+        )
+        self.register_buffer(
+            "index", paddle.zeros((self.out_channels, self.out_channels))
+        )
 
     def forward(self, x):
         x = self.norm(x)
@@ -164,24 +203,47 @@ class CondenseSFR(nn.Layer):
 
 
 class _SFR_DenseLayer(nn.Layer):
-    def __init__(self, in_channels, growth_rate, group_1x1, group_3x3,
-                 group_trans, bottleneck, activation, use_se=False):
+    def __init__(
+        self,
+        in_channels,
+        growth_rate,
+        group_1x1,
+        group_3x3,
+        group_trans,
+        bottleneck,
+        activation,
+        use_se=False,
+    ):
         super(_SFR_DenseLayer, self).__init__()
         self.group_1x1 = group_1x1
         self.group_3x3 = group_3x3
         self.group_trans = group_trans
         self.use_se = use_se
         # 1x1 conv i --> b*k
-        self.conv_1 = CondenseLGC(in_channels, bottleneck * growth_rate,
-                                  kernel_size=1, groups=self.group_1x1,
-                                  activation=activation)
+        self.conv_1 = CondenseLGC(
+            in_channels,
+            bottleneck * growth_rate,
+            kernel_size=1,
+            groups=self.group_1x1,
+            activation=activation,
+        )
         # 3x3 conv b*k --> k
-        self.conv_2 = Conv(bottleneck * growth_rate, growth_rate,
-                           kernel_size=3, padding=1, groups=self.group_3x3,
-                           activation=activation)
+        self.conv_2 = Conv(
+            bottleneck * growth_rate,
+            growth_rate,
+            kernel_size=3,
+            padding=1,
+            groups=self.group_3x3,
+            activation=activation,
+        )
         # 1x1 res conv k(8-16-32)--> i (k*l)
-        self.sfr = CondenseSFR(growth_rate, in_channels, kernel_size=1,
-                               groups=self.group_trans, activation=activation)
+        self.sfr = CondenseSFR(
+            growth_rate,
+            in_channels,
+            kernel_size=1,
+            groups=self.group_trans,
+            activation=activation,
+        )
         if self.use_se:
             self.se = SELayer(inplanes=growth_rate, reduction=1)
 
@@ -197,13 +259,31 @@ class _SFR_DenseLayer(nn.Layer):
 
 
 class _SFR_DenseBlock(nn.Sequential):
-    def __init__(self, num_layers, in_channels, growth_rate, group_1x1,
-                 group_3x3, group_trans, bottleneck, activation, use_se):
+    def __init__(
+        self,
+        num_layers,
+        in_channels,
+        growth_rate,
+        group_1x1,
+        group_3x3,
+        group_trans,
+        bottleneck,
+        activation,
+        use_se,
+    ):
         super(_SFR_DenseBlock, self).__init__()
         for i in range(num_layers):
             layer = _SFR_DenseLayer(
-                in_channels + i * growth_rate, growth_rate, group_1x1, group_3x3, group_trans, bottleneck, activation, use_se)
-            self.add_sublayer('denselayer_%d' % (i + 1), layer)
+                in_channels + i * growth_rate,
+                growth_rate,
+                group_1x1,
+                group_3x3,
+                group_trans,
+                bottleneck,
+                activation,
+                use_se,
+            )
+            self.add_sublayer("denselayer_%d" % (i + 1), layer)
 
 
 class _Transition(nn.Layer):
@@ -217,8 +297,20 @@ class _Transition(nn.Layer):
 
 
 class CondenseNetV2(nn.Layer):
-    def __init__(self, stages, growth, HS_start_block, SE_start_block, fc_channel, group_1x1,
-                 group_3x3, group_trans, bottleneck, last_se_reduction, class_dim=1000):
+    def __init__(
+        self,
+        stages,
+        growth,
+        HS_start_block,
+        SE_start_block,
+        fc_channel,
+        group_1x1,
+        group_3x3,
+        group_trans,
+        bottleneck,
+        last_se_reduction,
+        class_dim=1000,
+    ):
         super(CondenseNetV2, self).__init__()
         self.stages = stages
         self.growth = growth
@@ -234,17 +326,24 @@ class CondenseNetV2(nn.Layer):
         # Initial nChannels should be 3
         self.num_features = 2 * self.growth[0]
         # Dense-block 1 (224x224)
-        self.features.add_sublayer('init_conv', nn.Conv2D(3, self.num_features,
-                                                          kernel_size=3,
-                                                          stride=self.init_stride,
-                                                          padding=1,
-                                                          bias_attr=False))
+        self.features.add_sublayer(
+            "init_conv",
+            nn.Conv2D(
+                3,
+                self.num_features,
+                kernel_size=3,
+                stride=self.init_stride,
+                padding=1,
+                bias_attr=False,
+            ),
+        )
         for i in range(len(self.stages)):
-            activation = 'HS' if i >= HS_start_block else 'ReLU'
+            activation = "HS" if i >= HS_start_block else "ReLU"
             use_se = True if i >= SE_start_block else False
             # Dense-block i
-            self.add_block(i, group_1x1, group_3x3, group_trans,
-                           bottleneck, activation, use_se)
+            self.add_block(
+                i, group_1x1, group_3x3, group_trans, bottleneck, activation, use_se
+            )
 
         self.fc = nn.Linear(self.num_features, fc_channel)
         self.fc_act = HS()
@@ -254,9 +353,11 @@ class CondenseNetV2(nn.Layer):
             self.classifier = nn.Linear(fc_channel, class_dim)
         self._initialize()
 
-    def add_block(self, i, group_1x1, group_3x3, group_trans, bottleneck, activation, use_se):
+    def add_block(
+        self, i, group_1x1, group_3x3, group_trans, bottleneck, activation, use_se
+    ):
         # Check if ith is the last one
-        last = (i == len(self.stages) - 1)
+        last = i == len(self.stages) - 1
         block = _SFR_DenseBlock(
             num_layers=self.stages[i],
             in_channels=self.num_features,
@@ -268,21 +369,19 @@ class CondenseNetV2(nn.Layer):
             activation=activation,
             use_se=use_se,
         )
-        self.features.add_sublayer('denseblock_%d' % (i + 1), block)
+        self.features.add_sublayer("denseblock_%d" % (i + 1), block)
         self.num_features += self.stages[i] * self.growth[i]
         if not last:
             trans = _Transition()
-            self.features.add_sublayer('transition_%d' % (i + 1), trans)
+            self.features.add_sublayer("transition_%d" % (i + 1), trans)
         else:
-            self.features.add_sublayer('norm_last',
-                                       nn.BatchNorm2D(self.num_features))
-            self.features.add_sublayer('relu_last',
-                                       nn.ReLU())
-            self.features.add_sublayer('pool_last',
-                                       nn.AvgPool2D(self.pool_size))
+            self.features.add_sublayer("norm_last", nn.BatchNorm2D(self.num_features))
+            self.features.add_sublayer("relu_last", nn.ReLU())
+            self.features.add_sublayer("pool_last", nn.AvgPool2D(self.pool_size))
             # if useSE:
-            self.features.add_sublayer('se_last',
-                                       SELayer(self.num_features, reduction=self.last_se_reduction))
+            self.features.add_sublayer(
+                "se_last", SELayer(self.num_features, reduction=self.last_se_reduction)
+            )
 
     def forward(self, x):
         features = self.features(x)
@@ -320,7 +419,7 @@ def cdnv2_a(pretrained=False, return_transforms=False, **kwargs):
         **kwargs
     )
     if pretrained:
-        model = load_model(model, urls['cdnv2_a'])
+        model = load_model(model, urls["cdnv2_a"])
     if return_transforms:
         return model, transforms
     else:
@@ -342,7 +441,7 @@ def cdnv2_b(pretrained=False, return_transforms=False, **kwargs):
         **kwargs
     )
     if pretrained:
-        model = load_model(model, urls['cdnv2_b'])
+        model = load_model(model, urls["cdnv2_b"])
     if return_transforms:
         return model, transforms
     else:
@@ -364,7 +463,7 @@ def cdnv2_c(pretrained=False, return_transforms=False, **kwargs):
         **kwargs
     )
     if pretrained:
-        model = load_model(model, urls['cdnv2_c'])
+        model = load_model(model, urls["cdnv2_c"])
     if return_transforms:
         return model, transforms
     else:

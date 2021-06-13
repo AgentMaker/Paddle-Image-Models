@@ -1,6 +1,7 @@
 # Transformer
 from .vit import VisionTransformer
 from .tnt import tnt_s, TNT
+from .t2t import t2t_vit_7, t2t_vit_10, t2t_vit_12, t2t_vit_14, t2t_vit_19, t2t_vit_24, t2t_vit_t_14, t2t_vit_t_19, t2t_vit_t_24, t2t_vit_14_384, t2t_vit_24_token_labeling
 from .pvt import pvt_ti, pvt_s, pvt_m, pvt_l, PyramidVisionTransformer
 from .pit import pit_ti, pit_s, pit_xs, pit_b, pit_ti_distilled, pit_s_distilled, pit_xs_distilled, pit_b_distilled, PoolingTransformer, DistilledPoolingTransformer
 from .coat import coat_ti, coat_m, coat_lite_ti, coat_lite_m, CoaT
@@ -16,6 +17,4 @@ from .cdnv2 import cdnv2_a, cdnv2_b, cdnv2_c, CondenseNetV2
 from .rexnet import rexnet_1_0, rexnet_1_3, rexnet_1_5, rexnet_2_0, rexnet_3_0, ReXNet
 from .repvgg import repvgg_a0, repvgg_a1, repvgg_a2, repvgg_b0, repvgg_b1, repvgg_b2, repvgg_b3, repvgg_b1g2, repvgg_b1g4, repvgg_b2g4, repvgg_b3g4, RepVGG
 from .hardnet import hardnet_68, hardnet_85, hardnet_39_ds, hardnet_68_ds, HarDNet
-
-# Involution
 from .rednet import rednet_26, rednet_38, rednet_50, rednet_101, rednet_152, RedNet

@@ -11,21 +11,25 @@ from ppim.models.common import DropPath, Identity
 from ppim.models.common import trunc_normal_, zeros_, ones_
 
 
-transforms = T.Compose([
-    T.Resize(248, interpolation='bicubic'),
-    T.CenterCrop(224),
-    T.ToTensor(),
-    T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
-])
+transforms = T.Compose(
+    [
+        T.Resize(248, interpolation="bicubic"),
+        T.CenterCrop(224),
+        T.ToTensor(),
+        T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
+    ]
+)
 
 
 urls = {
-    'tnt_s': r'https://bj.bcebos.com/v1/ai-studio-online/e8777c29886a47e896f23a26d84917ee51efd05d341a403baed9107160857636?responseContentDisposition=attachment%3B%20filename%3Dtnt_s.pdparams'
+    "tnt_s": r"https://bj.bcebos.com/v1/ai-studio-online/e8777c29886a47e896f23a26d84917ee51efd05d341a403baed9107160857636?responseContentDisposition=attachment%3B%20filename%3Dtnt_s.pdparams"
 }
 
 
 class Attention(nn.Layer):
-    def __init__(self, dim, hidden_dim, num_heads=8, qkv_bias=False, attn_drop=0., proj_drop=0.):
+    def __init__(
+        self, dim, hidden_dim, num_heads=8, qkv_bias=False, attn_drop=0.0, proj_drop=0.0
+    ):
         super().__init__()
         self.hidden_dim = hidden_dim
         self.num_heads = num_heads
@@ -41,11 +45,13 @@ class Attention(nn.Layer):
 
     def forward(self, x):
         B, N, C = x.shape
-        qk = self.qk(x).reshape((B, N, 2, self.num_heads,
-                                 self.head_dim)).transpose((2, 0, 3, 1, 4))
+        qk = (
+            self.qk(x)
+            .reshape((B, N, 2, self.num_heads, self.head_dim))
+            .transpose((2, 0, 3, 1, 4))
+        )
         q, k = qk[0], qk[1]
-        v = self.v(x).reshape((B, N, self.num_heads, -1)
-                              ).transpose((0, 2, 1, 3))
+        v = self.v(x).reshape((B, N, self.num_heads, -1)).transpose((0, 2, 1, 3))
 
         attn = (q @ k.transpose((0, 1, 3, 2))) * self.scale
         attn = nn.functional.softmax(attn, axis=-1)
@@ -58,48 +64,82 @@ class Attention(nn.Layer):
 
 
 class Block(nn.Layer):
-    def __init__(self, dim, in_dim, num_pixel, num_heads=12, in_num_head=4, mlp_ratio=4.,
-                 qkv_bias=False, drop=0., attn_drop=0., drop_path=0., act_layer=nn.GELU,
-                 norm_layer=nn.LayerNorm):
+    def __init__(
+        self,
+        dim,
+        in_dim,
+        num_pixel,
+        num_heads=12,
+        in_num_head=4,
+        mlp_ratio=4.0,
+        qkv_bias=False,
+        drop=0.0,
+        attn_drop=0.0,
+        drop_path=0.0,
+        act_layer=nn.GELU,
+        norm_layer=nn.LayerNorm,
+    ):
         super().__init__()
         # Inner transformer
         self.norm_in = norm_layer(in_dim)
         self.attn_in = Attention(
-            in_dim, in_dim, num_heads=in_num_head, qkv_bias=qkv_bias,
-            attn_drop=attn_drop, proj_drop=drop)
+            in_dim,
+            in_dim,
+            num_heads=in_num_head,
+            qkv_bias=qkv_bias,
+            attn_drop=attn_drop,
+            proj_drop=drop,
+        )
 
         self.norm_mlp_in = norm_layer(in_dim)
-        self.mlp_in = Mlp(in_features=in_dim, hidden_features=int(in_dim * 4),
-                          out_features=in_dim, act_layer=act_layer, drop=drop)
+        self.mlp_in = Mlp(
+            in_features=in_dim,
+            hidden_features=int(in_dim * 4),
+            out_features=in_dim,
+            act_layer=act_layer,
+            drop=drop,
+        )
 
         self.norm1_proj = norm_layer(in_dim)
         self.proj = nn.Linear(in_dim * num_pixel, dim)
         # Outer transformer
         self.norm_out = norm_layer(dim)
         self.attn_out = Attention(
-            dim, dim, num_heads=num_heads, qkv_bias=qkv_bias,
-            attn_drop=attn_drop, proj_drop=drop)
-        self.drop_path = DropPath(
-            drop_path) if drop_path > 0. else Identity()
+            dim,
+            dim,
+            num_heads=num_heads,
+            qkv_bias=qkv_bias,
+            attn_drop=attn_drop,
+            proj_drop=drop,
+        )
+        self.drop_path = DropPath(drop_path) if drop_path > 0.0 else Identity()
 
         self.norm_mlp = norm_layer(dim)
-        self.mlp = Mlp(in_features=dim, hidden_features=int(dim * mlp_ratio),
-                       out_features=dim, act_layer=act_layer, drop=drop)
+        self.mlp = Mlp(
+            in_features=dim,
+            hidden_features=int(dim * mlp_ratio),
+            out_features=dim,
+            act_layer=act_layer,
+            drop=drop,
+        )
 
     def forward(self, pixel_embed, patch_embed):
         # inner
-        pixel_embed = pixel_embed + \
-            self.drop_path(self.attn_in(self.norm_in(pixel_embed)))
-        pixel_embed = pixel_embed + \
-            self.drop_path(self.mlp_in(self.norm_mlp_in(pixel_embed)))
+        pixel_embed = pixel_embed + self.drop_path(
+            self.attn_in(self.norm_in(pixel_embed))
+        )
+        pixel_embed = pixel_embed + self.drop_path(
+            self.mlp_in(self.norm_mlp_in(pixel_embed))
+        )
         # outer
         B, N, C = patch_embed.shape
-        patch_embed[:, 1:] = patch_embed[:, 1:] + \
-            self.proj(self.norm1_proj(pixel_embed).reshape((B, N - 1, -1)))
-        patch_embed = patch_embed + \
-            self.drop_path(self.attn_out(self.norm_out(patch_embed)))
-        patch_embed = patch_embed + \
-            self.drop_path(self.mlp(self.norm_mlp(patch_embed)))
+        patch_embed[:, 1:] = patch_embed[:, 1:] + self.proj(
+            self.norm1_proj(pixel_embed).reshape((B, N - 1, -1))
+        )
+        patch_embed = patch_embed + self.drop_path(
+            self.attn_out(self.norm_out(patch_embed))
+        )
+        patch_embed = patch_embed + self.drop_path(self.mlp(self.norm_mlp(patch_embed)))
         return pixel_embed, patch_embed
 
 
@@ -113,35 +153,64 @@ class PixelEmbed(nn.Layer):
         new_patch_size = math.ceil(patch_size / stride)
         self.new_patch_size = new_patch_size
 
-        self.proj = nn.Conv2D(in_chans, self.in_dim,
-                              kernel_size=7, padding=3, stride=stride)
+        self.proj = nn.Conv2D(
+            in_chans, self.in_dim, kernel_size=7, padding=3, stride=stride
+        )
 
     def forward(self, x, pixel_pos):
         B, C, H, W = x.shape
-        assert H == self.img_size and W == self.img_size, \
-            f"Input image size ({H}*{W}) doesn't match model ({self.img_size}*{self.img_size})."
+        assert (
+            H == self.img_size and W == self.img_size
+        ), f"Input image size ({H}*{W}) doesn't match model ({self.img_size}*{self.img_size})."
         x = self.proj(x)
         x = nn.functional.unfold(
-            x, kernel_sizes=self.new_patch_size, strides=self.new_patch_size)
-        x = x.transpose((0, 2, 1)).reshape((B * self.num_patches,
-                                            self.in_dim, self.new_patch_size, self.new_patch_size))
+            x, kernel_sizes=self.new_patch_size, strides=self.new_patch_size
+        )
+        x = x.transpose((0, 2, 1)).reshape(
+            (
+                B * self.num_patches,
+                self.in_dim,
+                self.new_patch_size,
+                self.new_patch_size,
+            )
+        )
         x = x + pixel_pos
-        x = x.reshape((B * self.num_patches, self.in_dim, -1)
-                      ).transpose((0, 2, 1))
+        x = x.reshape((B * self.num_patches, self.in_dim, -1)).transpose((0, 2, 1))
         return x
 
 
 class TNT(nn.Layer):
-    def __init__(self, img_size=224, patch_size=16, in_chans=3, embed_dim=768, in_dim=48, depth=12,
-                 num_heads=12, in_num_head=4, mlp_ratio=4., qkv_bias=False, drop_rate=0., attn_drop_rate=0.,
-                 drop_path_rate=0., norm_layer=nn.LayerNorm, first_stride=4, class_dim=1000):
+    def __init__(
+        self,
+        img_size=224,
+        patch_size=16,
+        in_chans=3,
+        embed_dim=768,
+        in_dim=48,
+        depth=12,
+        num_heads=12,
+        in_num_head=4,
+        mlp_ratio=4.0,
+        qkv_bias=False,
+        drop_rate=0.0,
+        attn_drop_rate=0.0,
+        drop_path_rate=0.0,
+        norm_layer=nn.LayerNorm,
+        first_stride=4,
+        class_dim=1000,
+    ):
         super().__init__()
         self.class_dim = class_dim
         # num_features for consistency with other models
         self.num_features = self.embed_dim = embed_dim
 
         self.pixel_embed = PixelEmbed(
-            img_size=img_size, patch_size=patch_size, in_chans=in_chans, in_dim=in_dim, stride=first_stride)
+            img_size=img_size,
+            patch_size=patch_size,
+            in_chans=in_chans,
+            in_dim=in_dim,
+            stride=first_stride,
+        )
         num_patches = self.pixel_embed.num_patches
         self.num_patches = num_patches
         new_patch_size = self.pixel_embed.new_patch_size
@@ -152,15 +221,19 @@ class TNT(nn.Layer):
         self.norm2_proj = norm_layer(embed_dim)
 
         self.cls_token = self.create_parameter(
-            shape=(1, 1, embed_dim), default_initializer=zeros_)
+            shape=(1, 1, embed_dim), default_initializer=zeros_
+        )
         self.add_parameter("cls_token", self.cls_token)
 
         self.patch_pos = self.create_parameter(
-            shape=(1, num_patches + 1, embed_dim), default_initializer=zeros_)
+            shape=(1, num_patches + 1, embed_dim), default_initializer=zeros_
+        )
         self.add_parameter("patch_pos", self.patch_pos)
 
         self.pixel_pos = self.create_parameter(
-            shape=(1, in_dim, new_patch_size, new_patch_size), default_initializer=zeros_)
+            shape=(1, in_dim, new_patch_size, new_patch_size),
+            default_initializer=zeros_,
+        )
         self.add_parameter("pixel_pos", self.pixel_pos)
 
         self.pos_drop = nn.Dropout(p=drop_rate)
@@ -170,10 +243,21 @@ class TNT(nn.Layer):
 
         blocks = []
         for i in range(depth):
-            blocks.append(Block(
-                dim=embed_dim, in_dim=in_dim, num_pixel=num_pixel, num_heads=num_heads, in_num_head=in_num_head,
-                mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, drop=drop_rate, attn_drop=attn_drop_rate,
-                drop_path=dpr[i], norm_layer=norm_layer))
+            blocks.append(
+                Block(
+                    dim=embed_dim,
+                    in_dim=in_dim,
+                    num_pixel=num_pixel,
+                    num_heads=num_heads,
+                    in_num_head=in_num_head,
+                    mlp_ratio=mlp_ratio,
+                    qkv_bias=qkv_bias,
+                    drop=drop_rate,
+                    attn_drop=attn_drop_rate,
+                    drop_path=dpr[i],
+                    norm_layer=norm_layer,
+                )
+            )
         self.blocks = nn.LayerList(blocks)
         self.norm = norm_layer(embed_dim)
 
@@ -198,10 +282,12 @@ class TNT(nn.Layer):
         B = x.shape[0]
         pixel_embed = self.pixel_embed(x, self.pixel_pos)
 
-        patch_embed = self.norm2_proj(self.proj(self.norm1_proj(
-            pixel_embed.reshape((B, self.num_patches, -1)))))
+        patch_embed = self.norm2_proj(
+            self.proj(self.norm1_proj(pixel_embed.reshape((B, self.num_patches, -1))))
+        )
         patch_embed = paddle.concat(
-            (self.cls_token.expand((B, -1, -1)), patch_embed), axis=1)
+            (self.cls_token.expand((B, -1, -1)), patch_embed), axis=1
+        )
         patch_embed = patch_embed + self.patch_pos
         patch_embed = self.pos_drop(patch_embed)
 
@@ -228,10 +314,10 @@ def tnt_s(pretrained=False, return_transforms=False, **kwargs):
         num_heads=6,
         in_num_head=4,
         qkv_bias=False,
-        **kwargs
+        **kwargs,
     )
     if pretrained:
-        model = load_model(model, urls['tnt_s'])
+        model = load_model(model, urls["tnt_s"])
     if return_transforms:
         return model, transforms
     else:

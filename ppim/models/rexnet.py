@@ -7,32 +7,45 @@ from math import ceil
 from ppim.models.common import load_model
 
 
-transforms = T.Compose([
-    T.Resize(256, interpolation='bicubic'),
-    T.CenterCrop(224),
-    T.ToTensor(),
-    T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-])
+transforms = T.Compose(
+    [
+        T.Resize(256, interpolation="bicubic"),
+        T.CenterCrop(224),
+        T.ToTensor(),
+        T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ]
+)
 
 
 urls = {
-    'rexnet_1_0': r'https://bj.bcebos.com/v1/ai-studio-online/6c890dd95dfc4e388335adfa298163d3ab413cca558e4abe966d52cb5c3aee31?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.0x.pdparams',
-    'rexnet_1_3': r'https://bj.bcebos.com/v1/ai-studio-online/41a4cc3e6d9545b9b69b4782cafa01147eb7661ec6af4f43841adc734149b3a7?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.3x.pdparams',
-    'rexnet_1_5': r'https://bj.bcebos.com/v1/ai-studio-online/20b131a7cb1840b5aed37c512b2665fb20c72eebe4344da5a3c6f0ab0592a323?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.5x.pdparams',
-    'rexnet_2_0': r'https://bj.bcebos.com/v1/ai-studio-online/b4df9f7be43446b0952a25ee6e83f2e443e3b879a00046f6bb33278319cb5fd0?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_2.0x.pdparams',
-    'rexnet_3_0': r'https://bj.bcebos.com/v1/ai-studio-online/9663f0570f0a4e4a8dde0b9799c539f5e22f46917d3d4e5a9d566cd213032d25?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_3.0x.pdparams'
+    "rexnet_1_0": r"https://bj.bcebos.com/v1/ai-studio-online/6c890dd95dfc4e388335adfa298163d3ab413cca558e4abe966d52cb5c3aee31?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.0x.pdparams",
+    "rexnet_1_3": r"https://bj.bcebos.com/v1/ai-studio-online/41a4cc3e6d9545b9b69b4782cafa01147eb7661ec6af4f43841adc734149b3a7?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.3x.pdparams",
+    "rexnet_1_5": r"https://bj.bcebos.com/v1/ai-studio-online/20b131a7cb1840b5aed37c512b2665fb20c72eebe4344da5a3c6f0ab0592a323?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_1.5x.pdparams",
+    "rexnet_2_0": r"https://bj.bcebos.com/v1/ai-studio-online/b4df9f7be43446b0952a25ee6e83f2e443e3b879a00046f6bb33278319cb5fd0?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_2.0x.pdparams",
+    "rexnet_3_0": r"https://bj.bcebos.com/v1/ai-studio-online/9663f0570f0a4e4a8dde0b9799c539f5e22f46917d3d4e5a9d566cd213032d25?responseContentDisposition=attachment%3B%20filename%3Drexnetv1_3.0x.pdparams",
 }
 
 
-def ConvBN(out, in_channels, channels, kernel=1, stride=1, pad=0, num_group=1, act=None):
-    out.append(nn.Conv2D(in_channels, channels, kernel,
-                         stride, pad, groups=num_group, bias_attr=False))
+def ConvBN(
+    out, in_channels, channels, kernel=1, stride=1, pad=0, num_group=1, act=None
+):
+    out.append(
+        nn.Conv2D(
+            in_channels,
+            channels,
+            kernel,
+            stride,
+            pad,
+            groups=num_group,
+            bias_attr=False,
+        )
+    )
     out.append(nn.BatchNorm2D(channels))
-    if act == 'swish':
+    if act == "swish":
         out.append(Swish())
-    elif act == 'relu':
+    elif act == "relu":
         out.append(nn.ReLU())
-    elif act == 'relu6':
+    elif act == "relu6":
         out.append(nn.ReLU6())
 
 
@@ -49,13 +62,11 @@ class SE(nn.Layer):
         super(SE, self).__init__()
         self.avg_pool = nn.AdaptiveAvgPool2D(1)
         self.fc = nn.Sequential(
-            nn.Conv2D(in_channels, channels // se_ratio,
-                      kernel_size=1, padding=0),
+            nn.Conv2D(in_channels, channels // se_ratio, kernel_size=1, padding=0),
             nn.BatchNorm2D(channels // se_ratio),
             nn.ReLU(),
-            nn.Conv2D(channels // se_ratio, channels,
-                      kernel_size=1, padding=0),
-            nn.Sigmoid()
+            nn.Conv2D(channels // se_ratio, channels, kernel_size=1, padding=0),
+            nn.Sigmoid(),
         )
 
     def forward(self, x):
@@ -74,13 +85,19 @@ class LinearBottleneck(nn.Layer):
         out = []
         if t != 1:
             dw_channels = in_channels * t
-            ConvBN(out, in_channels=in_channels,
-                   channels=dw_channels, act='swish')
+            ConvBN(out, in_channels=in_channels, channels=dw_channels, act="swish")
         else:
             dw_channels = in_channels
 
-        ConvBN(out, in_channels=dw_channels, channels=dw_channels, kernel=3, stride=stride, pad=1,
-               num_group=dw_channels)
+        ConvBN(
+            out,
+            in_channels=dw_channels,
+            channels=dw_channels,
+            kernel=3,
+            stride=stride,
+            pad=1,
+            num_group=dw_channels,
+        )
 
         if use_se:
             out.append(SE(dw_channels, dw_channels, se_ratio))
@@ -92,14 +109,24 @@ class LinearBottleneck(nn.Layer):
     def forward(self, x):
         out = self.out(x)
         if self.use_shortcut:
-            out[:, 0:self.in_channels] += x
+            out[:, 0 : self.in_channels] += x
 
         return out
 
 
 class ReXNet(nn.Layer):
-    def __init__(self, input_ch=16, final_ch=180, width_mult=1.0, depth_mult=1.0, use_se=True,
-                 se_ratio=12, dropout_ratio=0.2, class_dim=1000, with_pool=True):
+    def __init__(
+        self,
+        input_ch=16,
+        final_ch=180,
+        width_mult=1.0,
+        depth_mult=1.0,
+        use_se=True,
+        se_ratio=12,
+        dropout_ratio=0.2,
+        class_dim=1000,
+        with_pool=True,
+    ):
         super(ReXNet, self).__init__()
         self.class_dim = class_dim
         self.with_pool = with_pool
@@ -109,11 +136,17 @@ class ReXNet(nn.Layer):
         use_ses = [False, False, True, True, True, True]
 
         layers = [ceil(element * depth_mult) for element in layers]
-        strides = sum([[element] + [1] * (layers[idx] - 1)
-                       for idx, element in enumerate(strides)], [])
+        strides = sum(
+            [
+                [element] + [1] * (layers[idx] - 1)
+                for idx, element in enumerate(strides)
+            ],
+            [],
+        )
         if use_se:
-            use_ses = sum([[element] * layers[idx]
-                           for idx, element in enumerate(use_ses)], [])
+            use_ses = sum(
+                [[element] * layers[idx] for idx, element in enumerate(use_ses)], []
+            )
         else:
             use_ses = [False] * sum(layers[:])
         ts = [1] * layers[0] + [6] * sum(layers[1:])
@@ -136,18 +169,32 @@ class ReXNet(nn.Layer):
                 inplanes += final_ch / (self.depth // 3 * 1.0)
                 channels_group.append(int(round(inplanes * width_mult)))
 
-        ConvBN(features, 3, int(round(stem_channel * width_mult)),
-               kernel=3, stride=2, pad=1, act='swish')
+        ConvBN(
+            features,
+            3,
+            int(round(stem_channel * width_mult)),
+            kernel=3,
+            stride=2,
+            pad=1,
+            act="swish",
+        )
 
-        for block_idx, (in_c, c, t, s, se) in enumerate(zip(in_channels_group, channels_group, ts, strides, use_ses)):
-            features.append(LinearBottleneck(in_channels=in_c,
-                                             channels=c,
-                                             t=t,
-                                             stride=s,
-                                             use_se=se, se_ratio=se_ratio))
+        for block_idx, (in_c, c, t, s, se) in enumerate(
+            zip(in_channels_group, channels_group, ts, strides, use_ses)
+        ):
+            features.append(
+                LinearBottleneck(
+                    in_channels=in_c,
+                    channels=c,
+                    t=t,
+                    stride=s,
+                    use_se=se,
+                    se_ratio=se_ratio,
+                )
+            )
 
         pen_channels = int(1280 * width_mult)
-        ConvBN(features, c, pen_channels, act='swish')
+        ConvBN(features, c, pen_channels, act="swish")
 
         if with_pool:
             features.append(nn.AdaptiveAvgPool2D(1))
@@ -156,8 +203,7 @@ class ReXNet(nn.Layer):
 
         if class_dim > 0:
             self.output = nn.Sequential(
-                nn.Dropout(dropout_ratio),
-                nn.Conv2D(pen_channels, class_dim, 1)
+                nn.Dropout(dropout_ratio), nn.Conv2D(pen_channels, class_dim, 1)
             )
 
     def forward(self, x):
@@ -173,7 +219,7 @@ class ReXNet(nn.Layer):
 def rexnet_1_0(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=1.0, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_1_0'])
+        model = load_model(model, urls["rexnet_1_0"])
     if return_transforms:
         return model, transforms
     else:
@@ -183,7 +229,7 @@ def rexnet_1_0(pretrained=False, return_transforms=False, **kwargs):
 def rexnet_1_3(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=1.3, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_1_3'])
+        model = load_model(model, urls["rexnet_1_3"])
     if return_transforms:
         return model, transforms
     else:
@@ -193,7 +239,7 @@ def rexnet_1_3(pretrained=False, return_transforms=False, **kwargs):
 def rexnet_1_5(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=1.5, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_1_5'])
+        model = load_model(model, urls["rexnet_1_5"])
     if return_transforms:
         return model, transforms
     else:
@@ -203,7 +249,7 @@ def rexnet_1_5(pretrained=False, return_transforms=False, **kwargs):
 def rexnet_2_0(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=2.0, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_2_0'])
+        model = load_model(model, urls["rexnet_2_0"])
     if return_transforms:
         return model, transforms
     else:
@@ -213,7 +259,7 @@ def rexnet_2_0(pretrained=False, return_transforms=False, **kwargs):
 def rexnet_3_0(pretrained=False, return_transforms=False, **kwargs):
     model = ReXNet(width_mult=3.0, **kwargs)
     if pretrained:
-        model = load_model(model, urls['rexnet_3_0'])
+        model = load_model(model, urls["rexnet_3_0"])
     if return_transforms:
         return model, transforms
     else:
